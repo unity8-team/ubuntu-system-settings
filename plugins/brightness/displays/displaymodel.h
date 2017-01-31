@@ -37,7 +37,7 @@ class Q_DECL_EXPORT DisplayModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 public:
-    explicit DisplayModel(QObject *parent = 0);
+    explicit DisplayModel(QObject *parent = Q_NULLPTR);
     ~DisplayModel();
 
     enum Roles
@@ -48,7 +48,7 @@ public:
         ConnectedRole,
         EnabledRole,
         ModeRole,
-        ModesRole,
+        AvailableModesRole,
         OrientationRole,
         ScaleRole,
         UncommittedChangesRole,
@@ -61,8 +61,11 @@ public:
                  int role = Qt::EditRole);
     QHash<int,QByteArray> roleNames() const;
     void addDisplay(const QSharedPointer<Display> &display);
-    QSharedPointer<Display> getById(const uint &id);
-    int findRowFromId(const uint &id);
+
+    // Deprecated
+    QSharedPointer<Display> getById(const int &id);
+    // Deprecated
+    int findRowFromId(const int &id);
 
 Q_SIGNALS:
     void countChanged();

@@ -51,12 +51,17 @@ public:
     {
         return connected;
     }
+    virtual bool isConfigurationValid() override
+    {
+        return configurationValid;
+    }
     virtual QList<QSharedPointer<DisplayPlugin::Output>> outputs() override
     {
         return m_outputs;
     }
 
     bool connected = false;
+    bool configurationValid = false;
     MirDisplayConfig *conf = nullptr;
     QList<QSharedPointer<DisplayPlugin::Output>> m_outputs;
 };

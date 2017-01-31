@@ -27,12 +27,13 @@ class MirClientImpl : public MirClient
 {
     Q_OBJECT
 public:
-    explicit MirClientImpl(QObject *parent = 0);
+    explicit MirClientImpl(QObject *parent = Q_NULLPTR);
     ~MirClientImpl();
     virtual MirDisplayConfig* getConfiguration() const;
     virtual void setConfiguration(MirDisplayConfig *conf) override;
     virtual void applyConfiguration(MirDisplayConfig *conf) override;
     virtual bool isConnected() override;
+    virtual bool isConfigurationValid() override;
     virtual QList<QSharedPointer<Output>> outputs() override;
     void onConfigurationFailed(const QString &reason);
 

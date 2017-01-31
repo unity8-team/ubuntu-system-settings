@@ -155,12 +155,12 @@ QAbstractItemModel* Brightness::connectedDisplays()
 
 void Brightness::applyDisplayConfiguration()
 {
-    auto conf = m_mirClient->getConfiguration();
-
-    if (!conf) {
+    if (!m_mirClient->isConfigurationValid()) {
         qWarning() << Q_FUNC_INFO << "config invalid";
         return;
     }
+
+    auto conf = m_mirClient->getConfiguration();
 
     // for(uint i = 0; i < conf->num_outputs; i++) {
     //     MirDisplayOutput output = conf->outputs[i];
@@ -175,14 +175,12 @@ void Brightness::applyDisplayConfiguration()
     //     }
     //     conf->outputs[i] = output;
     // }
-    // m_mirClient->applyConfiguration(conf);
+    m_mirClient->applyConfiguration(conf);
 }
 
 void Brightness::refreshMirDisplays()
 {
-    auto conf = m_mirClient->getConfiguration();
-
-    if (!conf) {
+    if (!m_mirClient->isConfigurationValid()) {
         qWarning() << Q_FUNC_INFO << "config invalid";
         return;
     }
@@ -191,15 +189,6 @@ void Brightness::refreshMirDisplays()
         auto display = QSharedPointer<DisplayPlugin::Display>(
             new DisplayPlugin::Display(output)
         );
+        m_displays.addDisplay(display);
     }
-
-    // int num_outputs = mir_display_config_get_num_outputs(conf);
-    // for(uint i = 0; i < num_outputs; i++) {
-    //     // TODO: use immutable output?
-    //     MirDisplayOutput output = mir_display_config_get_mutable_output(conf, i);
-    //     auto display = QSharedPointer<DisplayPlugin::Display>(
-    //         new DisplayPlugin::Display(output)
-    //     );
-    //     m_displays.addDisplay(display);
-    // }
 }

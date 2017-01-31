@@ -88,22 +88,13 @@ private slots:
     {
         FakeMirClient mc;
         mc.connected = true;
+        mc.configurationValid = true;
 
         QList<QSharedPointer<Output>> list;
         QSharedPointer<Output> output(new FakeOutput);
         list << output;
 
         mc.m_outputs = list;
-        // MirDisplayConfig conf;
-        // conf.num_outputs = 1;
-
-        // MirDisplayOutput output;
-        // output.num_modes = 0;
-
-        // MirDisplayOutput outputs[1];
-        // conf.outputs = outputs;
-        // conf.outputs[0] = output;
-        // mc.conf = &conf;
 
         Brightness b(QDBusConnection::systemBus(), &mc);
         QCOMPARE(b.allDisplays()->rowCount(), 1);
@@ -134,13 +125,6 @@ private slots:
 private:
     FakeMirClient *m_mirClient = nullptr;
     Brightness *m_instance = nullptr;
-
-    // MirDisplayConfig m_conf;
-    // MirDisplayOutput m_output;
-    // MirDisplayOutput m_outputs[1];
-    // MirDisplayMode m_mode1;
-    // MirDisplayMode m_mode2;
-    // MirDisplayMode m_modes[2];
 };
 
 QTEST_GUILESS_MAIN(TstBrightness)

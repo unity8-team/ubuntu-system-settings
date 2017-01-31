@@ -1,5 +1,5 @@
 if(ANDR_PROP_FOUND)
-    add_subdirectory(Brightness)
+    # add_subdirectory(Brightness)
 endif()
 add_subdirectory(Launcher)
 add_subdirectory(Notifications)

@@ -240,12 +240,12 @@ ItemPage {
 
                     SettingsItemTitle {
                         objectName: "resolutionLabel"
-                        text: modes.length > 1 ?
+                        text: availableModes.length > 1 ?
                             i18n.tr("Resolution:") :
                             /* TRANSLATORS: %1 is a display resolution, e.g.
                             1200x720x24. Unknown refers to an unknown
                             resolution (in case of an error). */
-                            i18n.tr("Resolution: %1").arg(modes[mode] || i18n.tr("Unknown"))
+                            i18n.tr("Resolution: %1").arg(availableModes[mode] || i18n.tr("Unknown"))
                     }
 
                     OptionSelector {
@@ -257,9 +257,9 @@ ItemPage {
                             right: parent.right
                             margins: units.gu(2)
                         }
-                        visible: modes.length > 1
-                        containerHeight: itemHeight * modes.length
-                        model: modes
+                        visible: availableModes.length > 1
+                        containerHeight: itemHeight * availableModes.length
+                        model: availableModes
                         onDelegateClicked: {
                             expanded = !currentlyExpanded;
                             mode = index;
@@ -277,11 +277,14 @@ ItemPage {
                     Menus.SliderMenu {
                         id: scaleSlider
                         objectName: "scaleSlider"
-                        minimumValue: 1.0
-                        maximumValue: 100.0
-                        value: scale
+                        minimumValue: 0.5
+                        maximumValue: 3.0
+                        value: model.scale
                         minIcon: "image://theme/grip-large"
                         maxIcon: "image://theme/view-grid-symbolic"
+                        function formatValue(v) { return v.toFixed(2) }
+                        live: true
+                        onValueChanged: model.scale = value
                     }
                 }
             }

@@ -59,10 +59,16 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
             ret = display->enabled();
             break;
         case ModeRole:
-            ret = display->mode();
+            ret = display->availableModes().indexOf(display->mode());
             break;
-        case ModesRole:
-            ret = display->modes();
+        case AvailableModesRole: {
+            QStringList modes;
+            Q_FOREACH(const QSharedPointer<OutputMode> mode,
+                      display->availableModes()) {
+                modes << mode->toString();
+            }
+            ret = modes;
+            }
             break;
         case OrientationRole:
             ret = (uint) display->orientation();
@@ -93,18 +99,18 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
             display->setEnabled(value.toBool());
             break;
         case ModeRole:
-            display->setMode(value.toUInt());
+            display->setMode(display->availableModes().at(value.toInt()));
             break;
         case OrientationRole:
             display->setOrientation((Enums::Orientation) value.toUInt());
             break;
         case ScaleRole:
-            display->setScale(value.toInt());
+            display->setScale(value.toFloat());
             break;
         case Qt::DisplayRole:
         case TypeRole:
         case ConnectedRole:
-        case ModesRole:
+        case AvailableModesRole:
         case UncommittedChangesRole:
         default:
             return false;
@@ -125,7 +131,7 @@ QHash<int,QByteArray> DisplayModel::roleNames() const
         names[ConnectedRole] = "connected";
         names[EnabledRole] = "enabled";
         names[ModeRole] = "mode";
-        names[ModesRole] = "modes";
+        names[AvailableModesRole] = "availableModes";
         names[OrientationRole] = "orientation";
         names[ScaleRole] = "scale";
         names[UncommittedChangesRole] = "uncommittedChanges";
@@ -176,7 +182,7 @@ void DisplayModel::displayChangedSlot(const Display *display)
         emitRowChanged(row);
 }
 
-QSharedPointer<Display> DisplayModel::getById(const uint &id)
+QSharedPointer<Display> DisplayModel::getById(const int &id)
 {
     Q_FOREACH(auto display, m_displays) {
         if (display->id() == id)
@@ -185,7 +191,7 @@ QSharedPointer<Display> DisplayModel::getById(const uint &id)
     return QSharedPointer<Display>(nullptr);
 }
 
-int DisplayModel::findRowFromId(const uint &id)
+int DisplayModel::findRowFromId(const int &id)
 {
     for (int i = 0; i < m_displays.size(); i++) {
         if (m_displays[i]->id() == id)

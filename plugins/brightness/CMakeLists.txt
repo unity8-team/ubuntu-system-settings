@@ -26,7 +26,10 @@ add_library(uss-displays SHARED
     displays/mirclient_impl.cpp
 
     displays/output/output.h
+    displays/output/mir_output.cpp
+
     displays/outputmode/outputmode.h
+    displays/outputmode/mir_outputmode.cpp
     ../../src/i18n.cpp
 )
 set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)

@@ -19,24 +19,40 @@
 #ifndef FAKE_OUTPUTMODE_H
 #define FAKE_OUTPUTMODE_H
 
-class FakeOutputMode : DisplayPlugin::OutputMode
+#include "outputmode/outputmode.h"
+
+namespace DisplayPlugin
+{
+class FakeOutputMode : public OutputMode
 {
 public:
-    explicit FakeOutputMode();
-    virtual ~FakeOutputMode();
+    virtual ~FakeOutputMode()
+    {
+    }
 
     virtual int getWidth() override
     {
-
+        return m_width;
     }
     virtual int getHeight() override
     {
-
+        return m_height;
     }
     virtual double getRefreshRate() override
     {
-
+        return m_refreshRate;
     }
+    virtual QString toString() override
+    {
+        return m_string;
+    }
+
+    int m_width = 0;
+    int m_height = 0;
+    double m_refreshRate = 0;
+    QString m_string = QString::null;
 };
+
+} // DisplayPlugin
 
 #endif // FAKE_OUTPUTMODE_H

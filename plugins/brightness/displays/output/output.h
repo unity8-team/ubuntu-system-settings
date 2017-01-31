@@ -22,7 +22,7 @@
 #include "../enums.h"
 #include "../outputmode/outputmode.h"
 
-#include <QObject>
+#include <QSharedPointer>
 
 namespace DisplayPlugin
 {
@@ -30,41 +30,25 @@ namespace DisplayPlugin
 virtual video output (hdmi, screencast, etc.). */
 class Q_DECL_EXPORT Output
 {
-    Q_GADGET
-    // Q_DISABLE_COPY(Output)
 public:
     virtual ~Output() {};
-    // enum ConnectionState
-    // {
-    //     Disconnected = 0,
-    //     Connected,
-    //     Unknown
-    // };
-    // Q_ENUM(ConnectionState);
 
-    virtual int getNumModes() = 0;
-    // virtual OutputMode const* getMode(size_t index) = 0;
-    // virtual OutputMode const* getPreferredMode() = 0;
-    virtual size_t getPreferredModeIndex() = 0;
-    // virtual OutputMode const* getCurrentMode() = 0;
-    virtual size_t getCurrentModeIndex() = 0;
+    virtual QSharedPointer<OutputMode> getPreferredMode() = 0;
+    virtual QSharedPointer<OutputMode> getCurrentMode() = 0;
+    virtual QList<QSharedPointer<OutputMode>> getAvailableModes() = 0;
     virtual int getNumPixelFormats() = 0;
-    // virtual MirPixelFormat getPixelFormat(size_t index) = 0;
-    // virtual MirPixelFormat getCurrentPixelFormat() = 0;
     virtual int getId() = 0;
-    // virtual  MirOutputType getType() = 0;
+    virtual Enums::OutputType getType() = 0;
     virtual int getPositionX() = 0;
     virtual int getPositionY() = 0;
     virtual Enums::ConnectionState getConnectionState() = 0;
-    virtual bool is_enabled() = 0;
-    virtual char const* getModel() = 0;
+    virtual bool isEnabled() = 0;
+    virtual QString getModel() = 0;
     virtual int getPhysicalWidthMm() = 0;
     virtual int getPhysicalHeightMm() = 0;
     virtual Enums::PowerMode getPowerMode() = 0;
     virtual Enums::Orientation getOrientation() = 0;
     virtual float getScaleFactor() = 0;
-    // virtual MirSubpixelArrangement getSubpixelArrangement() = 0;
-    // virtual MirFormFactor getFormFactor() = 0;
     virtual uint8_t const* getEdid() = 0;
     // virtual char const* typeName(MirOutputType type) = 0;
     virtual bool isGammaSupported() = 0;
@@ -74,13 +58,10 @@ public:
                           uint16_t* blue,
                           uint32_t  size) = 0;
 
-    // virtual void setCurrentMode(OutputMode const* mode) = 0;
-    // void setPixelFormat(MirPixelFormat format);
+    virtual void setCurrentMode(const QSharedPointer<OutputMode> &mode) = 0;
     virtual void setPosition(int x, int y) = 0;
-
     virtual void enable() = 0;
     virtual void disable() = 0;
-
     virtual void setGamma(uint16_t const* red,
                           uint16_t const* green,
                           uint16_t const* blue,
@@ -90,5 +71,7 @@ public:
     virtual void setScaleFactor(float scale) = 0;
 };
 } // DisplayPlugin
+
+Q_DECLARE_METATYPE(QSharedPointer<DisplayPlugin::OutputMode>)
 
 #endif // DISPLAYS_OUTPUT_H

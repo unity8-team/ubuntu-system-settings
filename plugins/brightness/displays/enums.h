@@ -27,7 +27,7 @@ class Q_DECL_EXPORT Enums
 {
     Q_GADGET
 public:
-    enum ConnectionState
+    enum class ConnectionState : uint
     {
         Disconnected = 0,
         Connected,
@@ -36,16 +36,43 @@ public:
     Q_ENUM(ConnectionState);
 
     enum class Orientation : uint {
-        NormalOrientation, PortraitModeOrientation,
+        NormalOrientation = 0,
+        PortraitModeOrientation,
         LandscapeInvertedModeOrientation,
         PortraitInvertedModeOrientation
     };
 
     Q_ENUM(Orientation)
+
     enum class PowerMode : uint {
-        OnMode, StandbyMode, SuspendMode, OffMode
+        OnMode = 0,
+        StandbyMode,
+        SuspendMode,
+        OffMode
     };
     Q_ENUM(PowerMode)
+
+    enum class OutputType : uint {
+        OutputTypeUnknown = 0,
+        OutputTypeVga,
+        OutputTypeDvii,
+        OutputTypeDvid,
+        OutputTypeDvia,
+        OutputTypeComposite,
+        OutputTypeSvideo,
+        OutputTypeLvds,
+        OutputTypeComponent,
+        OutputTypeNinepindin,
+        OutputTypeDisplayport,
+        OutputTypeHdmia,
+        OutputTypeHdmib,
+        OutputTypeTv,
+        OutputTypeEdp,
+        OutputTypeVirtual,
+        OutputTypeDsi,
+        OutputTypeDpi,
+    };
+    Q_ENUM(OutputType)
 };
 } // DisplayPlugin
 

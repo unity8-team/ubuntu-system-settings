@@ -32,12 +32,13 @@ class Q_DECL_EXPORT MirClient : public QObject
 {
     Q_OBJECT
 public:
-    explicit MirClient(QObject *parent = 0) : QObject(parent) {}
+    explicit MirClient(QObject *parent = Q_NULLPTR) : QObject(parent) {}
     virtual ~MirClient() {};
     virtual MirDisplayConfig* getConfiguration() const = 0;
     virtual void setConfiguration(MirDisplayConfig *conf) = 0;
     virtual void applyConfiguration(MirDisplayConfig *conf) = 0;
     virtual bool isConnected() = 0;
+    virtual bool isConfigurationValid() = 0;
     virtual QList<QSharedPointer<Output>> outputs() = 0;
 
 Q_SIGNALS:

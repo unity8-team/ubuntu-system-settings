@@ -16,24 +16,30 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DISPLAYS_OUTPUTMODE_H
-#define DISPLAYS_OUTPUTMODE_H
+#ifndef DISPLAYS_MIR_OUTPUTMODE_H
+#define DISPLAYS_MIR_OUTPUTMODE_H
 
-#include <QtCore/QtGlobal>
+#include "outputmode.h"
+
+#include <mir_toolkit/mir_client_library.h>
 
 namespace DisplayPlugin
 {
 // Represents an abstraction of an output mode.
-class Q_DECL_EXPORT OutputMode
+class MirOutputModeImpl : public OutputMode
 {
 public:
-    virtual ~OutputMode() {};
+    explicit MirOutputModeImpl(MirOutputMode const *outputMode);
+    virtual ~MirOutputModeImpl();
 
-    virtual int getWidth() = 0;
-    virtual int getHeight() = 0;
-    virtual double getRefreshRate() = 0;
-    virtual QString toString() = 0;
+    virtual int getWidth() override;
+    virtual int getHeight() override;
+    virtual double getRefreshRate() override;
+    virtual QString toString() override;
+    MirOutputMode const* getMirOutputMode();
+private:
+    MirOutputMode const *m_outputMode = Q_NULLPTR;
 };
 } // DisplayPlugin
 
-#endif // DISPLAYS_OUTPUTMODE_H
+#endif // DISPLAYS_MIR_OUTPUTMODE_H

@@ -23,41 +23,30 @@
 
 namespace DisplayPlugin
 {
-QString DisplayMode::toString() const
-{
-    /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
-    display resolution, and %2 to the vertical pixels. E.g. 1200x720.
-    %3 is the refresh rate in hz. */
-    return SystemSettings::_("%1×%2 @ %3hz")
-        .arg(horizontal_resolution)
-        .arg(vertical_resolution)
-        .arg(refresh_rate);
-}
-bool DisplayMode::operator==(const DisplayMode &other) const
-{
-    return (
-        horizontal_resolution == other.horizontal_resolution
-        && vertical_resolution == other.vertical_resolution
-        && refresh_rate == other.refresh_rate
-    );
-}
-
-
-Display::Display(const uint &id)
-{
-    m_id = id;
-    initialize();
-}
-
-Display::Display(QObject *parent)
-    : QObject(parent)
-{
-    initialize();
-}
+// QString DisplayMode::toString() const
+// {
+//     /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
+//     display resolution, and %2 to the vertical pixels. E.g. 1200x720.
+//     %3 is the refresh rate in hz. */
+//     return SystemSettings::_("%1×%2 @ %3hz")
+//         .arg(horizontal_resolution)
+//         .arg(vertical_resolution)
+//         .arg(refresh_rate);
+// }
+// bool DisplayMode::operator==(const DisplayMode &other) const
+// {
+//     return (
+//         horizontal_resolution == other.horizontal_resolution
+//         && vertical_resolution == other.vertical_resolution
+//         && refresh_rate == other.refresh_rate
+//     );
+// }
 
 Display::Display(QSharedPointer<Output> output, QObject *parent)
-    : Display(parent)
+    : QObject(parent)
+    , m_output(output)
 {
+    initialize();
     // m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
     // setConnected(output.connected);
     // setEnabled(output.used);
@@ -79,21 +68,24 @@ Display::Display(QSharedPointer<Output> output, QObject *parent)
     // m_physicalHeightMm = output.physical_height_mm;
     // m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
 
-    // storeConfiguration();
-    // changedSlot();
+
+    qWarning() << "created Display: scale factor" << scale();
+
+    storeConfiguration();
+    changedSlot();
 }
 
 void Display::initialize()
 {
-    QObject::connect(this, SIGNAL(mirroredChanged()),
-                     this, SLOT(changedSlot()));
-    QObject::connect(this, SIGNAL(connectedChanged()),
-                     this, SLOT(changedSlot()));
+    // QObject::connect(this, SIGNAL(modesChanged()),
+    //                  this, SLOT(changedSlot()));
+    // QObject::connect(this, SIGNAL(mirroredChanged()),
+    //                  this, SLOT(changedSlot()));
+    // QObject::connect(this, SIGNAL(connectedChanged()),
+    //                  this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(enabledChanged()),
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(modeChanged()),
-                     this, SLOT(changedSlot()));
-    QObject::connect(this, SIGNAL(modesChanged()),
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(orientationChanged()),
                      this, SLOT(changedSlot()));
@@ -105,31 +97,31 @@ void Display::initialize()
 
 void Display::storeConfiguration()
 {
-    m_storedConfig["name"] = QVariant(m_name);
-    m_storedConfig["type"] = QVariant(m_type);
-    m_storedConfig["mirrored"] = QVariant(m_mirrored);
-    m_storedConfig["enabled"] = QVariant(m_enabled);
+    // m_storedConfig["name"] = QVariant(m_name);
+    // m_storedConfig["type"] = QVariant(m_type);
+    // m_storedConfig["mirrored"] = QVariant(m_mirrored);
+    m_storedConfig["enabled"] = QVariant(enabled());
     m_storedConfig["mode"] = QVariant(mode());
-    m_storedConfig["orientation"] = QVariant::fromValue(m_orientation);
-    m_storedConfig["scale"] = QVariant(m_scale);
+    m_storedConfig["orientation"] = QVariant::fromValue(orientation());
+    m_storedConfig["scale"] = QVariant(scale());
 }
 
 bool Display::hasChanged() const
 {
     return (
-        m_storedConfig["name"].toString() != m_name
-        || m_storedConfig["type"].toString() != m_type
-        || m_storedConfig["mirrored"].toBool() != m_mirrored
-        || m_storedConfig["enabled"].toBool() != m_enabled
-        || m_storedConfig["mode"].toUInt() != mode()
-        || m_storedConfig["orientation"].value<Enums::Orientation>() != m_orientation
-        || m_storedConfig["scale"].toUInt() != m_scale
+        // m_storedConfig["name"].toString() != m_name
+        // || m_storedConfig["type"].value<Enums::OutputType>() != m_output->getType()
+        // || m_storedConfig["mirrored"].toBool() != m_mirrored
+        m_storedConfig["enabled"].toBool() != enabled()
+        || m_storedConfig["mode"].value<QSharedPointer<OutputMode>>() != mode()
+        || m_storedConfig["orientation"].value<Enums::Orientation>() != orientation()
+        || m_storedConfig["scale"].toFloat() != scale()
     );
 }
 
-uint Display::id() const
+int Display::id() const
 {
-    return m_id;
+    return m_output->getId();
 }
 
 QString Display::name() const
@@ -139,7 +131,7 @@ QString Display::name() const
 
 QString Display::type() const
 {
-    return m_type;
+    return Helpers::typeToString(m_output->getType());
 }
 
 bool Display::mirrored() const
@@ -149,41 +141,32 @@ bool Display::mirrored() const
 
 bool Display::connected() const
 {
-    return m_connected;
+    return m_output->getConnectionState() == Enums::ConnectionState::Connected;
 }
 
 bool Display::enabled() const
 {
-    return m_enabled;
+    return m_output->isEnabled();
 }
 
-uint Display::mode() const
+QSharedPointer<OutputMode> Display::mode() const
 {
-    return m_modes.empty() ? 0 : m_modes.indexOf(m_mode);
+    return m_output->getCurrentMode();
 }
 
-QStringList Display::modes() const
+QList<QSharedPointer<OutputMode>> Display::availableModes() const
 {
-    QStringList modes;
-    Q_FOREACH(const DisplayMode &mode, m_modes) {
-        modes.append(mode.toString());
-    }
-    return modes;
-}
-
-QList<DisplayMode> Display::availableModes() const
-{
-    return m_modes;
+    return m_output->getAvailableModes();
 }
 
 Enums::Orientation Display::orientation() const
 {
-    return m_orientation;
+    return m_output->getOrientation();
 }
 
-double Display::scale() const
+float Display::scale() const
 {
-    return m_scale;
+    return m_output->getScaleFactor();
 }
 
 bool Display::uncommittedChanges() const
@@ -193,17 +176,17 @@ bool Display::uncommittedChanges() const
 
 uint Display::physicalWidthMm() const
 {
-    return m_physicalWidthMm;
+    return (uint) m_output->getPhysicalWidthMm();
 }
 
 uint Display::physicalHeightMm() const
 {
-    return m_physicalHeightMm;
+    return (uint) m_output->getPhysicalHeightMm();
 }
 
 Enums::PowerMode Display::powerMode() const
 {
-    return m_powerMode;
+    return m_output->getPowerMode();
 }
 
 void Display::setMirrored(const bool &mirrored)
@@ -214,41 +197,42 @@ void Display::setMirrored(const bool &mirrored)
     }
 }
 
-void Display::setConnected(const bool &connected)
-{
-    if (m_connected != connected) {
-        m_connected = connected;
-        Q_EMIT connectedChanged();
-    }
-}
-
 void Display::setEnabled(const bool &enabled)
 {
-    if (m_enabled != enabled) {
-        m_enabled = enabled;
+    bool wasEnabled = m_output->isEnabled();
+    if (enabled) {
+        m_output->enable();
+    } else {
+        m_output->disable();
+    }
+
+    if (wasEnabled != enabled) {
         Q_EMIT enabledChanged();
     }
 }
 
-void Display::setMode(const uint &mode)
+void Display::setMode(const QSharedPointer<OutputMode> &mode)
 {
-    m_mode = m_modes.value(mode);
-    Q_EMIT modeChanged();
+    if (mode != this->mode()) {
+        m_output->setCurrentMode(mode);
+        Q_EMIT modeChanged();
+    }
 }
 
 void Display::setOrientation(const Enums::Orientation &orientation)
 {
-    if (m_orientation != orientation) {
-        m_orientation = orientation;
+    if (orientation != this->orientation()) {
+        m_output->setOrientation(orientation);
         Q_EMIT orientationChanged();
     }
 }
 
-void Display::setScale(const double &scale)
+void Display::setScale(const float &scale)
 {
-    if (m_scale != scale) {
-        m_scale = scale;
+    if (scale != this->scale()) {
+        m_output->setScaleFactor(scale);
         Q_EMIT scaleChanged();
+        qWarning() << Q_FUNC_INFO << "setting" << scale;
     }
 }
 

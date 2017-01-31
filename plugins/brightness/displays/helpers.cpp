@@ -64,55 +64,64 @@ MirOrientation Helpers::orientationToMirOrientation(const Enums::Orientation &or
     return mirOrientation;
 }
 
-QString Helpers::mirTypeToString(const MirDisplayOutputType &type)
+QString Helpers::typeToString(const Enums::OutputType &type)
 {
     QString ret;
     switch (type) {
     default:
-    case mir_display_output_type_unknown:
+    case Enums::OutputType::OutputTypeUnknown:
         ret = "";
         break;
-    case mir_display_output_type_vga:
+    case Enums::OutputType::OutputTypeVga:
         ret = "vga";
         break;
-    case mir_display_output_type_dvii:
+    case Enums::OutputType::OutputTypeDvii:
         ret = "dvii";
         break;
-    case mir_display_output_type_dvid:
+    case Enums::OutputType::OutputTypeDvid:
         ret = "dvid";
         break;
-    case mir_display_output_type_dvia:
+    case Enums::OutputType::OutputTypeDvia:
         ret = "dvia";
         break;
-    case mir_display_output_type_composite:
+    case Enums::OutputType::OutputTypeComposite:
         ret = "composite";
         break;
-    case mir_display_output_type_svideo:
+    case Enums::OutputType::OutputTypeSvideo:
         ret = "svideo";
         break;
-    case mir_display_output_type_lvds:
+    case Enums::OutputType::OutputTypeLvds:
         ret = "lvds";
         break;
-    case mir_display_output_type_component:
+    case Enums::OutputType::OutputTypeComponent:
         ret = "component";
         break;
-    case mir_display_output_type_ninepindin:
+    case Enums::OutputType::OutputTypeNinepindin:
         ret = "ninepindin";
         break;
-    case mir_display_output_type_displayport:
+    case Enums::OutputType::OutputTypeDisplayport:
         ret = "displayport";
         break;
-    case mir_display_output_type_hdmia:
+    case Enums::OutputType::OutputTypeHdmia:
         ret = "hdmia";
         break;
-    case mir_display_output_type_hdmib:
+    case Enums::OutputType::OutputTypeHdmib:
         ret = "hdmib";
         break;
-    case mir_display_output_type_tv:
+    case Enums::OutputType::OutputTypeTv:
         ret = "tv";
         break;
-    case mir_display_output_type_edp:
+    case Enums::OutputType::OutputTypeEdp:
         ret = "edp";
+        break;
+    case Enums::OutputType::OutputTypeVirtual:
+        ret = "virtual";
+        break;
+    case Enums::OutputType::OutputTypeDsi:
+        ret = "dsi";
+        break;
+    case Enums::OutputType::OutputTypeDpi:
+        ret = "dpi";
         break;
     }
 
@@ -147,5 +156,61 @@ MirPowerMode Helpers::powerModeToMirPowerMode(const Enums::PowerMode &mode)
         return mir_power_mode_off;
     }
     return mir_power_mode_off;
+}
+
+Enums::OutputType Helpers::mirOutputTypeToOutputType(const MirOutputType &type)
+{
+    switch (type) {
+    default:
+    case MirOutputType::mir_output_type_unknown:
+        return Enums::OutputType::OutputTypeUnknown;
+    case MirOutputType::mir_output_type_vga:
+        return Enums::OutputType::OutputTypeVga;
+    case MirOutputType::mir_output_type_dvii:
+        return Enums::OutputType::OutputTypeDvii;
+    case MirOutputType::mir_output_type_dvid:
+        return Enums::OutputType::OutputTypeDvid;
+    case MirOutputType::mir_output_type_dvia:
+        return Enums::OutputType::OutputTypeDvia;
+    case MirOutputType::mir_output_type_composite:
+        return Enums::OutputType::OutputTypeComposite;
+    case MirOutputType::mir_output_type_svideo:
+        return Enums::OutputType::OutputTypeSvideo;
+    case MirOutputType::mir_output_type_lvds:
+        return Enums::OutputType::OutputTypeLvds;
+    case MirOutputType::mir_output_type_component:
+        return Enums::OutputType::OutputTypeComponent;
+    case MirOutputType::mir_output_type_ninepindin:
+        return Enums::OutputType::OutputTypeNinepindin;
+    case MirOutputType::mir_output_type_displayport:
+        return Enums::OutputType::OutputTypeDisplayport;
+    case MirOutputType::mir_output_type_hdmia:
+        return Enums::OutputType::OutputTypeHdmia;
+    case MirOutputType::mir_output_type_hdmib:
+        return Enums::OutputType::OutputTypeHdmib;
+    case MirOutputType::mir_output_type_tv:
+        return Enums::OutputType::OutputTypeTv;
+    case MirOutputType::mir_output_type_edp:
+        return Enums::OutputType::OutputTypeEdp;
+    case MirOutputType::mir_output_type_virtual:
+        return Enums::OutputType::OutputTypeVirtual;
+    case MirOutputType::mir_output_type_dsi:
+        return Enums::OutputType::OutputTypeDsi;
+    case MirOutputType::mir_output_type_dpi:
+        return Enums::OutputType::OutputTypeDpi;
+    }
+}
+
+Enums::ConnectionState Helpers::mirConnectionStateToConnectionState(const MirOutputConnectionState &state)
+{
+    switch (state) {
+    default:
+    case mir_output_connection_state_disconnected:
+        return Enums::ConnectionState::Disconnected;
+    case mir_output_connection_state_connected:
+        return Enums::ConnectionState::Connected;
+    case mir_output_connection_state_unknown:
+        return Enums::ConnectionState::Unknown;
+    }
 }
 } // DisplayPlugin

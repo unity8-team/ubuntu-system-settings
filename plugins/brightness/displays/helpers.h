@@ -31,10 +31,12 @@ struct Q_DECL_EXPORT Helpers
 public:
     static Enums::Orientation mirOrientationToOrientation(const MirOrientation &mirOrientation);
     static MirOrientation orientationToMirOrientation(const Enums::Orientation &orientation);
-    static QString mirTypeToString(const MirDisplayOutputType &type);
+    static QString typeToString(const Enums::OutputType &type);
     static QString mirModeToString(const MirDisplayOutputType &type);
     static Enums::PowerMode mirPowerModeToPowerMode(const MirPowerMode &mode);
     static MirPowerMode powerModeToMirPowerMode(const Enums::PowerMode &mode);
+    static Enums::OutputType mirOutputTypeToOutputType(const MirOutputType &type);
+    static Enums::ConnectionState mirConnectionStateToConnectionState(const MirOutputConnectionState &state);
 };
 } // DisplayPlugin
 
