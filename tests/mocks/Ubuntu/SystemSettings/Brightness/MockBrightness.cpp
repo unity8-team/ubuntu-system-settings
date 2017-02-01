@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "MockDisplayModel.h"
 #include "MockBrightness.h"
+
+#include "fakeoutput.h"
+#include "fakeoutputmode.h"
 
 #include <QQmlEngine>
 
@@ -91,7 +93,39 @@ void MockBrightness::applyDisplayConfiguration()
     Q_EMIT applied();
 }
 
-MockDisplayModel* MockBrightness::displayModel()
+void MockBrightness::mockAddDisplay(const bool connected,
+                                    const bool enabled,
+                                    const int availableModes,
+                                    const int currentMode,
+                                    const int orientation,
+                                    const float scale)
 {
-    return (MockDisplayModel*) allDisplays();
+    using namespace DisplayPlugin;
+
+    // Needs to be connected to be visible to QML.
+    auto fakeOutput = new FakeOutput;
+    fakeOutput->m_connectionState = connected ? Enums::ConnectionState::Connected
+                                              : Enums::ConnectionState::Disconnected;
+
+    fakeOutput->m_enabled = enabled;
+
+    QList<QSharedPointer<OutputMode>> list;
+    for (int i = 0; i < availableModes; i++) {
+        auto fakeMode = new FakeOutputMode;
+        fakeMode->m_width = 1000 * i;
+        fakeMode->m_height = 1000 * i;
+        fakeMode->m_refreshRate = 10.0 * i;
+        fakeMode->m_string = QString("Mode %1").arg(i);
+        auto mode = QSharedPointer<OutputMode>(fakeMode);
+        list.append(mode);
+    }
+    fakeOutput->m_modes = list;
+    fakeOutput->m_currentModeIndex = currentMode;
+    fakeOutput->m_orientation = (Enums::Orientation) orientation;
+
+    auto output = QSharedPointer<Output>(fakeOutput);
+    auto d = QSharedPointer<Display>(
+        new Display(output)
+    );
+    m_displays.addDisplay(d);
 }

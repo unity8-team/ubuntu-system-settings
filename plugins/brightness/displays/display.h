@@ -22,8 +22,6 @@
 #include "enums.h"
 #include "output/output.h"
 
-#include <mir_toolkit/mir_client_library.h>
-
 #include <QList>
 #include <QObject>
 #include <QString>

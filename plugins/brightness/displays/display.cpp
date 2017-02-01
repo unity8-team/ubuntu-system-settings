@@ -52,9 +52,11 @@ void Display::storeConfiguration()
 
 bool Display::hasChanged() const
 {
+    bool considerModes = availableModes().size() > 0;
     return (
         m_storedConfig["enabled"].toBool() != enabled()
-        || m_storedConfig["mode"].value<QSharedPointer<OutputMode>>()->toString() != mode()->toString()
+        || (considerModes && (
+            m_storedConfig["mode"].value<QSharedPointer<OutputMode>>()->toString() != mode()->toString()))
         || m_storedConfig["orientation"].value<Enums::Orientation>() != orientation()
         || m_storedConfig["scale"].toFloat() != scale()
     );

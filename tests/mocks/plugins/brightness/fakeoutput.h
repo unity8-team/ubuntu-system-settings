@@ -128,7 +128,6 @@ public:
     QList<QSharedPointer<OutputMode>> m_modes;
     bool m_enabled = false;
     bool m_gammaSupported = false;
-    int m_numModes = 0;
     int m_preferredModeIndex;
     int m_currentModeIndex = 0;
     int m_numPixelFormats = 0;

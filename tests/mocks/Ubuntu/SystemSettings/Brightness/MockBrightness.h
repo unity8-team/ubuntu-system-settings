@@ -19,7 +19,9 @@
 #ifndef MOCK_BRIGHTNESS_H
 #define MOCK_BRIGHTNESS_H
 
-#include "MockDisplayModel.h"
+#include "displays/display.h"
+#include "displays/displaymodel.h"
+#include "displays/output/output.h"
 
 #include <QAbstractItemModel>
 #include <QObject>
@@ -59,7 +61,12 @@ public:
     QAbstractItemModel* changedDisplays();
     QAbstractItemModel* connectedDisplays();
     Q_INVOKABLE void applyDisplayConfiguration();
-    Q_INVOKABLE MockDisplayModel* displayModel(); // mock only
+    Q_INVOKABLE void mockAddDisplay(const bool connected = false,
+                                    const bool enabled = false,
+                                    const int availableModes = 0,
+                                    const int currentMode = 0,
+                                    const int orientation = 0,
+                                    const float scale = 1.0); // mock only
 
 Q_SIGNALS:
     void powerdRunningChanged();
@@ -71,7 +78,7 @@ private:
     bool m_powerdRunning = false;
     bool m_autoBrightnessAvailable = false;
     bool m_widiSupported = false;
-    MockDisplayModel m_displays;
+    DisplayPlugin::DisplayModel m_displays;
     DisplayPlugin::DisplaysFilter m_changedDisplays;
     DisplayPlugin::DisplaysFilter m_connectedDisplays;
 };
