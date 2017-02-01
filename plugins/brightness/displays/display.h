@@ -88,7 +88,6 @@ protected slots:
     void changedSlot();
 
 private:
-    void initialize();
     bool hasChanged() const;
 
     QVariantMap m_storedConfig;

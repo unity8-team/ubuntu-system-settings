@@ -114,9 +114,9 @@ void MirClientImpl::connect() {
         qWarning() << Q_FUNC_INFO << "Connected successfully to mir.";
         mir_connection_set_display_config_change_callback(
             m_mir_connection, mir_display_change_callback, this);
-        // mir_connection_set_error_callback(m_mir_connection,
-        //                                   mir_error_callback,
-        //                                   this);
+        mir_connection_set_error_callback(m_mir_connection,
+                                          mir_error_callback,
+                                          this);
     }
 }
 

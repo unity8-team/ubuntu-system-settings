@@ -58,11 +58,6 @@ QList<QSharedPointer<OutputMode>> MirOutputImpl::getAvailableModes()
     return list;
 }
 
-int MirOutputImpl::getNumPixelFormats()
-{
-
-}
-
 int MirOutputImpl::getId()
 {
     return mir_output_get_id(m_output);
@@ -136,66 +131,40 @@ uint8_t const* MirOutputImpl::getEdid()
 
 }
 
-bool MirOutputImpl::isGammaSupported()
-{
-
-}
-
-uint32_t MirOutputImpl::getGammaSize()
-{
-
-}
-
-void MirOutputImpl::getGamma(uint16_t* red,
-                             uint16_t* green,
-                             uint16_t* blue,
-                             uint32_t  size)
-{
-}
-
 void MirOutputImpl::setCurrentMode(const QSharedPointer<OutputMode> &mode)
 {
     auto mirMode = (MirOutputModeImpl*) mode.data();
     mir_output_set_current_mode(m_output, mirMode->getMirOutputMode());
 }
 
-void MirOutputImpl::setPosition(int x, int y)
+void MirOutputImpl::setPosition(const int &x, const int &y)
 {
 
 }
 
-void MirOutputImpl::enable()
+void MirOutputImpl::setEnabled(const bool enabled)
 {
-    mir_output_enable(m_output);
+    if (enabled)
+        mir_output_enable(m_output);
+    else
+        mir_output_disable(m_output);
 }
 
-void MirOutputImpl::disable()
-{
-    mir_output_disable(m_output);
-}
-
-void MirOutputImpl::setGamma(uint16_t const* red,
-                             uint16_t const* green,
-                             uint16_t const* blue,
-                             uint32_t size)
-{
-}
-                          ;
-void MirOutputImpl::setPowerMode(Enums::PowerMode mode)
+                         ;
+void MirOutputImpl::setPowerMode(const Enums::PowerMode &mode)
 {
     auto mirMode = Helpers::powerModeToMirPowerMode(mode);
     mir_output_set_power_mode(m_output, mirMode);
 }
 
-void MirOutputImpl::setOrientation(Enums::Orientation orientation)
+void MirOutputImpl::setOrientation(const Enums::Orientation &orientation)
 {
     auto mirOrientation = Helpers::orientationToMirOrientation(orientation);
     mir_output_set_orientation(m_output, mirOrientation);
 }
 
-void MirOutputImpl::setScaleFactor(float scale)
+void MirOutputImpl::setScaleFactor(const float &scale)
 {
-    qWarning() << Q_FUNC_INFO << "setting" << scale;
     mir_output_set_scale_factor(m_output, scale);
 }
 

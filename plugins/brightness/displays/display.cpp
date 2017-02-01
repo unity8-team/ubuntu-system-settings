@@ -23,66 +23,10 @@
 
 namespace DisplayPlugin
 {
-// QString DisplayMode::toString() const
-// {
-//     /* TRANSLATORS: %1 refer to the amount of horizontal pixels in a
-//     display resolution, and %2 to the vertical pixels. E.g. 1200x720.
-//     %3 is the refresh rate in hz. */
-//     return SystemSettings::_("%1×%2 @ %3hz")
-//         .arg(horizontal_resolution)
-//         .arg(vertical_resolution)
-//         .arg(refresh_rate);
-// }
-// bool DisplayMode::operator==(const DisplayMode &other) const
-// {
-//     return (
-//         horizontal_resolution == other.horizontal_resolution
-//         && vertical_resolution == other.vertical_resolution
-//         && refresh_rate == other.refresh_rate
-//     );
-// }
-
 Display::Display(QSharedPointer<Output> output, QObject *parent)
     : QObject(parent)
     , m_output(output)
 {
-    initialize();
-    // m_type = DisplayPlugin::Helpers::mirTypeToString(output.type);
-    // setConnected(output.connected);
-    // setEnabled(output.used);
-
-    // auto modes = QList<DisplayMode>();
-    // for(uint j = 0; j < output.num_modes; j++) {
-    //     DisplayMode mode(output.modes[j]);
-    //     modes.append(mode);
-
-    //     if (j == output.current_mode)
-    //         m_mode = mode;
-    // }
-    // m_modes = modes;
-    // m_orientation = DisplayPlugin::Helpers::mirOrientationToOrientation(output.orientation);
-    // m_powerMode = DisplayPlugin::Helpers::mirPowerModeToPowerMode(output.power_mode);
-    // m_id = output.output_id;
-
-    // m_physicalWidthMm = output.physical_width_mm;
-    // m_physicalHeightMm = output.physical_height_mm;
-    // m_name = QString("%1").arg(DisplayPlugin::Helpers::mirTypeToString(output.type));
-
-
-    qWarning() << "created Display: scale factor" << scale();
-
-    storeConfiguration();
-    changedSlot();
-}
-
-void Display::initialize()
-{
-    // QObject::connect(this, SIGNAL(modesChanged()),
-    //                  this, SLOT(changedSlot()));
-    // QObject::connect(this, SIGNAL(mirroredChanged()),
-    //                  this, SLOT(changedSlot()));
-    // QObject::connect(this, SIGNAL(connectedChanged()),
-    //                  this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(enabledChanged()),
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(modeChanged()),
@@ -93,6 +37,9 @@ void Display::initialize()
                      this, SLOT(changedSlot()));
     QObject::connect(this, SIGNAL(uncommittedChangesChanged()),
                      this, SLOT(changedSlot()));
+
+    storeConfiguration();
+    changedSlot();
 }
 
 void Display::storeConfiguration()
@@ -200,11 +147,7 @@ void Display::setMirrored(const bool &mirrored)
 void Display::setEnabled(const bool &enabled)
 {
     bool wasEnabled = m_output->isEnabled();
-    if (enabled) {
-        m_output->enable();
-    } else {
-        m_output->disable();
-    }
+    m_output->setEnabled(enabled);
 
     if (wasEnabled != enabled) {
         Q_EMIT enabledChanged();

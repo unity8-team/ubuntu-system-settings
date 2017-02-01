@@ -48,10 +48,6 @@ public:
     {
         return m_modes;
     }
-    virtual int getNumPixelFormats() override
-    {
-        return m_numPixelFormats;
-    }
     virtual int getId() override
     {
         return m_id;
@@ -104,51 +100,24 @@ public:
     {
         return m_edid;
     }
-    virtual bool isGammaSupported() override
-    {
-        return m_gammaSupported;
-    }
-    virtual uint32_t getGammaSize() override
-    {
-        return m_gammaSize;
-    }
-    virtual void getGamma(uint16_t* red,
-                          uint16_t* green,
-                          uint16_t* blue,
-                          uint32_t  size) override
-    {
-
-    }
-
-    virtual void setPosition(int x, int y) override
+    virtual void setPosition(const int &x, const int &y) override
     {
         m_positionY = y;
         m_positionX = x;
     }
-    virtual void enable() override
+    virtual void setEnabled(const bool enabled) override
     {
-        m_enabled = true;
+        m_enabled = enabled;
     }
-    virtual void disable() override
-    {
-        m_enabled = false;
-    }
-    virtual void setGamma(uint16_t const* red,
-                          uint16_t const* green,
-                          uint16_t const* blue,
-                          uint32_t  size) override
-    {
-
-    }
-    virtual void setPowerMode(Enums::PowerMode mode) override
+    virtual void setPowerMode(const Enums::PowerMode &mode) override
     {
         m_powerMode = mode;
     }
-    virtual void setOrientation(Enums::Orientation orientation) override
+    virtual void setOrientation(const Enums::Orientation &orientation) override
     {
         m_orientation = orientation;
     }
-    virtual void setScaleFactor(float scale) override
+    virtual void setScaleFactor(const float &scale) override
     {
         m_scaleFactor = scale;
     }

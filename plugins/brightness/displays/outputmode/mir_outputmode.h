@@ -25,7 +25,6 @@
 
 namespace DisplayPlugin
 {
-// Represents an abstraction of an output mode.
 class MirOutputModeImpl : public OutputMode
 {
 public:

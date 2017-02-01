@@ -34,7 +34,6 @@ public:
     virtual QSharedPointer<OutputMode> getPreferredMode() override;
     virtual QSharedPointer<OutputMode> getCurrentMode() override;
     virtual QList<QSharedPointer<OutputMode>> getAvailableModes() override;
-    virtual int getNumPixelFormats() override;
     virtual int getId() override;
     virtual Enums::OutputType getType() override;
     virtual int getPositionX() override;
@@ -48,25 +47,12 @@ public:
     virtual Enums::Orientation getOrientation() override;
     virtual float getScaleFactor() override;
     virtual uint8_t const* getEdid() override;
-    // virtual char const* typeName(MirOutputType type) override;
-    virtual bool isGammaSupported() override;
-    virtual uint32_t getGammaSize() override;
-    virtual void getGamma(uint16_t* red,
-                          uint16_t* green,
-                          uint16_t* blue,
-                          uint32_t  size) override;
-
     virtual void setCurrentMode(const QSharedPointer<OutputMode> &mode) override;
-    virtual void setPosition(int x, int y) override;
-    virtual void enable() override;
-    virtual void disable() override;
-    virtual void setGamma(uint16_t const* red,
-                          uint16_t const* green,
-                          uint16_t const* blue,
-                          uint32_t size) override;
-    virtual void setPowerMode(Enums::PowerMode mode) override;
-    virtual void setOrientation(Enums::Orientation orientation) override;
-    virtual void setScaleFactor(float scale) override;
+    virtual void setPosition(const int &x, const int &y) override;
+    virtual void setEnabled(const bool enabled) override;
+    virtual void setPowerMode(const Enums::PowerMode &mode) override;
+    virtual void setOrientation(const Enums::Orientation &orientation) override;
+    virtual void setScaleFactor(const float &scale) override;
 
 private:
     MirOutput *m_output = Q_NULLPTR;
