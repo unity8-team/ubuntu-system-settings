@@ -38,15 +38,12 @@ class Q_DECL_EXPORT Display : public QObject
     Q_OBJECT
 
 public:
-    explicit Display(QObject *parent = Q_NULLPTR);
     explicit Display(QSharedPointer<Output> output, QObject *parent = Q_NULLPTR);
-    explicit Display(const uint &id);
     ~Display() {};
 
     int id() const;
     QString name() const;
     QString type() const;
-    bool mirrored() const;
     bool connected() const;
     bool enabled() const;
     QSharedPointer<OutputMode> mode() const;
@@ -58,7 +55,6 @@ public:
     uint physicalHeightMm() const;
     Enums::PowerMode powerMode() const;
 
-    void setMirrored(const bool &mirrored);
     void setEnabled(const bool &enabled);
     void setMode(const QSharedPointer<OutputMode> &mode);
     void setOrientation(const Enums::Orientation &orientation);
@@ -78,9 +74,7 @@ Q_SIGNALS:
 protected:
     void setUncommitedChanges(const bool uncommittedChanges);
     void storeConfiguration();
-
     QString m_name = QString::null;
-    bool m_mirrored = false;
     bool m_uncommittedChanges = false;
     QSharedPointer<Output> m_output = QSharedPointer<Output>(Q_NULLPTR);
 
@@ -89,7 +83,6 @@ protected slots:
 
 private:
     bool hasChanged() const;
-
     QVariantMap m_storedConfig;
 };
 

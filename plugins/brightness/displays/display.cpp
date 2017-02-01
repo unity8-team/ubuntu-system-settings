@@ -44,23 +44,17 @@ Display::Display(QSharedPointer<Output> output, QObject *parent)
 
 void Display::storeConfiguration()
 {
-    // m_storedConfig["name"] = QVariant(m_name);
-    // m_storedConfig["type"] = QVariant(m_type);
-    // m_storedConfig["mirrored"] = QVariant(m_mirrored);
-    m_storedConfig["enabled"] = QVariant(enabled());
-    m_storedConfig["mode"] = QVariant(mode());
+    m_storedConfig["enabled"] = enabled();
+    m_storedConfig["mode"] = QVariant::fromValue(mode());
     m_storedConfig["orientation"] = QVariant::fromValue(orientation());
-    m_storedConfig["scale"] = QVariant(scale());
+    m_storedConfig["scale"] = scale();
 }
 
 bool Display::hasChanged() const
 {
     return (
-        // m_storedConfig["name"].toString() != m_name
-        // || m_storedConfig["type"].value<Enums::OutputType>() != m_output->getType()
-        // || m_storedConfig["mirrored"].toBool() != m_mirrored
         m_storedConfig["enabled"].toBool() != enabled()
-        || m_storedConfig["mode"].value<QSharedPointer<OutputMode>>() != mode()
+        || m_storedConfig["mode"].value<QSharedPointer<OutputMode>>()->toString() != mode()->toString()
         || m_storedConfig["orientation"].value<Enums::Orientation>() != orientation()
         || m_storedConfig["scale"].toFloat() != scale()
     );
@@ -79,11 +73,6 @@ QString Display::name() const
 QString Display::type() const
 {
     return Helpers::typeToString(m_output->getType());
-}
-
-bool Display::mirrored() const
-{
-    return m_mirrored;
 }
 
 bool Display::connected() const
@@ -136,14 +125,6 @@ Enums::PowerMode Display::powerMode() const
     return m_output->getPowerMode();
 }
 
-void Display::setMirrored(const bool &mirrored)
-{
-    if (m_mirrored != mirrored) {
-        m_mirrored = mirrored;
-        Q_EMIT mirroredChanged();
-    }
-}
-
 void Display::setEnabled(const bool &enabled)
 {
     bool wasEnabled = m_output->isEnabled();
@@ -175,7 +156,6 @@ void Display::setScale(const float &scale)
     if (scale != this->scale()) {
         m_output->setScaleFactor(scale);
         Q_EMIT scaleChanged();
-        qWarning() << Q_FUNC_INFO << "setting" << scale;
     }
 }
 

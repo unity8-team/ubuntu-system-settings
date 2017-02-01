@@ -161,20 +161,6 @@ void Brightness::applyDisplayConfiguration()
     }
 
     auto conf = m_mirClient->getConfiguration();
-
-    // for(uint i = 0; i < conf->num_outputs; i++) {
-    //     MirDisplayOutput output = conf->outputs[i];
-    //     auto display = m_displays.getById(output.output_id);
-    //     if (display) {
-    //         output.current_mode = display->mode();
-    //         output.used = display->enabled();
-    //         output.orientation =
-    //             DisplayPlugin::Helpers::orientationToMirOrientation(
-    //                 display->orientation()
-    //             );
-    //     }
-    //     conf->outputs[i] = output;
-    // }
     m_mirClient->applyConfiguration(conf);
 }
 

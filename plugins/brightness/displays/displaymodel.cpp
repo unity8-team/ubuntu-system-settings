@@ -49,9 +49,6 @@ QVariant DisplayModel::data(const QModelIndex &index, int role) const
         case TypeRole:
             ret = display->type();
             break;
-        case MirroredRole:
-            ret = display->mirrored();
-            break;
         case ConnectedRole:
             ret = display->connected();
             break;
@@ -92,9 +89,6 @@ bool DisplayModel::setData(const QModelIndex &index, const QVariant &value,
         auto display = m_displays[index.row()];
 
         switch (role) {
-        case MirroredRole:
-            display->setMirrored(value.toBool());
-            break;
         case EnabledRole:
             display->setEnabled(value.toBool());
             break;
@@ -127,7 +121,6 @@ QHash<int,QByteArray> DisplayModel::roleNames() const
     static QHash<int,QByteArray> names;
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[MirroredRole] = "mirrored";
         names[ConnectedRole] = "connected";
         names[EnabledRole] = "enabled";
         names[ModeRole] = "mode";

@@ -44,7 +44,6 @@ public:
     {
         // Qt::DisplayRole holds device name
         TypeRole = Qt::UserRole,
-        MirroredRole,
         ConnectedRole,
         EnabledRole,
         ModeRole,

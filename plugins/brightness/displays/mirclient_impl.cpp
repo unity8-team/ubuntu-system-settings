@@ -18,6 +18,10 @@
 
 #include "mirclient_impl.h"
 #include "output/mir_output.h"
+#include "../../../src/i18n.h"
+
+#include <mir_toolkit/client_types.h>
+#include <mir_toolkit/mir_error.h>
 
 #include <QDebug>
 #include <QQmlEngine>
@@ -30,25 +34,60 @@ static void mir_display_change_callback(MirConnection *connection,
                                         void *context)
 {
     auto mirClient = static_cast<MirClientImpl*>(context);
-    QString error(mir_connection_get_error_message(connection));
-    if (error.isEmpty()) {
-        qWarning() << "Mir apply config successfully.";
-        MirDisplayConfig *conf = mir_connection_create_display_configuration(
-            connection);
-        mirClient->setConfiguration(conf);
-    } else {
-        // FIXME: use error callback!
-        qWarning() << "Mir configuration error:" << error;
-        mirClient->setConfiguration(Q_NULLPTR);
-        mirClient->onConfigurationFailed(error);
-    }
+    auto conf = mir_connection_create_display_configuration(
+        connection);
+    mirClient->setConfiguration(conf);
+    qWarning() << "Mir apply config successfully.";
 }
 
 static void mir_error_callback(MirConnection *connection,
+                               MirError const* error,
                                void *context)
 {
-    Q_UNUSED(context);
-    qWarning() << mir_connection_get_error_message(connection);
+    Q_UNUSED(connection);
+    auto mirClient = static_cast<MirClientImpl*>(context);
+    auto domain = mir_error_get_domain(error);
+    auto errorCode = mir_error_get_code(error);
+
+    QString msg;
+    switch (domain) {
+    case MirErrorDomain::mir_error_domain_display_configuration:
+        switch ((MirDisplayConfigurationError) errorCode) {
+        case MirDisplayConfigurationError::mir_display_configuration_error_unauthorized:
+            msg = SystemSettings::_(
+                "Client is not permitted to change global display configuration"
+            );
+            break;
+        case MirDisplayConfigurationError::mir_display_configuration_error_in_progress:
+            msg = SystemSettings::_(
+                "A global configuration change request is already pending"
+            );
+            break;
+        case MirDisplayConfigurationError::mir_display_configuration_error_no_preview_in_progress:
+            msg = SystemSettings::_(
+                "A cancel request was received, but no global display configuration preview is in progress"
+            );
+            break;
+        case MirDisplayConfigurationError::mir_display_configuration_error_rejected_by_hardware:
+            msg = SystemSettings::_(
+                "Display configuration was attempted but was rejected by the hardware"
+            );
+            break;
+        }
+        break;
+    case MirErrorDomain::mir_error_domain_input_configuration:
+        msg = SystemSettings::_(
+            "Input configuration was attempted but was rejected by driver"
+        );
+        break;
+    }
+
+    // TRANSLATORS: %1 is the reason why configuration failed.
+    mirClient->onConfigurationFailed(
+        SystemSettings::_("Configuration failed: %1.").arg(msg)
+    );
+
+    mirClient->setConfiguration(Q_NULLPTR);
 }
 
 MirClientImpl::MirClientImpl(QObject *parent)
