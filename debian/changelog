@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20170206-0ubuntu1) zesty; urgency=medium
+
+  * changes packaging: deps on mir headers (libmirclient-dev) and USC
+    for testing (qtdeclarative5-ubuntu-settings-components)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Mon, 06 Feb 2017 14:25:28 +0000
+
 ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]
