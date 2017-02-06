@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20170206-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange, jonas-drange ]
+  * use the vpn filepicker, and make the cert handling more robust
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Mon, 06 Feb 2017 15:10:25 +0000
+
 ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]
