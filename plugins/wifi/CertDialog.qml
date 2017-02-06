@@ -14,6 +14,7 @@ Component {
         property var fileName;
 
         signal updateSignal(var update);
+        signal certSaved(string file);
 
         anchors.fill: parent
 
@@ -24,6 +25,30 @@ Component {
                 return i18n.tr("Add key?");
             } else if (certType === 2) { // pacFile
                 return i18n.tr("Add pac file?");
+            }
+        }
+
+        Component {
+            id: failedToImportComponent
+            Dialog {
+                id: failedToImportDialog
+                title: {
+                    if (certType === 0) { // certificate
+                        return i18n.tr("Could not save certificate.")
+                    } else if (certType === 1) { // privatekey
+                        return i18n.tr("Could not save key.")
+                    } else if (certType === 2) { // pacFile
+                        return i18n.tr("Could not save pack file.")
+                    }
+                }
+
+                Button {
+                    text: i18n.tr("OK")
+                    onClicked: {
+                        PopupUtils.close(failedToImportDialog);
+                        PopupUtils.close(certDialog);
+                    }
+                }
             }
         }
 
@@ -64,7 +89,6 @@ Component {
                 Layout.fillWidth: true
                 text: i18n.tr("Cancel")
                 onClicked: {
-                    fileHandler.removeFile(certDialog.fileName);
                     PopupUtils.close(certDialog);
                 }
             }
@@ -74,19 +98,24 @@ Component {
                 text: i18n.tr("Save")
                 Layout.fillWidth: true
                 enabled: (certDialog.certContent.text !== "")
-                onClicked: { if (certType === 0) { // certificate
-                        fileHandler.moveCertFile(certDialog.fileName);
+                onClicked: {
+                    var ret;
+                    if (certType === 0) { // certificate
+                        ret = fileHandler.copyCertFile(certDialog.fileName);
                     } else if (certType === 1) { // privatekey
-                        fileHandler.moveKeyFile(certDialog.fileName);
+                        ret = fileHandler.copyKeyFile(certDialog.fileName);
                     } else if (certType === 2) { // pacFile
-                        fileHandler.movePacFile(certDialog.fileName);
+                        ret = fileHandler.copyPacFile(certDialog.fileName);
                     }
 
-                    /* Just to be sure source file will be deleted if move was
-                    not successfull */
-                    fileHandler.removeFile(certDialog.fileName);
-                    certDialog.updateSignal(true);
-                    PopupUtils.close(certDialog);
+                    // If the cert/key/pac doesn't compute, warn.
+                    if (!ret) {
+                        PopupUtils.open(failedToImportComponent);
+                    } else {
+                        certDialog.updateSignal(true);
+                        certDialog.certSaved(ret);
+                        PopupUtils.close(certDialog);
+                    }
                 }
             }
         }
