@@ -58,6 +58,26 @@ ItemPage {
         }
     }
 
+    AethercastDisplays {
+        id: displays
+        objectName: "aethercastDisplays"
+
+        onConnectError: {
+            console.error("onConnectError: " + error);
+            showError(error);
+        }
+
+        // Log some info to help debug
+        onConnectedDevicesChanged: {
+            console.warn("ConnectedDevices: " + displays.connectedDevices.count);
+        }
+
+        // Log some info to help debug
+        onDisconnectedDevicesChanged: {
+            console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
+        }
+    }
+
     Flickable {
         id: pageFlickable
         anchors.fill: parent
@@ -69,26 +89,8 @@ ItemPage {
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
 
-        AethercastDisplays {
-            id: displays
-
-            onConnectError: {
-                console.error("onConnectError: " + error);
-                showError(error);
-            }
-
-            // Log some info to help debug
-            onConnectedDevicesChanged: {
-                console.warn("ConnectedDevices: " + displays.connectedDevices.count);
-            }
-
-            // Log some info to help debug
-            onDisconnectedDevicesChanged: {
-                console.warn("DisconnectedDevices: " + displays.disconnectedDevices.count);
-            }
-        }
-
         Label {
+            objectName: "noDisplaysDetected"
             anchors {
                 left: parent.left
                 right: parent.right
@@ -115,6 +117,7 @@ ItemPage {
             }
 
             Repeater {
+                objectName: "displayRepeater"
                 model: displays.connectedDevices ? displays.connectedDevices : null
                 delegate: ListItem.Subtitled {
                     id: displayDelegate

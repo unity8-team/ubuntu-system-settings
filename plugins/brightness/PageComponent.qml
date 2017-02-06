@@ -21,6 +21,7 @@
 import GSettings 1.0
 import QtQuick 2.4
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
@@ -42,6 +43,7 @@ ItemPage {
 
     AethercastDisplays {
         id: aethercastDisplays
+        objectName: "aethercastDisplays"
         onEnabledChanged: {
             /* This is a hack to ensure the aethercast enabled switch stays
              * in sync with the enabled property
@@ -53,6 +55,7 @@ ItemPage {
 
     UbuntuBrightnessPanel {
         id: brightnessPanel
+        objectName: "brightnessPanel"
     }
 
     QDBusActionGroup {
@@ -66,7 +69,12 @@ ItemPage {
 
     Flickable {
         id: scrollWidget
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: applyButtonBackground.top
+        }
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ?
                             Flickable.DragAndOvershootBounds :
@@ -80,7 +88,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 text: i18n.tr("Display brightness")
                 showDivider: false
             }
@@ -111,12 +119,13 @@ ItemPage {
                 }
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
                 id: adjust
                 text: i18n.tr("Adjust automatically")
                 visible: brightnessPanel.powerdRunning &&
                          brightnessPanel.autoBrightnessAvailable
-                control: CheckBox {
+
+                CheckBox {
                     id: autoAdjustCheck
                     property bool serverChecked: gsettings.autoBrightness
                     onServerCheckedChanged: checked = serverChecked
@@ -136,11 +145,13 @@ ItemPage {
                 visible: brightnessPanel.widiSupported
             }
 
-            ListItem.Standard {
+            SettingsListItems.Standard {
+                objectName: "externalDisplayControl"
                 text: i18n.tr("External display")
                 enabled: brightnessPanel.widiSupported
                 onClicked: enabledCheck.trigger()
-                control: Switch {
+
+                Switch {
                     id: enabledCheck
                     property bool serverChecked: aethercastDisplays.enabled
                     onServerCheckedChanged: checked = serverChecked
@@ -151,16 +162,51 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
+            SettingsListItems.SingleValueProgression {
                 objectName: "displayCasting"
                 visible: brightnessPanel.widiSupported
                 enabled: aethercastDisplays.enabled
                 text: i18n.tr("Wireless display")
                 value: aethercastDisplays.state === "connected" ? i18n.tr("Connected") : i18n.tr("Not connected")
-                progression: true
                 onClicked: pageStack.addPageToNextColumn(
                     root, Qt.resolvedUrl("WifiDisplays.qml"))
             }
+
+            Repeater {
+                objectName: "displayConfigurationRepeater"
+                model: brightnessPanel.connectedDisplays
+
+                delegate: MirDisplay {
+
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: applyButtonBackground
+        objectName: "applyButtonBackground"
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        color: Theme.palette.selected.background
+
+        visible: brightnessPanel.allDisplays.count > 0 && showAllUI
+        height: units.gu(6)
+
+        Button {
+            id: applyButton
+            objectName: "applyButton"
+            anchors {
+                left: parent.left
+                leftMargin: units.gu(1)
+                verticalCenter: parent.verticalCenter
+            }
+            enabled: brightnessPanel.changedDisplays.count > 0
+            text: i18n.tr("Apply Changes…")
+            onClicked: brightnessPanel.applyDisplayConfiguration()
         }
     }
 }

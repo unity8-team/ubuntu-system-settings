@@ -1,0 +1,31 @@
+pkg_search_module(MIR REQUIRED mirclient)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Quick REQUIRED)
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_SOURCE_DIR}/plugins/brightness
+    ${CMAKE_SOURCE_DIR}/plugins/brightness/displays
+    ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/brightness
+    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+    ${MIR_INCLUDE_DIRS}
+)
+
+set(MOCK_BRIGHTNESS_SRCS
+    MockAethercastDevice.h
+    MockAethercastDeviceModel.cpp
+    MockAethercastDisplays.cpp
+    MockBrightness.cpp
+
+    # MockDisplay.h
+    # MockDisplayModel.h
+    plugin.cpp
+)
+
+add_library(MockBrightnessPanel MODULE ${MOCK_BRIGHTNESS_SRCS})
+
+target_link_libraries(MockBrightnessPanel uss-displays)
+
+add_uss_mock(Ubuntu.SystemSettings.Brightness 1.0 Ubuntu/SystemSettings/Brightness
+             TARGETS MockBrightnessPanel)

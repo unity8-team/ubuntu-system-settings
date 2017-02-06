@@ -23,6 +23,7 @@
 
 #include <QDebug>
 #include <QDBusInterface>
+#include <QProcessEnvironment>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
@@ -48,6 +49,18 @@ public:
 BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent)
 {
+    setDisplayName(_("Brightness"));
+
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (env.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = env.value("USS_SHOW_ALL_UI", "");
+
+        if(!showAllS.isEmpty()) {
+            setVisibility(true);
+            return;
+        }
+    }
+
     QDBusInterface m_powerdIface ("com.canonical.powerd",
                                   "/com/canonical/powerd",
                                   "com.canonical.powerd",
@@ -61,9 +74,7 @@ BrightnessItem::BrightnessItem(const QVariantMap &staticData, QObject *parent):
     // We want to log this property to help aid debugging
     qWarning() << Q_FUNC_INFO << "ubuntu.widi.supported:" << widi;
 
-    if (strcmp(widi, "0") == 0) {
-        setDisplayName(_("Brightness"));
-    } else {
+    if (strcmp(widi, "0") != 0) {
         setDisplayName(_("Brightness & Display"));
     }
 }

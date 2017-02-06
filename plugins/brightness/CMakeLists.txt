@@ -1,8 +1,45 @@
 include_directories(${ANDR_PROP_INCLUDE_DIRS})
 add_subdirectory(plugin)
 
+pkg_search_module(MIR_CORE REQUIRED mircore)
+pkg_search_module(MIR_CLIENT REQUIRED mirclient)
+find_package(Qt5Core)
+find_package(Qt5Gui)
+find_package(Qt5Quick)
+find_package(Qt5Gui)
+include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS} ${MIR_CORE_INCLUDE_DIRS} ${MIR_CLIENT_INCLUDE_DIRS})
+
+add_library(uss-displays SHARED
+    displays/helpers.h
+
+    displays/display.h
+    displays/displaymodel.h
+
+    displays/enums.h
+
+    displays/mirclient.h
+    displays/mirclient_impl.h
+
+    displays/helpers.cpp
+    displays/display.cpp
+    displays/displaymodel.cpp
+    displays/mirclient_impl.cpp
+
+    displays/output/output.h
+    displays/output/mir_output.cpp
+
+    displays/outputmode/outputmode.h
+    displays/outputmode/mir_outputmode.cpp
+    ../../src/i18n.cpp
+)
+set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)
+target_link_libraries(uss-displays Qt5::Core Qt5::Quick
+                      ${Qt5Gui_PRIVATE_LDFLAGS}
+                      ${MIR_CORE_LDFLAGS}
+                      ${MIR_CLIENT_LDFLAGS})
 set(QML_SOURCES
     PageComponent.qml
+    MirDisplay.qml
     WifiDisplays.qml
     WifiDisplaysAlert.qml
 )
@@ -29,11 +66,12 @@ add_library(UbuntuBrightnessPanel MODULE
                 brightness.cpp
                 ${QML_SOURCES})
 qt5_use_modules(UbuntuBrightnessPanel Quick Qml DBus)
-target_link_libraries(UbuntuBrightnessPanel SystemSettings ${ANDR_PROP_LDFLAGS})
+target_link_libraries(UbuntuBrightnessPanel SystemSettings ${ANDR_PROP_LDFLAGS} uss-displays)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Brightness)
+install(TARGETS uss-displays DESTINATION ${PLUGIN_MODULE_DIR})
 install(TARGETS UbuntuBrightnessPanel DESTINATION ${PLUG_DIR})
-install(FILES qmldir DESTINATION ${PLUG_DIR})
+install(FILES qmldir.in DESTINATION ${PLUG_DIR} RENAME qmldir)
 install(FILES brightness.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-brightness.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/brightness)

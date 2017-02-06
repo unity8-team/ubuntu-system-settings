@@ -4,6 +4,9 @@ include(QmlTest)
 add_subdirectory(security-privacy)
 add_subdirectory(system-update)
 add_subdirectory(bluetooth)
+if(ANDR_PROP_FOUND)
+    add_subdirectory(brightness)
+endif()
 add_subdirectory(wifi)
 add_subdirectory(notifications)
 
@@ -55,6 +58,17 @@ add_qml_test(system-update systemupdate_noauthentication
 add_qml_test(system-update systemupdate_download_handler
     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
 )
+
+if(ANDR_PROP_FOUND)
+    set(BRIGHTNESS_IMPORT_PATHS
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_BINARY_DIR}/tests/utils/modules
+        ${CMAKE_BINARY_DIR}/tests/mocks/
+        ${CMAKE_SOURCE_DIR}/tests/plugins/brightness
+    )
+    add_qml_test(brightness BrightnessPageComponent IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
+    add_qml_test(brightness BrightnessWifiDisplays IMPORT_PATHS ${BRIGHTNESS_IMPORT_PATHS})
+endif()
 
 add_qml_test(main MainWindow
     IMPORT_PATHS

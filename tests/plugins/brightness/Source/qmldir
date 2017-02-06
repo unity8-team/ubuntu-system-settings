@@ -1,0 +1,3 @@
+module Source
+PageComponent 1.0 ../../../../plugins/brightness/PageComponent.qml
+WifiDisplays 1.0 ../../../../plugins/brightness/WifiDisplays.qml
