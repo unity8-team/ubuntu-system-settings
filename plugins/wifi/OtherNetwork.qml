@@ -85,7 +85,29 @@ Component {
                         } else if (update && type === 1) {
                             privatekeyListModel.dataupdate();
                         } else if (update && type === 2) {
-                            pacFileListModeL.dataupdate();
+                            pacFileListModel.dataupdate();
+                        }
+                    });
+
+                    // Updates the selected index of a selector.
+                    certDialog.certSaved.connect(function (certFile) {
+                        var model;
+                        var selector;
+                        if (update && type === 0) {
+                            selector = cacertSelector;
+                            model = cacertListModel;
+                        } else if (update && type === 1) {
+                            selector = privateKeySelector;
+                            model = privatekeyListModel;
+                        } else if (update && type === 2) {
+                            selector = pacFileSelector;
+                            model = pacFileListModel;
+                        }
+
+                        for (var i = 0; i < model.rowCount(); i++) {
+                            if (model.getfileName(i) === certFile) {
+                                selector.selectedIndex = i;
+                            }
                         }
                     });
                 }

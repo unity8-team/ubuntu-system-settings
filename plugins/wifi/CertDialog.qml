@@ -14,6 +14,7 @@ Component {
         property var fileName;
 
         signal updateSignal(var update);
+        signal certSaved(string file);
 
         anchors.fill: parent
 
@@ -112,6 +113,7 @@ Component {
                         PopupUtils.open(failedToImportComponent);
                     } else {
                         certDialog.updateSignal(true);
+                        certDialog.certSaved(ret);
                         PopupUtils.close(certDialog);
                     }
                 }
