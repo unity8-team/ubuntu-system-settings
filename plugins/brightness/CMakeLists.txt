@@ -33,7 +33,10 @@ add_library(uss-displays SHARED
     ../../src/i18n.cpp
 )
 set_target_properties(uss-displays PROPERTIES VERSION 0.0 SOVERSION 0.0)
-target_link_libraries(uss-displays Qt5::Core Qt5::Quick ${Qt5Gui_PRIVATE_LDFLAGS} ${MIR_LDFLAGS})
+target_link_libraries(uss-displays Qt5::Core Qt5::Quick
+                      ${Qt5Gui_PRIVATE_LDFLAGS}
+                      ${MIR_CORE_LDFLAGS}
+                      ${MIR_CLIENT_LDFLAGS})
 set(QML_SOURCES
     PageComponent.qml
     MirDisplay.qml

@@ -15,7 +15,7 @@ find_package(Qt5DBus REQUIRED)
 find_package(Qt5Qml REQUIRED)
 find_package(Qt5Test REQUIRED)
 
-set(PLUGIN_LIBS uss-displays Qt5::Core Qt5::Qml Qt5::Test Qt5::DBus)
+set(PLUGIN_LIBS uss-displays Qt5::Qml Qt5::Test Qt5::DBus)
 set(FAKE_MIR_CODE
     ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/brightness/fakemirclient.h
     ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/brightness/fakeoutput.h
