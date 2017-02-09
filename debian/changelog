@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4.1-0ubuntu1) vivid; urgency=medium
+
+  * Tweak changelog to build on vivid.
+
+ -- Gustavo Pichorim Boiko <gustavo.boiko@canonical.com>  Thu, 09 Feb 2017 11:10:01 -0200
+
 ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]
