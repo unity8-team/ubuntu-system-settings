@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4.1+15.04.20170209.1-0ubuntu1) vivid; urgency=medium
+
+  * Remove the phone settings. They were moved to dialer-app. (LP:
+    #1447601)
+
+ -- Gustavo Pichorim Boiko <gustavo.boiko@canonical.com>  Thu, 09 Feb 2017 16:40:40 +0000
+
 ubuntu-system-settings (0.4.1-0ubuntu1) vivid; urgency=medium
 
   * Tweak changelog to build on vivid.
