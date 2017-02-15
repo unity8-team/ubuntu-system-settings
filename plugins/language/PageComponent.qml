@@ -108,6 +108,11 @@ ItemPage {
         schema.id: "com.canonical.keyboard.maliit"
     }
 
+    GSettings {
+        id: unitySettings
+        schema.id: "com.canonical.Unity"
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -139,6 +144,18 @@ ItemPage {
             }
 
             ListItem.Divider {}
+
+            ListItem.Standard {
+                text: i18n.tr("Enable on-screen keyboard")
+                visible: externalKeyboardPresent || showAllUI
+
+                control: Switch {
+                    property bool serverChecked: !unitySettings.inhibitOsk
+                    onServerCheckedChanged: checked = serverChecked
+                    Component.onCompleted: checked = serverChecked
+                    onTriggered: unitySettings.inhibitOsk = !checked
+                }
+            }
 
             ListItem.SingleValue {
                 text: externalKeyboardPresent ? i18n.tr("On-screen keyboard") :
