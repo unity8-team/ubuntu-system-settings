@@ -110,7 +110,7 @@ ItemPage {
 
     GSettings {
         id: unitySettings
-        schema.id: "com.canonical.Unity"
+        schema.id: "com.canonical.Unity8"
     }
 
     Flickable {
@@ -147,13 +147,13 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Enable on-screen keyboard")
-                visible: externalKeyboardPresent || showAllUI
+                visible: unitySettings.oskSwitchVisible || showAllUI
 
                 control: Switch {
-                    property bool serverChecked: !unitySettings.inhibitOsk
+                    property bool serverChecked: unitySettings.alwaysShowOsk
                     onServerCheckedChanged: checked = serverChecked
                     Component.onCompleted: checked = serverChecked
-                    onTriggered: unitySettings.inhibitOsk = !checked
+                    onTriggered: unitySettings.alwaysShowOsk = checked
                 }
             }
 
