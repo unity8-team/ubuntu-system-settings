@@ -17,7 +17,7 @@ include_directories(
     /usr/include/apt-pkg/
 )
 
-pkg_check_modules(UAL REQUIRED ubuntu-app-launch-2)
+pkg_check_modules(UAL REQUIRED ubuntu-app-launch-3)
 add_definitions(${UAL_CFLAGS} ${UAL_CFLAGS_OTHER})
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
