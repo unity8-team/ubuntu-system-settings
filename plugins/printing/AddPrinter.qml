@@ -26,16 +26,17 @@ import Ubuntu.Settings.Printers 0.1
 ItemPage {
     id: root
     objectName: "printingPage"
+    title: i18n.tr("Add printer")
 
     header: PageHeader {
         id: printerHeader
         title: i18n.tr("Printing")
         flickable: printerList
-        trailingActionBar {
+        leadingActionBar {
             actions: [
                 Action {
-                    iconName: "add"
-                    text: i18n.tr("Add printer")
+                    iconName: "close"
+                    text: i18n.tr("Cancel")
                     onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"))
                 }
             ]
