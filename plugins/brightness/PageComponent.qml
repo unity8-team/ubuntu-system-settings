@@ -80,11 +80,6 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
-                text: i18n.tr("Display brightness")
-                showDivider: false
-            }
-
             /* Use the SliderMenu component instead of the Slider to avoid binding
                issues on valueChanged until LP: #1388094 is fixed.
             */
@@ -93,6 +88,7 @@ ItemPage {
                 objectName: "sliderMenu"
                 enabled: indicatorPower.brightness.state != null
                 live: true
+                text: i18n.tr("Display brightness")
                 minimumValue: 0.0
                 maximumValue: 100.0
                 minIcon: "image://theme/display-brightness-min"
