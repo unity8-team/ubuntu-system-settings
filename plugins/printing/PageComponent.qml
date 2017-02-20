@@ -44,6 +44,7 @@ ItemPage {
 
     Flickable {
         id: printerList
+        anchors.fill: parent
 
         ListView {
             id: allPrintersList

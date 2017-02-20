@@ -1,8 +1,11 @@
 add_definitions(-DQT_NO_KEYWORDS)
 
 set(QML_SOURCES
+    AddPrinter.qml
+    GeneralSettings.qml
     PageComponent.qml
     Printer.qml
+    Setting.qml
 )
 
 # We need a dummy target so the QML files show up in Qt Creator

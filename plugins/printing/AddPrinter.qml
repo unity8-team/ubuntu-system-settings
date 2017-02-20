@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 1.3 as ListItems
 import Ubuntu.Settings.Printers 0.1
 
 ItemPage {
-    id: root
+    id: addPrinterPage
     objectName: "printingPage"
     title: i18n.tr("Add printer")
 
@@ -37,7 +37,7 @@ ItemPage {
                 Action {
                     iconName: "close"
                     text: i18n.tr("Cancel")
-                    onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"))
+                    onTriggered: pageStack.removePages(addPrinterPage)
                 }
             ]
         }

@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
@@ -26,17 +27,49 @@ import Ubuntu.Settings.Components 0.1
 import Ubuntu.Settings.Printers 0.1
 
 ItemPage {
-    id: root
+    id: printerPage
     objectName: "printerPage"
     property var printer
     header: PageHeader {
-       title: printer.name
-       flickable: printerFlickable
+        title: printer.name
+        flickable: printerFlickable
+        extension: Label {
+            text: printer.description
+            anchors {
+                left: parent.left
+                leftMargin: units.gu(5)
+                bottom: parent.bottom
+                bottomMargin: units.gu(1)
+            }
+        }
     }
 
     Flickable {
         id: printerFlickable
         anchors.fill: parent
+
+        Loader {
+            id: printerPageLoader
+            anchors.fill: parent
+            sourceComponent: printer.isLoaded ? printerLoadedComponent
+                                              : printerLoadingComponent
+        }
+    }
+
+    Component {
+        id: printerLoadingComponent
+
+        Item {
+            anchors.fill: parent
+            ActivityIndicator {
+                anchors.centerIn: parent
+                running: true
+            }
+        }
+    }
+
+    Component {
+        id: printerLoadedComponent
 
         Column {
             spacing: units.gu(2)
@@ -47,91 +80,20 @@ ItemPage {
                 right: parent.right
             }
 
-            Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.gu(2)
-                }
-                text: "Description"
+            SettingsListItems.StandardProgression {
+                text: i18n.tr("General settings")
+                onClicked: pageStack.addPageToNextColumn(
+                    printerPage, Qt.resolvedUrl("GeneralSettings.qml"),
+                    { printer: printer }
+                )
             }
 
-            ListItems.SingleControl {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                control: TextField {
-                   anchors {
-                        margins: units.gu(1)
-                        left: parent.left
-                        right: parent.right
-
-                    }
-                    text: printer.description
-                    onTextChanged: printer.description = text
-                }
-            }
-
-
-            ListItems.ValueSelector {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                enabled: values.length > 1
-                text: "Duplex"
-                values: printer.supportedDuplexModes
-                onSelectedIndexChanged: printer.duplexMode = selectedIndex
-                Component.onCompleted: {
-                    if (enabled) {
-                        selectedIndex = printer.duplexMode
-                    }
-                }
-            }
-
-            ListItems.ValueSelector {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                text: "Page size"
-                values: printer.supportedPageSizes
-                onSelectedIndexChanged: printer.pageSize = selectedIndex
-                Component.onCompleted: selectedIndex = printer.supportedPageSizes.indexOf(printer.pageSize)
-            }
-
-            ListItems.ValueSelector {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                visible: printer.supportedColorModels.length
-                text: "Color model"
-                values: printer.supportedColorModels
-                enabled: values.length > 1
-                onSelectedIndexChanged: printer.colorModel = selectedIndex
-                Component.onCompleted: {
-                    if (enabled)
-                        selectedIndex = printer.colorModel
-                }
-            }
-
-            ListItems.ValueSelector {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                visible: printer.supportedPrintQualities.length
-                text: "Quality"
-                values: printer.supportedPrintQualities
-                enabled: values.length > 1
-                onSelectedIndexChanged: printer.printQuality = selectedIndex
-                Component.onCompleted: {
-                    if (enabled)
-                        selectedIndex = printer.printQuality
-                }
+            SettingsListItems.StandardProgression {
+                text: i18n.tr("Policies")
+                onClicked: pageStack.addPageToNextColumn(
+                    printerPage, Qt.resolvedUrl("Policies.qml"),
+                    { printer: printer }
+                )
             }
         }
     }
