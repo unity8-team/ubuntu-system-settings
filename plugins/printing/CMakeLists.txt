@@ -1,6 +1,8 @@
 add_definitions(-DQT_NO_KEYWORDS)
 
 set(QML_SOURCES
+    connections/Ipp.qml
+
     AddPrinter.qml
     GeneralSettings.qml
     PageComponent.qml

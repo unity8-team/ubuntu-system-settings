@@ -19,11 +19,8 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
-import Ubuntu.Settings.Components 0.1
-import Ubuntu.Settings.Printers 0.1
 
 ItemPage {
     id: settingPage

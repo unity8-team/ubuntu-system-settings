@@ -18,10 +18,8 @@
 
 import QtQuick 2.4
 import SystemSettings 1.0
-import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3 as ListItems
-import Ubuntu.Settings.Printers 0.1
+import Ubuntu.Components.Extras.Printers 0.1
 
 ItemPage {
     id: root
@@ -39,6 +37,22 @@ ItemPage {
                     onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"))
                 }
             ]
+        }
+    }
+
+    onPushedOntoStack: {
+        var page;
+        var opts = {
+            pluginManager: pluginManager, pluginOptions: pluginOptions,};
+        if (pluginOptions && pluginOptions['subpage']) {
+            switch (pluginOptions['subpage']) {
+            case 'add-printer':
+                page = Qt.resolvedUrl("AddPrinter.qml");
+                break;
+            }
+        }
+        if (page) {
+            pageStack.addPageToNextColumn(root, page, opts);
         }
     }
 
@@ -76,4 +90,30 @@ ItemPage {
         }
     }
 
+
+    Item {
+        visible: allPrintersList.count == 0
+        z: 1
+
+        anchors.fill: parent
+
+        Label {
+            id: noPrintersLabel
+            anchors.centerIn: parent
+            text: i18n.tr("There are no printers configured yet.")
+            color: theme.palette.normal.baseText
+        }
+
+        Icon {
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: noPrintersLabel.bottom
+                topMargin: units.gu(2)
+            }
+            name: "printer-symbolic"
+            height: units.gu(6)
+            width: height
+            color: theme.palette.normal.base
+        }
+    }
 }
