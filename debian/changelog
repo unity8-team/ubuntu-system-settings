@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+17.04.20170211-0ubuntu1) zesty; urgency=medium
+
+  * Handle ubuntu-app-launch API change
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Sat, 11 Feb 2017 00:16:14 +0000
+
 ubuntu-system-settings (0.4+17.04.20170118.1-0ubuntu1) zesty; urgency=medium
 
   [ Lukáš Tinkl ]
