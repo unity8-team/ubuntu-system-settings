@@ -28,14 +28,13 @@ ItemPage {
     header: PageHeader {
         title: printer.name
         flickable: printerFlickable
-        extension: Label {
-            text: printer.description
-            anchors {
-                left: parent.left
-                leftMargin: units.gu(5)
-                bottom: parent.bottom
-                bottomMargin: units.gu(1)
-            }
+    }
+
+    function categoryToSelectorIndex(category) {
+        switch (category) {
+        case "policies": return 1;
+        case "status": return 0;
+        default: return 0;
         }
     }
 
@@ -75,20 +74,50 @@ ItemPage {
                 right: parent.right
             }
 
-            SettingsListItems.StandardProgression {
-                text: i18n.tr("General settings")
-                onClicked: pageStack.addPageToNextColumn(
-                    printerPage, Qt.resolvedUrl("GeneralSettings.qml"),
-                    { printer: printer }
-                )
+            OptionSelector {
+                id: subPageSelector
+                anchors {
+                    left: parent.left
+                    leftMargin: units.gu(2)
+                }
+                width: units.gu(30)
+                model: [
+                    i18n.tr("Printer status"),
+                    i18n.tr("Policies"),
+                    i18n.tr("Allowed users"),
+                    i18n.tr("Installable options"),
+                    i18n.tr("Copies and pages"),
+                ]
+                onSelectedIndexChanged: {
+                    var uri = printerSubPageLoader.defaultUri;
+                    switch (selectedIndex) {
+                    case 1:
+                        uri = Qt.resolvedUrl("Policies.qml");
+                        break;
+                    }
+                    printerSubPageLoader.setSource(uri);
+                }
             }
 
-            SettingsListItems.StandardProgression {
-                text: i18n.tr("Policies")
-                onClicked: pageStack.addPageToNextColumn(
-                    printerPage, Qt.resolvedUrl("Policies.qml"),
-                    { printer: printer }
-                )
+            Loader {
+                id: printerSubPageLoader
+                anchors { left: parent.left; right: parent.right }
+                property string defaultUri: Qt.resolvedUrl("Status.qml")
+
+                Component.onCompleted: {
+                    // If we're asked for specific category, show it immediately.
+                    var category = pluginOptions['category'];
+                    var index = 0;
+                    if (pluginOptions && category) {
+                        index = categoryToSelectorIndex(category);
+                    }
+
+                    if (index == 0) {
+                        printerSubPageLoader.setSource(defaultUri);
+                    } else {
+                        subPageSelector.selectedIndex = index;
+                    }
+                }
             }
         }
     }

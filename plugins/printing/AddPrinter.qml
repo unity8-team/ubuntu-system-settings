@@ -49,7 +49,33 @@ ItemPage {
                     iconName: "ok"
                     text: i18n.tr("Add printer")
                     enabled: connectionsSelector.selectedIndex > 0
-                    onTriggered: save()
+                    onTriggered: {
+                        addPrinterPage.state = "adding";
+                        var ret;
+                        if (driverSelector.selectedIndex == 0) {
+                            ret = Printers.addPrinter(
+                                printerName.text,
+                                driversView.selectedDriver,
+                                printerUri.text,
+                                printerDescription.text,
+                                printerLocation.text
+                            );
+                        } else {
+                            ret = Printers.addPrinterWithPpdFile(
+                                printerName.text,
+                                printerPpd.text,
+                                printerUri.text,
+                                printerDescription.text,
+                                printerLocation.text
+                            );
+                        }
+                        if (ret) {
+                            addPrinterPage.state = "success"
+                        } else {
+                            errorMessage.text = Printers.lastMessage;
+                            addPrinterPage.state = "failure"
+                        }
+                    }
                 }
             ]
         }
@@ -65,10 +91,6 @@ ItemPage {
         }
 
         Printers.prepareToAddPrinter();
-    }
-
-    function save () {
-        addPrinterPage.state = "adding";
     }
 
     states: [
@@ -151,10 +173,10 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                text: "Choose driver"
+                text: i18n.tr("Choose driver")
                 values: [
-                    "Select printer from database",
-                    "Provide PPD file"
+                    i18n.tr("Select printer from database"),
+                    i18n.tr("Provide PPD file")
                 ]
                 enabled: parent.enabled
             }
@@ -164,7 +186,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                text: "Filter drivers"
+                text: i18n.tr("Filter drivers")
 
                 TextField {
                     id: driverFilter
@@ -221,7 +243,7 @@ ItemPage {
             }
 
             ListItems.Standard {
-                text: "PPD File"
+                text: i18n.tr("PPD file")
                 visible: driverSelector.selectedIndex == 1
                 control: TextField {
                     id: printerPpd
@@ -239,6 +261,7 @@ ItemPage {
 
                 TextField {
                     id: descriptionField
+                    placeholderText: i18n.tr("Optional")
                 }
             }
 
@@ -251,6 +274,7 @@ ItemPage {
 
                 TextField {
                     id: locationField
+                    placeholderText: i18n.tr("Optional")
                 }
             }
         }

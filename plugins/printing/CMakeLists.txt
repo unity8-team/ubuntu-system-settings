@@ -3,6 +3,9 @@ add_definitions(-DQT_NO_KEYWORDS)
 set(QML_SOURCES
     connections/Ipp.qml
 
+    printer-sub-pages/Status.qml
+    printer-sub-pages/Policies.qml
+
     AddPrinter.qml
     GeneralSettings.qml
     PageComponent.qml

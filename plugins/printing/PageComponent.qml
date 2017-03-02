@@ -43,11 +43,26 @@ ItemPage {
     onPushedOntoStack: {
         var page;
         var opts = {
-            pluginManager: pluginManager, pluginOptions: pluginOptions,};
+            pluginManager: pluginManager,
+            pluginOptions: pluginOptions,
+        };
         if (pluginOptions && pluginOptions['subpage']) {
             switch (pluginOptions['subpage']) {
             case 'add-printer':
                 page = Qt.resolvedUrl("AddPrinter.qml");
+                break;
+            case 'view-printer':
+                var printerName = pluginOptions['name'];
+                if (printerName) {
+                    Printers.loadPrinter(printerName);
+                    for (var i = 0; i < allPrintersList.count; i++) {
+                        if (printerName == Printers.allPrinters.get(i).name) {
+                            allPrintersList.currentIndex = i;
+                            allPrintersList.currentItem.clicked();
+                            break;
+                        }
+                    }
+                }
                 break;
             }
         }
@@ -62,10 +77,7 @@ ItemPage {
 
         ListView {
             id: allPrintersList
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
+            anchors.fill: parent
             model: Printers.allPrinters
             delegate: ListItem {
                 height: modelLayout.height + (divider.visible ? divider.height : 0)
@@ -83,9 +95,12 @@ ItemPage {
 
                     ProgressionSlot {}
                 }
-                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Printer.qml"), {
-                    printer: model
-                })
+                onClicked: {
+                    Printers.loadPrinter(model.name);
+                    pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Printer.qml"), {
+                        printer: model, pluginOptions: pluginOptions
+                    });
+                }
             }
         }
     }
