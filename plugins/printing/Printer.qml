@@ -41,10 +41,14 @@ ItemPage {
     Flickable {
         id: printerFlickable
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
 
         Loader {
             id: printerPageLoader
-            anchors.fill: parent
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             sourceComponent: printer.isLoaded ? printerLoadedComponent
                                               : printerLoadingComponent
         }
@@ -67,6 +71,7 @@ ItemPage {
 
         Column {
             spacing: units.gu(2)
+            height: childrenRect.height + anchors.topMargin
             anchors {
                 top: parent.top
                 topMargin: units.gu(2)
