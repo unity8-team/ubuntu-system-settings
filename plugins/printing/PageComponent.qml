@@ -81,9 +81,29 @@ ItemPage {
             model: Printers.allPrinters
             delegate: ListItem {
                 height: modelLayout.height + (divider.visible ? divider.height : 0)
+                leadingActions: ListItemActions {
+                    actions: [
+                        Action {
+                            iconName: "delete"
+                            onTriggered: {
+                                if (!Printers.removePrinter(model.name)) {
+                                    console.error('failed to remove printer', Printers.lastMessage);
+                                }
+                            }
+                        }
+                    ]
+                }
+                trailingActions: ListItemActions {
+                    actions: Action {
+                        iconName: model.default ? "starred" : "non-starred"
+                        enabled: !model.default
+                        onTriggered: Printers.defaultPrinterName = model.name
+                    }
+                }
                 ListItemLayout {
                     id: modelLayout
                     title.text: displayName
+                    anchors { left: parent.left; right: parent.right }
 
                     Icon {
                         id: icon

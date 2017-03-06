@@ -22,6 +22,8 @@ import Ubuntu.Components 1.3
 import SystemSettings.ListItems 1.0 as SettingsListItems
 
 Column {
+    property alias host: hostField.text
+    property bool enabled: true
     SettingsListItems.Standard {
         text: i18n.tr("Host")
         anchors {
@@ -31,6 +33,7 @@ Column {
 
         TextField {
             id: hostField
+            enabled: parent.enabled
         }
     }
 }

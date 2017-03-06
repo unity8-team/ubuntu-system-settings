@@ -19,32 +19,33 @@
 import QtQuick 2.4
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 Column {
     SettingsListItems.Standard {
-        text: i18n.tr("Enabled")
+        text: i18n.tr("Copies")
 
-        CheckBox {
-            checked: printer.printerEnabled
-            onTriggered: printer.printerEnabled = checked
+        TextField {
+            id: copiesField
+            inputMethodHints: Qt.ImhDigitsOnly
+            text: printer.copies
+            validator: IntValidator {
+                bottom: 1
+                top: 999
+            }
+            width: units.gu(10)
+            onTextChanged: printer.copies = text
         }
     }
 
-    SettingsListItems.Standard {
-        text: i18n.tr("Accepting jobs")
-
-        CheckBox {
-            checked: printer.acceptJobs
-            onTriggered: printer.acceptJobs = checked
+    ListItems.ValueSelector {
+        anchors {
+            left: parent.left
+            right: parent.right
         }
-    }
-
-    SettingsListItems.Standard {
-        text: i18n.tr("Shared")
-
-        CheckBox {
-            checked: printer.shared
-            onTriggered: printer.shared = checked
-        }
+        text: i18n.tr("Paper size")
+        values: printer.supportedPageSizes
+        onSelectedIndexChanged: printer.pageSize = selectedIndex
+        Component.onCompleted: selectedIndex = printer.supportedPageSizes.indexOf(printer.pageSize)
     }
 }

@@ -32,7 +32,9 @@ ItemPage {
 
     function categoryToSelectorIndex(category) {
         switch (category) {
-        case "policies": return 1;
+        case "general": return 1;
+        case "policies": return 2;
+        case "copiesandpages": return 3;
         case "status": return 0;
         default: return 0;
         }
@@ -58,9 +60,12 @@ ItemPage {
         id: printerLoadingComponent
 
         Item {
-            anchors.fill: parent
             ActivityIndicator {
-                anchors.centerIn: parent
+                anchors {
+                    top: parent.top
+                    topMargin: units.gu(2)
+                    horizontalCenter: parent.horizontalCenter
+                }
                 running: true
             }
         }
@@ -88,16 +93,23 @@ ItemPage {
                 width: units.gu(30)
                 model: [
                     i18n.tr("Printer status"),
+                    i18n.tr("General settings"),
                     i18n.tr("Policies"),
-                    i18n.tr("Allowed users"),
-                    i18n.tr("Installable options"),
+                    /* i18n.tr("Allowed users"), */
+                    /* i18n.tr("Installable options"), */
                     i18n.tr("Copies and pages"),
                 ]
                 onSelectedIndexChanged: {
                     var uri = printerSubPageLoader.defaultUri;
                     switch (selectedIndex) {
                     case 1:
+                        uri = Qt.resolvedUrl("GeneralSettings.qml");
+                        break;
+                    case 2:
                         uri = Qt.resolvedUrl("Policies.qml");
+                        break;
+                    case 3:
+                        uri = Qt.resolvedUrl("CopiesAndPages.qml");
                         break;
                     }
                     printerSubPageLoader.setSource(uri);
@@ -111,7 +123,7 @@ ItemPage {
 
                 Component.onCompleted: {
                     // If we're asked for specific category, show it immediately.
-                    var category = pluginOptions['category'];
+                    var category = pluginOptions ? pluginOptions['category'] : null;
                     var index = 0;
                     if (pluginOptions && category) {
                         index = categoryToSelectorIndex(category);

@@ -54,23 +54,24 @@ ItemPage {
                         var ret;
                         if (driverSelector.selectedIndex == 0) {
                             ret = Printers.addPrinter(
-                                printerName.text,
+                                nameField.text,
                                 driversView.selectedDriver,
-                                printerUri.text,
-                                printerDescription.text,
-                                printerLocation.text
+                                connectionsLoader.item.host,
+                                descriptionField.text,
+                                locationField.text
                             );
                         } else {
                             ret = Printers.addPrinterWithPpdFile(
-                                printerName.text,
-                                printerPpd.text,
-                                printerUri.text,
+                                nameField.text,
+                                pddFileField.text,
+                                connectionsLoader.item.host,
+                                descriptionField.text,
                                 printerDescription.text,
-                                printerLocation.text
+                                locationField.text
                             );
                         }
                         if (ret) {
-                            addPrinterPage.state = "success"
+                            addPrinterPage.state = "adding"
                         } else {
                             errorMessage.text = Printers.lastMessage;
                             addPrinterPage.state = "failure"
@@ -99,10 +100,12 @@ ItemPage {
             PropertyChanges { target: closeAction; enabled: false }
             PropertyChanges { target: addAction; enabled: false }
             PropertyChanges { target: successTimer; running: true }
+            PropertyChanges { target: connectionsLoader.item; enabled: false }
+            PropertyChanges { target: fieldsColumn; enabled: false }
         },
         State {
-            name: "failed"
-            PropertyChanges { target: successTimer; running: false }
+            name: "failure"
+            PropertyChanges { target: errorMessageContainer; visible: true }
         }
     ]
 
@@ -127,8 +130,12 @@ ItemPage {
         }
 
         Column {
+            id: fieldsColumn
             anchors { left: parent.left; right: parent.right; top: connectionsSelector.bottom }
             visible: connectionsSelector.selectedIndex > 0
+            height: visible ? childrenRect.height : 0
+            clip: true
+            property bool enabled: true
 
             SettingsListItems.Standard {
                 text: i18n.tr("Printer name")
@@ -139,6 +146,7 @@ ItemPage {
 
                 TextField {
                     id: nameField
+                    enabled: fieldsColumn.enabled
                 }
             }
 
@@ -191,6 +199,7 @@ ItemPage {
                 TextField {
                     id: driverFilter
                     onTextChanged: Printers.driverFilter = text
+                    enabled: fieldsColumn.enabled
                 }
                 visible: driverSelector.selectedIndex == 0
                 enabled: parent.enabled
@@ -262,6 +271,7 @@ ItemPage {
                 TextField {
                     id: descriptionField
                     placeholderText: i18n.tr("Optional")
+                    enabled: fieldsColumn.enabled
                 }
             }
 
@@ -275,6 +285,66 @@ ItemPage {
                 TextField {
                     id: locationField
                     placeholderText: i18n.tr("Optional")
+                    enabled: fieldsColumn.enabled
+                }
+            }
+        }
+
+        SettingsItemTitle {
+            id: remotePrintersTitle
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: fieldsColumn.bottom
+            }
+            text: i18n.tr("Network printers")
+            visible: remotePrintersList.count > 0 && !successTimer.running
+        }
+
+        ListView {
+            id: remotePrintersList
+            contentHeight: contentItem.childrenRect.height
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: remotePrintersTitle.bottom
+            }
+            model: Printers.remotePrinters
+            delegate: ListItem {
+                height: modelLayout.height + (divider.visible ? divider.height : 0)
+                ListItemLayout {
+                    id: modelLayout
+                    title.text: displayName
+                    subtitle.text: description
+
+                    Icon {
+                        id: icon
+                        width: height
+                        height: units.gu(2.5)
+                        name: "printer-symbolic"
+                        SlotsLayout.position: SlotsLayout.First
+                    }
+
+                    Button {
+                        text: i18n.tr("Add printer")
+                        enabled: !successTimer.running
+                        onClicked: {
+                            addPrinterPage.state = "adding";
+                            var ret = Printers.addPrinterWithPpdFile(
+                                /* TRANSLATORS: %1 refers to the printer name,
+                                %2 the hostname of the printer, .e.g
+                                "Laserjet-mark.local". */
+                                i18n.tr("%1-%2").arg(model.name).arg(hostname),
+                                "", deviceUri, description, location
+                            );
+                            if (ret) {
+                                addPrinterPage.state = "adding"
+                            } else {
+                                errorMessage.text = Printers.lastMessage;
+                                addPrinterPage.state = "failure"
+                            }
+                        }
+                    }
                 }
             }
         }
