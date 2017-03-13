@@ -43,8 +43,7 @@ int main(int argc, char **argv)
     bool isSnap = !mountPoint.isEmpty();
 
     // Ensure printing environment is correct.
-    qputenv(QLatin1String("QT_PRINTER_MODULE"),
-            QLatin1String("cupsprintersupport"));
+    qputenv("QT_PRINTER_MODULE", "cupsprintersupport");
 
     /* read environment variables */
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
