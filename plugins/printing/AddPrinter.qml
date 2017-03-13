@@ -56,7 +56,7 @@ ItemPage {
                             ret = Printers.addPrinter(
                                 nameField.text,
                                 driversView.selectedDriver,
-                                connectionsLoader.item.host,
+                                connections.host,
                                 descriptionField.text,
                                 locationField.text
                             );
@@ -64,7 +64,7 @@ ItemPage {
                             ret = Printers.addPrinterWithPpdFile(
                                 nameField.text,
                                 pddFileField.text,
-                                connectionsLoader.item.host,
+                                connections.host,
                                 descriptionField.text,
                                 printerDescription.text,
                                 locationField.text
@@ -100,7 +100,7 @@ ItemPage {
             PropertyChanges { target: closeAction; enabled: false }
             PropertyChanges { target: addAction; enabled: false }
             PropertyChanges { target: successTimer; running: true }
-            PropertyChanges { target: connectionsLoader.item; enabled: false }
+            PropertyChanges { target: connections; enabled: false }
             PropertyChanges { target: fieldsColumn; enabled: false }
         },
         State {
@@ -119,12 +119,27 @@ ItemPage {
             id: connectionsSelector
             anchors { left: parent.left; right: parent.right; top: parent.top }
             text: i18n.tr("Connection")
-            values: [i18n.tr("Choose a connection"), "IPP"]
+            values: [
+                i18n.tr("Choose a connection"),
+                "ipp",
+                "lpd",
+                "ipps",
+                "ipp14",
+                "http",
+                "beh",
+                "socket",
+                "https",
+                "ipp",
+                "hp",
+                "usb",
+                "hpfax",
+                "dnssd",
+            ]
             onSelectedIndexChanged: {
                 if (selectedIndex === 0) {
-                    connectionsLoader.sourceComponent = null;
-                } else if (selectedIndex === 1) {
-                    connectionsLoader.setSource(Qt.resolvedUrl("Ipp.qml"));
+                    connection.type = PrinterEnum.IppType;
+                } else {
+                    connection.type = connection.stringToType(values[selectedIndex]);
                 }
             }
         }
@@ -169,18 +184,51 @@ ItemPage {
                 }
             }
 
-            Loader {
-                id: connectionsLoader
-
-                anchors { left: parent.left; right: parent.right; }
+            PrinterConnection {
+                id: connection
+                anchors { left: parent.left; right: parent.right }
+                onTypeChanged: {
+                    var selIndex = connectionsSelector.values.indexOf(typeToString(type));
+                    if (selIndex < 0) {
+                        selIndex = 0;
+                    }
+                    connectionsSelector.selectedIndex = selIndex;
+                }
             }
 
-            ListItems.ValueSelector {
-                id: driverSelector
+            SettingsListItems.Standard {
+                text: i18n.tr("Description")
+                anchors { left: parent.left; right: parent.right }
+
+                TextField {
+                    id: descriptionField
+                    placeholderText: i18n.tr("Optional")
+                    enabled: fieldsColumn.enabled
+                }
+            }
+
+            SettingsListItems.Standard {
+                text: i18n.tr("Location")
+                anchors { left: parent.left; right: parent.right }
+
+                TextField {
+                    id: locationField
+                    placeholderText: i18n.tr("Optional")
+                    enabled: fieldsColumn.enabled
+                }
+            }
+
+            SettingsItemTitle {
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
+                text: i18n.tr("Driver")
+            }
+
+            ListItems.ValueSelector {
+                id: driverSelector
+                anchors { left: parent.left; right: parent.right }
                 text: i18n.tr("Choose driver")
                 values: [
                     i18n.tr("Select printer from database"),
@@ -190,10 +238,7 @@ ItemPage {
             }
 
             SettingsListItems.Standard {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                anchors { left: parent.left; right: parent.right }
                 text: i18n.tr("Filter drivers")
 
                 TextField {
@@ -205,48 +250,62 @@ ItemPage {
                 enabled: parent.enabled
             }
 
-            ListView {
-                id: driversView
-                property string selectedDriver
-                property bool loading: true
-                visible: driverSelector.selectedIndex == 0
-                model: Printers.drivers
+            ScrollView {
                 anchors { left: parent.left; right: parent.right }
                 height: units.gu(30)
-                clip: true
-                enabled: parent.enabled
-                highlightFollowsCurrentItem: false
-                highlight: Rectangle {
-                    z: 0
-                    y: driversView.currentItem.y
-                    width: driversView.currentItem.width
-                    height: driversView.currentItem.height
-                    color: theme.palette.selected.background
-                }
-                delegate: ListItem {
-                    height: driverLayout.height + (divider.visible ? divider.height : 0)
-                    ListItemLayout {
-                        id: driverLayout
-                        title.text: displayName
-                        subtitle.text: name
-                        summary.text: deviceId
-                    }
-                    onClicked: {
-                        driversView.selectedDriver = name
-                        driversView.currentIndex = index
-                    }
-                }
+                contentItem: driversView
+                visible: driverSelector.selectedIndex == 0
 
-                ActivityIndicator {
-                    anchors.centerIn: parent
-                    running: parent.loading
-                }
+                ListView {
+                    id: driversView
+                    property string selectedDriver
+                    property bool loading: true
+                    model: Printers.drivers
+                    anchors { left: parent.left; right: parent.right }
+                    height: units.gu(30)
+                    clip: true
+                    enabled: fieldsColumn.enabled
+                    highlightFollowsCurrentItem: false
+                    highlight: Rectangle {
+                        z: 0
+                        y: driversView.currentItem.y
+                        width: driversView.currentItem.width
+                        height: driversView.currentItem.height
+                        color: theme.palette.selected.background
+                    }
+                    delegate: ListItem {
+                        id: driverItem
+                        height: driverLayout.height + (divider.visible ? divider.height : 0)
+                        ListItemLayout {
+                            id: driverLayout
+                            title.text: displayName
 
-                Connections {
-                    target: driversView
-                    onCountChanged: {
-                        target = null;
-                        driversView.loading = false;
+                            Icon {
+                                name: "ok"
+                                width: units.gu(2)
+                                height: width
+                                SlotsLayout.position: SlotsLayout.Trailing
+                                visible: model.name == driversView.selectedDriver
+
+                            }
+                        }
+                        onClicked: {
+                            driversView.selectedDriver = name
+                            driversView.currentIndex = index
+                        }
+                    }
+
+                    ActivityIndicator {
+                        anchors.centerIn: parent
+                        running: parent.loading
+                    }
+
+                    Connections {
+                        target: driversView
+                        onCountChanged: {
+                            target = null;
+                            driversView.loading = false;
+                        }
                     }
                 }
             }
@@ -260,34 +319,6 @@ ItemPage {
                 enabled: parent.enabled
                 id: pddFileField
             }
-
-            SettingsListItems.Standard {
-                text: i18n.tr("Description")
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                TextField {
-                    id: descriptionField
-                    placeholderText: i18n.tr("Optional")
-                    enabled: fieldsColumn.enabled
-                }
-            }
-
-            SettingsListItems.Standard {
-                text: i18n.tr("Location")
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                TextField {
-                    id: locationField
-                    placeholderText: i18n.tr("Optional")
-                    enabled: fieldsColumn.enabled
-                }
-            }
         }
 
         SettingsItemTitle {
@@ -297,8 +328,19 @@ ItemPage {
                 right: parent.right
                 top: fieldsColumn.bottom
             }
-            text: i18n.tr("Network printers")
-            visible: remotePrintersList.count > 0 && !successTimer.running
+            text: i18n.tr("Other printers")
+
+            ActivityIndicator {
+                id: remotePrintersSearchIndicator
+                anchors {
+                    right: parent.right
+                    rightMargin: units.gu(2)
+                    verticalCenter: parent.verticalCenter
+                }
+                property var target
+                Component.onCompleted: target = Printers.remotePrinters
+                running: target.searching
+            }
         }
 
         ListView {
@@ -315,38 +357,41 @@ ItemPage {
                 ListItemLayout {
                     id: modelLayout
                     title.text: displayName
-                    subtitle.text: description
+                    subtitle.text: info
 
                     Icon {
                         id: icon
                         width: height
                         height: units.gu(2.5)
-                        name: "printer-symbolic"
+                        name: "network-printer-symbolic"
                         SlotsLayout.position: SlotsLayout.First
                     }
 
                     Button {
                         text: i18n.tr("Add printer")
-                        enabled: !successTimer.running
                         onClicked: {
-                            addPrinterPage.state = "adding";
-                            var ret = Printers.addPrinterWithPpdFile(
-                                /* TRANSLATORS: %1 refers to the printer name,
-                                %2 the hostname of the printer, .e.g
-                                "Laserjet-mark.local". */
-                                i18n.tr("%1-%2").arg(model.name).arg(hostname),
-                                "", deviceUri, description, location
-                            );
-                            if (ret) {
-                                addPrinterPage.state = "adding"
-                            } else {
-                                errorMessage.text = Printers.lastMessage;
-                                addPrinterPage.state = "failure"
-                            }
+                            var suggestedPrinterName = (" " + displayName).slice(1);
+                            suggestedPrinterName = suggestedPrinterName.replace(/\ /g, "\-");
+                            nameField.text = suggestedPrinterName;
+                            connection.host = uri;
+                            descriptionField.text = info;
+                            locationField.text = location;
+                            connection.type = type;
                         }
                     }
                 }
             }
+        }
+
+        Label {
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: remotePrintersTitle.bottom
+                margins: units.gu(2)
+            }
+            text: i18n.tr("No other printers found.")
+            visible: !remotePrintersSearchIndicator.running && remotePrintersList.count == 0
         }
     }
 
