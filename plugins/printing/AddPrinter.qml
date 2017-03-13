@@ -56,7 +56,7 @@ ItemPage {
                             ret = Printers.addPrinter(
                                 nameField.text,
                                 driversView.selectedDriver,
-                                connections.host,
+                                connection.host,
                                 descriptionField.text,
                                 locationField.text
                             );
@@ -64,7 +64,7 @@ ItemPage {
                             ret = Printers.addPrinterWithPpdFile(
                                 nameField.text,
                                 pddFileField.text,
-                                connections.host,
+                                connection.host,
                                 descriptionField.text,
                                 printerDescription.text,
                                 locationField.text
@@ -100,7 +100,7 @@ ItemPage {
             PropertyChanges { target: closeAction; enabled: false }
             PropertyChanges { target: addAction; enabled: false }
             PropertyChanges { target: successTimer; running: true }
-            PropertyChanges { target: connections; enabled: false }
+            PropertyChanges { target: connection; enabled: false }
             PropertyChanges { target: fieldsColumn; enabled: false }
         },
         State {
