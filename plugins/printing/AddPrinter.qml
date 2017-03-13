@@ -113,7 +113,7 @@ ItemPage {
         id: addPrinterFlickable
         anchors.fill: parent
         contentWidth: parent.width
-        contentHeight: contentItem.childrenRect.height
+        contentHeight: contentItem.childrenRect.height + units.gu(4) // margin
 
         ListItems.ValueSelector {
             id: connectionsSelector
