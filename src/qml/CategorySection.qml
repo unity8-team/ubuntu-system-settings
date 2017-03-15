@@ -36,6 +36,22 @@ Column {
 
     objectName: "categoryGrid-" + category
 
+    function getPluginIndexByName(plugin) {
+        return repeater.model.getIndexByName(plugin)
+    }
+
+    function getPluginNameByIndex(index) {
+        return repeater.model.getNameByIndex(index)
+    }
+
+    function getPreviousPluginIndex(from) {
+        return repeater.model.getPreviousVisibleIndex(from)
+    }
+
+    function getNextPluginIndex(from) {
+        return repeater.model.getNextVisibleIndex(from)
+    }
+
     SettingsItemTitle {
         id: header
         text: categoryName
@@ -77,13 +93,13 @@ Column {
                     target: loader.item
                     property: "color"
                     value: theme.palette.highlighted.background
-                    when: currentPlugin == model.item.baseName && apl.columns > 1
+                    when: currentPlugin == model.item.baseName
                 }
                 Binding {
                     target: loader.item
                     property: "color"
                     value: "transparent"
-                    when: currentPlugin != model.item.baseName || apl.columns == 1
+                    when: currentPlugin != model.item.baseName
                 }
             }
         }

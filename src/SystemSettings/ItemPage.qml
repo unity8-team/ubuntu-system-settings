@@ -23,6 +23,7 @@ import Ubuntu.Components 1.3
 
 Page {
     id: root
+    focus: true
 
     property alias title: pageHeader.title
     property alias flickable: pageHeader.flickable
@@ -46,5 +47,10 @@ Page {
                 target = null;
             }
         }
+    }
+
+    Keys.onPressed: {
+        console.warn("[onPressed] key:", event.key)
+        event.accepted = true
     }
 }

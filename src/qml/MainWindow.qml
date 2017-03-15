@@ -31,6 +31,7 @@ MainView {
     objectName: "systemSettingsMainView"
     automaticOrientation: true
     anchorToKeyboard: true
+    focus: true
     property var pluginManager: PluginManager {}
     property string currentPlugin: ""
 
@@ -55,12 +56,11 @@ MainView {
                 page = apl.addComponentToNextColumnSync(
                     apl.primaryPage, pageComponent, opts
                 );
-                currentPlugin = pluginName;
                 page.Component.destruction.connect(function () {
-                    if (currentPlugin == this.baseName) {
-                        currentPlugin = "";
-                    }
+                    mainPage.forceActiveFocus()
                 }.bind(plugin))
+                page.forceActiveFocus()
+                currentPlugin = pluginName;
             }
             return true
         } else {
@@ -85,6 +85,8 @@ MainView {
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
         view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
+
+        mainPage.forceActiveFocus()
     }
 
     Connections {
@@ -92,9 +94,13 @@ MainView {
         ignoreUnknownSignals: true
         onColumnsChanged: {
             var columns = target.columns;
-            if (columns > 1 && !currentPlugin) {
-                loadPluginByName(placeholderPlugin);
-            } else if (columns == 1 && currentPlugin == placeholderPlugin) {
+            if (columns > 1) {
+               if (!currentPlugin) {
+                    loadPluginByName(placeholderPlugin);
+                } else { 
+                    loadPluginByName(currentPlugin);
+                }
+            } else if (columns == 1) {
                 apl.removePages(apl.primaryPage);
             }
         }
@@ -131,12 +137,13 @@ MainView {
             }
         }
     }
-
+    
     USSAdaptivePageLayout {
         id: apl
         objectName: "apl"
         anchors.fill: parent
         primaryPage: mainPage
+        focus: true
         layouts: [
             PageColumnsLayout {
                 when: width >= units.gu(90)
@@ -163,6 +170,79 @@ MainView {
             objectName: "systemSettingsPage"
             visible: false
             header: standardHeader
+            focus: true
+
+            function selectPreviousPlugin() {
+                for (var i = 0; i < mainColumn.children.length; ++i) {
+                    var curr = mainColumn.children[i].getPluginIndexByName(main.currentPlugin)
+
+                    if (curr >= 0) {
+                        var prev = mainColumn.children[i].getPreviousPluginIndex(curr)
+
+                        var prevPlugin
+                        if (prev >= 0) {
+                            prevPlugin = mainColumn.children[i].getPluginNameByIndex(prev)
+                        } else {
+                            var j = i - 1
+                            if (j <= 0) {
+                                j = mainColumn.children.length - 1 
+                            }
+                            prev = mainColumn.children[j].getPreviousPluginIndex(-1)
+                            prevPlugin = mainColumn.children[j].getPluginNameByIndex(prev)
+                        }
+
+                        if (apl.columns > 1) {
+                            loadPluginByName(prevPlugin)
+                        } else {
+                            main.currentPlugin = prevPlugin
+                        }
+                        break
+                    }
+                }
+            }
+
+            function selectNextPlugin() {
+                for (var i = 0; i < mainColumn.children.length; ++i) {
+                    var curr = mainColumn.children[i].getPluginIndexByName(main.currentPlugin)
+
+                    if (curr >= 0) {
+                        var next = mainColumn.children[i].getNextPluginIndex(curr)
+
+                        var nextPlugin
+                        if (next >= 0) {
+                            nextPlugin = mainColumn.children[i].getPluginNameByIndex(next)
+                        } else {
+                            var j = i + 1
+                            if (j >= mainColumn.children.length) {
+                                j = 1 
+                            }
+                            next = mainColumn.children[j].getNextPluginIndex(-1)
+                            nextPlugin = mainColumn.children[j].getPluginNameByIndex(next)
+                        }
+                        if (apl.columns > 1) {
+                            loadPluginByName(nextPlugin)
+                        } else {
+                            main.currentPlugin = nextPlugin
+                        }
+                        break
+                    }
+                }
+            }
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Up) {
+                    mainPage.selectPreviousPlugin()
+                    event.accepted = true
+                } else if (event.key == Qt.Key_Down) {
+                    mainPage.selectNextPlugin()
+                    event.accepted = true
+                } else if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
+                    if (apl.columns == 1 && main.currentPlugin) {
+                        loadPluginByName(main.currentPlugin)
+                        event.accepted = true
+                    }
+                }
+            }
 
             PageHeader {
                 id: standardHeader
@@ -227,6 +307,7 @@ MainView {
                 flickableDirection: Flickable.VerticalFlick
 
                 Column {
+                    id: mainColumn
                     anchors.left: parent.left
                     anchors.right: parent.right
 
