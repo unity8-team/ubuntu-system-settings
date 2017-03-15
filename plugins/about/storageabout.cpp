@@ -138,8 +138,6 @@ static void measure_finished(GObject *source_object,
 
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
-    m_clickModel(),
-    m_clickFilterProxy(&m_clickModel),
     m_moviesSize(0),
     m_audioSize(0),
     m_picturesSize(0),
@@ -254,32 +252,6 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     copyrightText = QString(file.readAll());
     file.close();
     return copyrightText;
-}
-
-QAbstractItemModel *StorageAbout::getClickList()
-{
-    return &m_clickFilterProxy;
-}
-
-ClickModel::Roles StorageAbout::getSortRole()
-{
-    return (ClickModel::Roles) m_clickFilterProxy.sortRole();
-}
-
-void StorageAbout::setSortRole(ClickModel::Roles newRole)
-{
-    m_clickFilterProxy.setSortRole(newRole);
-
-    m_clickFilterProxy.sort(0, newRole == ClickModel::InstalledSizeRole ?
-                                Qt::DescendingOrder :
-                                Qt::AscendingOrder);
-    m_clickFilterProxy.invalidate();
-    Q_EMIT(sortRoleChanged());
-}
-
-quint64 StorageAbout::getClickSize() const
-{
-    return m_clickModel.getClickSize();
 }
 
 quint64 StorageAbout::getMoviesSize()

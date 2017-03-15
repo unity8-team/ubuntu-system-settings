@@ -21,27 +21,13 @@
 #include "plugin.h"
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "click.h"
 #include "storageabout.h"
-#include "systemimage.h"
-
-static QObject *siSingletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-    return new QSystemImage;
-}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.StorageAbout"));
 
-    qRegisterMetaType<ClickModel::Roles>();
-    qmlRegisterType<ClickModel>(uri, 1, 0, "ClickRoles");
     qmlRegisterType<StorageAbout>(uri, 1, 0, "UbuntuStorageAboutPanel");
-    qmlRegisterSingletonType<QSystemImage>(
-        uri, 1, 0, "SystemImage", siSingletonProvider
-    );
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -1,9 +1,0 @@
-module SystemSettings
-plugin MockSystemSettings
-
-ItemPage 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ItemPage.qml
-SettingsItemTitle 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/SettingsItemTitle.qml
-USSAdaptivePageLayout 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/USSAdaptivePageLayout.qml
-CategorySection 1.0 file://${CMAKE_SOURCE_DIR}/src/qml/CategorySection.qml
-UncategorizedItemsView.qml 1.0 file://${CMAKE_SOURCE_DIR}/src/qml/UncategorizedItemsView.qml.qml
-MainWindow 1.0 file://${CMAKE_SOURCE_DIR}/src/qml/MainWindow.qml

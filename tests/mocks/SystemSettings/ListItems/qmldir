@@ -1,9 +1,0 @@
-module SystemSettings.ListItems
-
-Icon 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/Icon.qml
-IconProgression 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/IconProgression.qml
-SingleControl 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/SingleControl.qml
-SingleValue 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/SingleValue.qml
-SingleValueProgression 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/SingleValueProgression.qml
-Standard 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/Standard.qml
-StandardProgression 1.0 file://${CMAKE_SOURCE_DIR}/src/SystemSettings/ListItems/StandardProgression.qml

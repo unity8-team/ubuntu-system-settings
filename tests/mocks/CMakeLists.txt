@@ -33,5 +33,4 @@ endmacro()
 
 add_subdirectory(GSettings.1.0)
 add_subdirectory(QMenuModel)
-add_subdirectory(SystemSettings)
 add_subdirectory(Ubuntu)
