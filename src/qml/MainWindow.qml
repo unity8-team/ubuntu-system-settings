@@ -34,6 +34,7 @@ MainView {
     focus: true
     property var pluginManager: PluginManager {}
     property string currentPlugin: ""
+    property Page currentPluginPage: undefined
 
     /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
     so we implement it here. */
@@ -59,8 +60,27 @@ MainView {
                 page.Component.destruction.connect(function () {
                     mainPage.forceActiveFocus()
                 }.bind(plugin))
-                page.forceActiveFocus()
+
+                page.Keys.pressed.connect(function (event) {
+                    if (event.key == Qt.Key_Left) {
+                        if (apl.columns > 1) {
+                            mainPage.forceActiveFocus()
+                        } else {
+                            apl.removePages(apl.primaryPage);
+                        }
+                        event.accepted = true
+                    } else if (event.key == Qt.Key_Escape) {
+                        if (apl.columns > 1) {
+                            mainPage.forceActiveFocus()
+                        } else {
+                            apl.removePages(apl.primaryPage);
+                        }
+                        event.accepted = true
+                    }
+                }.bind(plugin))
+
                 currentPlugin = pluginName;
+                currentPluginPage = page;
             }
             return true
         } else {
@@ -236,6 +256,11 @@ MainView {
                 } else if (event.key == Qt.Key_Down) {
                     mainPage.selectNextPlugin()
                     event.accepted = true
+                } else if (event.key == Qt.Key_Right) {
+                    if (apl.columns > 1 && main.currentPluginPage) {
+                        main.currentPluginPage.forceActiveFocus()
+                        event.accepted = true
+                    }
                 } else if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
                     if (apl.columns == 1 && main.currentPlugin) {
                         loadPluginByName(main.currentPlugin)

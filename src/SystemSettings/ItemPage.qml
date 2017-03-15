@@ -48,9 +48,4 @@ Page {
             }
         }
     }
-
-    Keys.onPressed: {
-        console.warn("[onPressed] key:", event.key)
-        event.accepted = true
-    }
 }
