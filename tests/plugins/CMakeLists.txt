@@ -4,7 +4,6 @@ include(QmlTest)
 add_subdirectory(security-privacy)
 add_subdirectory(bluetooth)
 add_subdirectory(wifi)
-add_subdirectory(notifications)
 
 set(qmltest_DEFAULT_TARGETS qmluitests)
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "LC_ALL=C")
