@@ -165,16 +165,6 @@ class SystemSettingsMainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName="chooseCarrierPage")
 
     @property
-    def storage_page(self):
-        """ Return 'Storage' page """
-        return self.select_single(objectName='storagePage')
-
-    @property
-    def updates_page(self):
-        """ Return 'System Update' page """
-        return self.select_single(objectName='systemUpdatesPage')
-
-    @property
     def background_page(self):
         """ Return 'Background' page """
         return self.select_single(objectName='backgroundPage')
@@ -820,25 +810,6 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         imei_item = self._get_imei_item()
         return imei_item.value
 
-    def get_os_information(self):
-        os_item = self.select_single(objectName='osItem')
-        return os_item.value
-
-    def get_last_updated_date(self):
-        last_updated_item = self.select_single(objectName='lastUpdatedItem')
-        return last_updated_item.value
-
-    @autopilot.logging.log_action(logger.info)
-    def go_to_check_for_updates(self):
-        check_for_updates_button = self.select_single(
-            objectName='updateButton')
-        check_for_updates_button.swipe_into_view()
-        self.pointing_device.click_object(check_for_updates_button)
-        system_updates_page = self.get_root_instance().wait_select_single(
-            objectName='systemUpdatesPage')
-        system_updates_page.active.wait_for(True)
-        return system_updates_page
-
     @autopilot.logging.log_action(logger.info)
     def go_to_software_licenses(self):
         license_item = self.select_single(
@@ -866,23 +837,6 @@ class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'licensesPage':
                 return True
         return False
-
-
-class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
-
-    """Autopilot helper for the System Updates page."""
-
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'PageComponent':
-            if state['objectName'][1] == 'systemUpdatesPage':
-                return True
-        return False
-
-    def stop_check(self):
-        btn = self.select_single(objectName='updatesGlobalStopButton')
-        self.pointing_device.click_object(btn)
 
 
 class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

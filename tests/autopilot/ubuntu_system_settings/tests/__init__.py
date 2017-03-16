@@ -60,7 +60,6 @@ NETREG_IFACE = 'org.ofono.NetworkRegistration'
 NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
-SYSTEM_IFACE = 'com.canonical.SystemImage'
 SYSTEM_SERVICE_OBJ = '/Service'
 LM_SERVICE = 'org.freedesktop.login1'
 LM_PATH = '/org/freedesktop/login1'
@@ -626,63 +625,6 @@ class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         """Go to About page."""
         super(AboutOfonoBaseTestCase, self).setUp()
         self.about_page = self.main_view.go_to_about_page()
-
-
-class AboutSystemImageBaseTestCase(AboutBaseTestCase,
-                                   dbusmock.DBusTestCase):
-    systemimage_parameters = {
-        'last_update_date': datetime.now().replace(microsecond=0).isoformat(),
-        'channel': 'daily',
-        'build_number': 42,
-        'device': ''
-    }
-
-    @classmethod
-    def setUpClass(cls):
-        cls.start_system_bus()
-        cls.dbus_con = cls.get_dbus(True)
-        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
-        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
-            si_tmpl, parameters=cls.systemimage_parameters,
-            stdout=subprocess.PIPE)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.si_mock.terminate()
-        cls.si_mock.wait()
-        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
-
-
-class StorageBaseTestCase(AboutBaseTestCase):
-
-    """Base class for Storage page tests."""
-
-    def setUp(self):
-        """Go to Storage Page."""
-        super(StorageBaseTestCase, self).setUp()
-        self.main_view.click_item('storageItem')
-        self.storage_page = self.main_view.select_single(
-            objectName='storagePage'
-        )
-        self.assertThat(self.storage_page.active, Eventually(Equals(True)))
-
-    def assert_space_item(self, object_name, text):
-        """ Checks whether an space item exists and returns a value """
-        item = self.main_view.storage_page.wait_select_single(
-            objectName=object_name
-        )
-        self.assertThat(item, NotEquals(None))
-        label = item.label  # Label
-        self.assertThat(label, Equals(text))
-        # Get item's label
-        size_label = item.select_single(objectName='sizeLabel')
-        self.assertThat(size_label, NotEquals(None))
-        values = size_label.text.split(' ')  # Format: "00.0 (bytes|MB|GB)"
-        self.assertThat(len(values), GreaterThan(1))
-
-    def get_storage_space_used_by_category(self, objectName):
-        return self.main_view.wait_select_single(
-            'StorageItem', objectName=objectName).value
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):
