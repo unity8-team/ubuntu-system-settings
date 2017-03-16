@@ -34,9 +34,6 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
 from testtools.matchers import Equals, NotEquals, GreaterThan
-from ubuntu_system_settings.utils.mock_update_click_server import (
-    Manager
-)
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
     MAIN_IFACE as CTV_IFACE
@@ -696,80 +693,6 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """Go to License Page."""
         super(LicenseBaseTestCase, self).setUp()
         self.licenses_page = self.about_page.go_to_software_licenses()
-
-
-class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
-                                dbusmock.DBusTestCase):
-    """Base class for SystemUpdates page tests."""
-
-    connectivity_parameters = {
-        'Status': 'online'
-    }
-
-    click_server_parameters = {
-        'start': False
-    }
-
-    systemimage_parameters = {}
-
-    @classmethod
-    def setUpClass(cls):
-        cls.session_con = cls.get_dbus(False)
-
-        cls.start_system_bus()
-
-        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
-        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
-            si_tmpl, parameters=cls.systemimage_parameters,
-            stdout=subprocess.PIPE)
-
-        super(SystemUpdatesBaseTestCase, cls).setUpClass()
-
-    def setUp(self):
-        """Go to SystemUpdates Page."""
-        self.clicksrv_manager = None
-        if is_process_running(INDICATOR_NETWORK):
-            _stop_process(INDICATOR_NETWORK)
-            self.addCleanup(_start_process, INDICATOR_NETWORK)
-
-        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
-        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
-            ctv_tmpl, parameters=self.connectivity_parameters,
-            stdout=subprocess.PIPE)
-
-        self.ctv_nets = dbus.Interface(
-            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
-            'org.freedesktop.DBus.Properties')
-
-        if self.click_server_parameters['start']:
-            self.clicksrv_manager = Manager(
-                responses=self.click_server_parameters.get('responses', None)
-            )
-            self.clicksrv_manager.start()
-
-        super(SystemUpdatesBaseTestCase, self).setUp()
-        self.main_view.click_item('entryComponent-system-update')
-
-    def tearDown(self):
-        self.ctv_mock.terminate()
-        self.ctv_mock.wait()
-        if self.clicksrv_manager and self.clicksrv_manager.is_running():
-            self.clicksrv_manager.stop()
-        super(SystemUpdatesBaseTestCase, self).tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.si_mock.terminate()
-        cls.si_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        if dbusmock.DBusTestCase.session_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
-            del os.environ['DBUS_SESSION_BUS_ADDRESS']
-            dbusmock.DBusTestCase.session_bus_pid = None
-        super(SystemUpdatesBaseTestCase, cls).tearDownClass()
 
 
 class BackgroundBaseTestCase(
