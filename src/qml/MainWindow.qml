@@ -65,10 +65,8 @@ MainView {
                     if (event.key == Qt.Key_Left) {
                         if (apl.columns > 1) {
                             mainPage.forceActiveFocus()
-                        } else {
-                            apl.removePages(apl.primaryPage);
+                            event.accepted = true
                         }
-                        event.accepted = true
                     } else if (event.key == Qt.Key_Escape) {
                         if (apl.columns > 1) {
                             mainPage.forceActiveFocus()
@@ -264,6 +262,7 @@ MainView {
                 } else if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
                     if (apl.columns == 1 && main.currentPlugin) {
                         loadPluginByName(main.currentPlugin)
+                        main.currentPluginPage.forceActiveFocus()
                         event.accepted = true
                     }
                 }

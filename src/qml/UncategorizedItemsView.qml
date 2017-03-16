@@ -68,6 +68,9 @@ Column {
                         if (pageComponent) {
                             Haptics.play();
                             loadPluginByName(model.item.baseName);
+                            if (apl.columns == 1) {
+                                currentPluginPage.forceActiveFocus();
+                            }
                         }
                     }
                 }
