@@ -34,7 +34,7 @@ MainView {
     focus: true
     property var pluginManager: PluginManager {}
     property string currentPlugin: ""
-    property Page currentPluginPage: undefined
+    property Page currentPluginPage: null
 
     /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
     so we implement it here. */
@@ -58,7 +58,9 @@ MainView {
                     apl.primaryPage, pageComponent, opts
                 );
                 page.Component.destruction.connect(function () {
-                    mainPage.forceActiveFocus()
+                    if (mainPage) {
+                        mainPage.forceActiveFocus()
+                    }
                 }.bind(plugin))
 
                 page.Keys.pressed.connect(function (event) {
