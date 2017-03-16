@@ -24,12 +24,29 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 import SystemSettings 1.0
 
 Column {
+    id: column
     property alias model: repeater.model
 
     visible: repeater.count > 0
 
     anchors.left: parent.left
     anchors.right: parent.right
+
+    function getPluginIndexByName(plugin) {
+        return repeater.model.getIndexByName(plugin)
+    }
+
+    function getPluginNameByIndex(index) {
+        return repeater.model.getNameByIndex(index)
+    }
+
+    function getPreviousPluginIndex(from) {
+        return repeater.model.getPreviousVisibleIndex(from)
+    }
+
+    function getNextPluginIndex(from) {
+        return repeater.model.getNextVisibleIndex(from)
+    }
 
     Repeater {
         id: repeater
@@ -51,6 +68,9 @@ Column {
                         if (pageComponent) {
                             Haptics.play();
                             loadPluginByName(model.item.baseName);
+                            if (apl.columns == 1) {
+                                currentPluginPage.forceActiveFocus();
+                            }
                         }
                     }
                 }
@@ -58,13 +78,13 @@ Column {
                     target: loader.item
                     property: "color"
                     value: theme.palette.highlighted.background
-                    when: currentPlugin == model.item.baseName && apl.columns > 1
+                    when: currentPlugin == model.item.baseName
                 }
                 Binding {
                     target: loader.item
                     property: "color"
                     value: "transparent"
-                    when: currentPlugin != model.item.baseName || apl.columns == 1
+                    when: currentPlugin != model.item.baseName
                 }
             }
         }

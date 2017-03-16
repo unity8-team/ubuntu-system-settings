@@ -134,6 +134,17 @@ QHash<int, QByteArray> ItemModel::roleNames() const
     return d->m_roleNames;
 }
 
+int ItemModel::getIndexByName(const QString& name) const
+{
+    Q_D(const ItemModel);
+    for (int i = 0; i < d->m_visibleItems.count(); ++i) {
+        if (d->m_visibleItems.at(i)->baseName() == name) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void ItemModel::onItemVisibilityChanged()
 {
     Q_D(ItemModel);
@@ -160,6 +171,73 @@ void ItemModel::onItemVisibilityChanged()
 ItemModelSortProxy::ItemModelSortProxy(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
+}
+
+int ItemModelSortProxy::getIndexByName(const QString& name) const
+{
+    ItemModel *source = (ItemModel*) sourceModel();
+    int sourceRow = source->getIndexByName(name);
+
+    if (sourceRow < 0)
+        return sourceRow;
+
+    return mapFromSource(source->index(sourceRow, 0)).row();
+}
+
+QString ItemModelSortProxy::getNameByIndex(int row) const
+{
+    if (row < 0 || row >= rowCount()) {
+        return QString();
+    }
+
+    QVariant data = index(row, 0).data(ItemModel::ItemRole); 
+    Plugin *plugin = data.value<Plugin *>();
+    
+    if (plugin != NULL) {
+        return plugin->baseName();
+    }
+
+    return QString();
+}
+
+int ItemModelSortProxy::getPreviousVisibleIndex(int from) const
+{
+    int ret = rowCount() - 1;
+    
+    if (from >= 0) {
+       ret = from - 1;
+    }
+
+    while (ret >= 0) {
+        QVariant data = index(ret, 0).data(ItemModel::ItemRole); 
+        Plugin *plugin = data.value<Plugin *>();
+        if (plugin && plugin->isVisible()) {
+            return ret;
+        }
+        ret--;
+    }
+
+    return -1;
+}
+
+int ItemModelSortProxy::getNextVisibleIndex(int from) const
+{
+    int ret = 0;
+    
+    if (from >= 0) {
+       ret = from + 1;
+    }
+
+    while (ret < rowCount()) {
+        QVariant data = index(ret, 0).data(ItemModel::ItemRole); 
+        Plugin *plugin = data.value<Plugin *>();
+        if (plugin->isVisible()) {
+            return ret;
+        }
+        ret++;
+    }
+
+    return -1;
 }
 
 bool ItemModelSortProxy::lessThan(const QModelIndex &left,
