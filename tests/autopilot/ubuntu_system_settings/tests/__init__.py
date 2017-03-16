@@ -24,7 +24,6 @@ import random
 import subprocess
 import ubuntuuitoolkit
 
-from datetime import datetime
 from time import sleep
 
 from autopilot import platform
@@ -33,7 +32,7 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
                                                NM80211ApSecurityFlags)
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
-from testtools.matchers import Equals, NotEquals, GreaterThan
+from testtools.matchers import Equals
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
     MAIN_IFACE as CTV_IFACE
@@ -879,38 +878,6 @@ class SoundBaseTestCase(
 
     def stop_sound_indicator(self):
         subprocess.call(['initctl', 'stop', 'indicator-sound'])
-
-
-class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
-                        dbusmock.DBusTestCase):
-    """ Base class for reset settings tests"""
-
-    def mock_for_factory_reset(self):
-        self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
-                                             SYSTEM_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-        # spawn_server does not wait properly
-        # Reported as bug here: http://pad.lv/1350833
-        sleep(2)
-        self.sys_mock = dbus.Interface(self.dbus_con.get_object(
-            SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
-
-        self.sys_mock.AddMethod(SYSTEM_IFACE, 'FactoryReset', '', '', '')
-
-    @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-
-    def setUp(self):
-        self.mock_for_factory_reset()
-        super(ResetBaseTestCase, self).setUp()
-        self.reset_page = self.main_view.go_to_reset_phone()
-
-    def tearDown(self):
-        self.mock_server.terminate()
-        self.mock_server.wait()
-        super(ResetBaseTestCase, self).tearDown()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):

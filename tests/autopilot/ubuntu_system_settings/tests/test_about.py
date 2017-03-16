@@ -5,24 +5,17 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import dateutil.parser
-import os
 import subprocess
-import unittest
 
-from gi.repository import GLib
-
-from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipIf
-from testtools.matchers import Equals, NotEquals, Contains
+from testtools.matchers import Equals
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
     AboutOfonoBaseTestCase,
     LicenseBaseTestCase
 )
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 import dbus
 
