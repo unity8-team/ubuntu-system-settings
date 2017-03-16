@@ -7,7 +7,7 @@ export DH_VERBOSE=1
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 # Skip tests on the archs they are known to be broken with current configuration
 # Ref.: https://bugs.launchpad.net/ubuntu/+source/qtdeclarative-opensource-src/+bug/1606927
-testskip_architectures := powerpc
+testskip_architectures := powerpc ppc64el s390x
 
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
