@@ -31,6 +31,14 @@ ItemPage {
     objectName: "storagePage"
     title: i18n.tr("Storage")
 
+    UbuntuStorageAboutPanel {
+        id: backendInfo
+        property bool ready: false
+        // All of these events come simultaneously
+        onMoviesSizeChanged: ready = true
+        Component.onCompleted: populateSizes()
+    }
+
     Column {
         anchors.centerIn: parent
         visible: progress.running
