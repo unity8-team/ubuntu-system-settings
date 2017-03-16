@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20170316.1-0ubuntu1) zesty; urgency=medium
+
+  [ Arthur Mello ]
+  * Add support for keyboard navigation:
+
+ -- Arthur Renato Mello <arthur.mello@canonical.com>  Thu, 16 Mar 2017 14:43:19 +0000
+
 ubuntu-system-settings (0.4+17.04.20170301-0ubuntu1) zesty; urgency=medium
 
   [ Michael Sheldon ]
