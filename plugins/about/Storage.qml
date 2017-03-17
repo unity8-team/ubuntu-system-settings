@@ -106,15 +106,13 @@ ItemPage {
                 "red",
                 "blue",
                 "green",
-                "yellow",
-                UbuntuColors.lightAubergine]
+                "yellow"]
             property variant spaceLabels: [
                 i18n.tr("Used by Ubuntu"),
                 i18n.tr("Videos"),
                 i18n.tr("Audio"),
                 i18n.tr("Pictures"),
-                i18n.tr("Other files"),
-                i18n.tr("Used by apps")]
+                i18n.tr("Other files")]
             property variant spaceValues: [
                 usedByUbuntu, // Used by Ubuntu
                 backendInfo.moviesSize,
@@ -126,8 +124,7 @@ ItemPage {
                 "moviesItem",
                 "audioItem",
                 "picturesItem",
-                "otherFilesItem",
-                "usedByAppsItem"]
+                "otherFilesItem"]
 
             GSettings {
                 id: settingsId
