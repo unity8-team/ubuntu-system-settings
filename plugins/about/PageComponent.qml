@@ -154,67 +154,6 @@ ItemPage {
             }
 
             SettingsItemTitle {
-                id: softwareItem
-                objectName: "softwareItem"
-                visible: SystemImage.currentBuildNumber
-                text: i18n.tr("Software:")
-            }
-
-            SettingsListItems.SingleValueProgression {
-                visible: softwareItem.visible
-                property string versionIdentifier: {
-                    var num = SystemImage.currentBuildNumber;
-                    var ota = SystemImage.versionTag;
-                    num = num ? "r%1".arg(num.toString()) : "";
-                    return ota ? ota : num;
-                }
-                objectName: "osItem"
-                text: i18n.tr("OS")
-                value: "Ubuntu %1%2"
-                    .arg(deviceInfos.version(DeviceInfo.Os))
-                    .arg(versionIdentifier ? " (%1)".arg(versionIdentifier) : "")
-                onClicked: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Version.qml"), {
-                    version: versionIdentifier
-                })
-            }
-
-            SettingsListItems.SingleValue {
-                objectName: "lastUpdatedItem"
-                visible: softwareItem.visible
-                text: i18n.tr("Last updated")
-                value: SystemImage.lastUpdateDate && !isNaN(SystemImage.lastUpdateDate) ?
-                    Qt.formatDate(SystemImage.lastUpdateDate) : i18n.tr("Never")
-            }
-
-            SettingsListItems.SingleControl {
-                visible: softwareItem.visible
-
-                Button {
-                    objectName: "updateButton"
-                    text: i18n.tr("Check for updates")
-                    width: parent.width - units.gu(4)
-                    onClicked: {
-                        var upPlugin = pluginManager.getByName("system-update")
-                        if (upPlugin) {
-                            var updatePage = upPlugin.pageComponent
-                            var updatePageItem;
-                            if (updatePage) {
-                                updatePageItem = pageStack.addPageToNextColumn(root, updatePage, {
-                                    plugin: upPlugin, pluginManager: pluginManager
-                                });
-                                updatePageItem.check(true); // Force a check.
-                            } else {
-                                console.warn("Failed to get system-update pageComponent")
-                            }
-                        } else {
-                            console.warn("Failed to get system-update plugin instance")
-                        }
-                    }
-                }
-                showDivider: false
-            }
-
-            SettingsItemTitle {
                 objectName: "legalItem"
                 text: i18n.tr("Legal:")
             }

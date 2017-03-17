@@ -31,6 +31,14 @@ ItemPage {
     objectName: "storagePage"
     title: i18n.tr("Storage")
 
+    UbuntuStorageAboutPanel {
+        id: backendInfo
+        property bool ready: false
+        // All of these events come simultaneously
+        onMoviesSizeChanged: ready = true
+        Component.onCompleted: populateSizes()
+    }
+
     Column {
         anchors.centerIn: parent
         visible: progress.running
@@ -86,12 +94,10 @@ ItemPage {
 
             property real usedByUbuntu: diskSpace -
                                         freediskSpace -
-                                        backendInfo.homeSize -
-                                        backendInfo.totalClickSize
+                                        backendInfo.homeSize
             property real otherSize: diskSpace -
                                      freediskSpace -
                                      usedByUbuntu -
-                                     backendInfo.totalClickSize -
                                      backendInfo.moviesSize -
                                      backendInfo.picturesSize -
                                      backendInfo.audioSize
@@ -100,45 +106,29 @@ ItemPage {
                 "red",
                 "blue",
                 "green",
-                "yellow",
-                UbuntuColors.lightAubergine]
+                "yellow"]
             property variant spaceLabels: [
                 i18n.tr("Used by Ubuntu"),
                 i18n.tr("Videos"),
                 i18n.tr("Audio"),
                 i18n.tr("Pictures"),
-                i18n.tr("Other files"),
-                i18n.tr("Used by apps")]
+                i18n.tr("Other files")]
             property variant spaceValues: [
                 usedByUbuntu, // Used by Ubuntu
                 backendInfo.moviesSize,
                 backendInfo.audioSize,
                 backendInfo.picturesSize,
-                otherSize, //Other Files
-                backendInfo.totalClickSize]
+                otherSize] //Other Files
             property variant spaceObjectNames: [
                 "usedByUbuntuItem",
                 "moviesItem",
                 "audioItem",
                 "picturesItem",
-                "otherFilesItem",
-                "usedByAppsItem"]
+                "otherFilesItem"]
 
             GSettings {
                 id: settingsId
                 schema.id: "com.ubuntu.touch.system-settings"
-            }
-
-            UbuntuStorageAboutPanel {
-                id: backendInfo
-                property bool ready: false
-                // All of these events come simultaneously
-                onMoviesSizeChanged: ready = true
-                Component.onCompleted: populateSizes()
-                sortRole: settingsId.storageSortByName ?
-                              ClickRoles.DisplayNameRole :
-                              ClickRoles.InstalledSizeRole
-
             }
 
             Flickable {
@@ -182,44 +172,6 @@ ItemPage {
                     label: spaceLabels[index]
                     value: spaceValues[index]
                     ready: backendInfo.ready
-                }
-            }
-
-            ListItem.ItemSelector {
-                id: valueSelect
-                objectName: "installedAppsItemSelector"
-                model: [i18n.tr("By name"), i18n.tr("By size")]
-                onSelectedIndexChanged:
-                    settingsId.storageSortByName = (selectedIndex == 0)
-                                                   // 0 → by name, 1 → by size
-            }
-
-            Binding {
-                target: valueSelect
-                property: 'selectedIndex'
-                value: (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
-                        0 :
-                        1
-            }
-
-            ListView {
-                objectName: "installedAppsListView"
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: childrenRect.height
-                /* Deactivate the listview flicking, we want to scroll on the
-                 * column */
-                interactive: false
-                model: backendInfo.clickList
-                delegate: ListItem.SingleValue {
-                    objectName: "appItem" + displayName
-                    iconSource: iconPath
-                    fallbackIconSource: "image://theme/clear"
-                    iconFrame: iconPath // no frame for invalid icons, since these aren't app icons
-                    text: displayName
-                    value: installedSize ?
-                               Utilities.formatSize(installedSize) :
-                               i18n.tr("N/A")
                 }
             }
         }

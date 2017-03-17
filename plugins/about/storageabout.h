@@ -21,8 +21,6 @@
 #ifndef STORAGEABOUT_H
 #define STORAGEABOUT_H
 
-#include "click.h"
-
 #include <gio/gio.h>
 #include <glib.h>
 
@@ -36,8 +34,6 @@ class StorageAbout : public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(ClickModel::Roles)
-
     Q_PROPERTY( QString serialNumber
                 READ serialNumber
                 CONSTANT)
@@ -45,14 +41,6 @@ class StorageAbout : public QObject
     Q_PROPERTY( QString vendorString
                 READ vendorString
                 CONSTANT)
-
-    Q_PROPERTY(QAbstractItemModel *clickList
-               READ getClickList
-               CONSTANT)
-
-    Q_PROPERTY(quint64 totalClickSize
-               READ getClickSize
-               CONSTANT)
 
     Q_PROPERTY(QStringList mountedVolumes
                READ getMountedVolumes
@@ -74,11 +62,6 @@ class StorageAbout : public QObject
                READ getHomeSize
                NOTIFY sizeReady)
 
-    Q_PROPERTY(ClickModel::Roles sortRole
-               READ getSortRole
-               WRITE setSortRole
-               NOTIFY sortRoleChanged)
-
     Q_PROPERTY( QString deviceBuildDisplayID
                 READ deviceBuildDisplayID
                 CONSTANT)
@@ -97,15 +80,11 @@ class StorageAbout : public QObject
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
-    QAbstractItemModel *getClickList();
     QString serialNumber();
     QString vendorString();
     QString deviceBuildDisplayID();
     QString ubuntuBuildID();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
-    ClickModel::Roles getSortRole();
-    void setSortRole(ClickModel::Roles newRole);
-    quint64 getClickSize() const;
     quint64 getMoviesSize();
     quint64 getAudioSize();
     quint64 getPicturesSize();
@@ -131,8 +110,6 @@ private:
     QString m_vendorString;
     QString m_deviceBuildDisplayID;
     QString m_ubuntuBuildID;
-    ClickModel m_clickModel;
-    ClickFilterProxy m_clickFilterProxy;
     quint64 m_moviesSize;
     quint64 m_audioSize;
     quint64 m_picturesSize;

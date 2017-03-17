@@ -18,7 +18,6 @@ set(USS_SOURCES
     main.cpp
     plugin-manager.cpp
     plugin.cpp
-    systemimage.cpp
     utils.cpp
 )
 
@@ -47,10 +46,5 @@ add_library(uss-sessionservice SHARED sessionservice.h sessionservice.cpp)
 qt5_use_modules(uss-sessionservice Core Qml DBus)
 set_target_properties(uss-sessionservice PROPERTIES VERSION 0.0 SOVERSION 0.0)
 install(TARGETS uss-sessionservice LIBRARY DESTINATION ${PLUGIN_MODULE_DIR} NAMELINK_SKIP)
-
-add_library(uss-systemimage SHARED systemimage.h systemimage.cpp i18n.cpp)
-qt5_use_modules(uss-systemimage Core Qml DBus)
-set_target_properties(uss-systemimage PROPERTIES VERSION 0.0 SOVERSION 0.0)
-install(TARGETS uss-systemimage LIBRARY DESTINATION ${PLUGIN_MODULE_DIR} NAMELINK_SKIP)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/url-map.ini DESTINATION ${PLUGIN_MANIFEST_DIR})
