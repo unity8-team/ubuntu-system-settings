@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+17.04.20170317.2-0ubuntu1) zesty; urgency=medium
+
+  * Drop the fake build depends on upstart
+  * Drop everything that needs system-image or click
+  * Don't build dep on qml-module-ubuntu-connectivity, we've mocked it
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Fri, 17 Mar 2017 14:42:26 +0000
+
 ubuntu-system-settings (0.4+17.04.20170301-0ubuntu1) zesty; urgency=medium
 
   [ Michael Sheldon ]
