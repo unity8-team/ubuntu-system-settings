@@ -14,6 +14,8 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authored by Jonas G. Drange <jonas.drange@canonical.com>
  */
 
 import QtQuick 2.4
