@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+17.04.20170320-0ubuntu1) zesty; urgency=medium
+
+  [ Gustavo Pichorim Boiko, Tiago Salem Herrmann ]
+  * Remove the phone settings. They were moved to dialer-app. (LP:
+    #1447601)
+
+ -- Gustavo Pichorim Boiko <gustavo.boiko@canonical.com>  Mon, 20 Mar 2017 23:46:24 +0000
+
 ubuntu-system-settings (0.4+17.04.20170301-0ubuntu1) zesty; urgency=medium
 
   [ Michael Sheldon ]
