@@ -23,6 +23,7 @@ import Ubuntu.Components.Extras.Printers 0.1
 import SystemSettings.ListItems 1.0 as SettingsListItems
 
 Column {
+    id: root
     property alias host: hostField.text
     property bool enabled: true
 
@@ -68,7 +69,7 @@ Column {
 
         TextField {
             id: hostField
-            enabled: parent.enabled
+            enabled: root.enabled
             placeholderText: "%1://printer.mydomain/%1".arg(typeToString(type))
         }
     }

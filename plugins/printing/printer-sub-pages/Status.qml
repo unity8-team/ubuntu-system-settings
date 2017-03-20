@@ -48,6 +48,12 @@ Column {
         text: i18n.tr("Jobs")
         layout.subtitle.text: printer.jobs.count ? printer.jobs.count
                                                  : i18n.tr("None")
+
+        Button {
+            text: i18n.tr("Manage Print Jobs")
+            // Printer names are by the cups definition, URL friendly.
+            onClicked: Qt.openUrlExternally("printing:///queue?printer-name=%1".arg(printer.displayName))
+        }
     }
 
     SettingsListItems.Standard {

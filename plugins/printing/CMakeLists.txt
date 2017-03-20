@@ -7,6 +7,7 @@ set(QML_SOURCES
     printer-sub-pages/Status.qml
 
     AddPrinter.qml
+    AddPrinterDetails.qml
     PageComponent.qml
     Printer.qml
     PrinterConnection.qml
