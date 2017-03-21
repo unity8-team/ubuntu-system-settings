@@ -66,7 +66,9 @@ ItemPage {
                     ProgressionSlot {}
                 }
                 onClicked: pageStack.addPageToNextColumn(
-                    addPrinterPage, Qt.resolvedUrl("AddPrinterDetails.qml")
+                    addPrinterPage, Qt.resolvedUrl("AddPrinterDetails.qml"), {
+                        plugin: plugin
+                    }
                 )
             }
 
@@ -119,7 +121,7 @@ ItemPage {
                     onClicked: {
                         detailsPageObserver.target = pageStack.addFileToNextColumnSync(
                             addPrinterPage, Qt.resolvedUrl("AddPrinterDetails.qml"), {
-                                device: model,
+                                device: model, plugin: plugin
                             }
                         )
                     }
@@ -136,6 +138,7 @@ ItemPage {
 
     Connections {
         id: detailsPageObserver
+        ignoreUnknownSignals: true
         onPrinterAdded: pageStack.removePages(addPrinterPage)
     }
 }

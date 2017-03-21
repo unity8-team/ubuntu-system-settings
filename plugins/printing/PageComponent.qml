@@ -36,7 +36,9 @@ ItemPage {
                 Action {
                     iconName: "add"
                     text: i18n.tr("Add printer")
-                    onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"))
+                    onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"), {
+                        plugin: plugin
+                    })
                 }
             ]
         }
@@ -45,6 +47,7 @@ ItemPage {
     onPushedOntoStack: {
         var page;
         var opts = {
+            plugin: plugin,
             pluginManager: pluginManager,
             pluginOptions: pluginOptions,
         };
@@ -120,7 +123,8 @@ ItemPage {
                 onClicked: {
                     Printers.loadPrinter(model.name);
                     pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Printer.qml"), {
-                        printer: model, pluginOptions: pluginOptions
+                        printer: model, pluginOptions: pluginOptions,
+                        plugin: plugin
                     });
                 }
             }
