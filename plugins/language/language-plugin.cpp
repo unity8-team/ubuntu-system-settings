@@ -17,6 +17,10 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QDBusPendingCall>
+#include <QDBusMessage>
+#include <QDBusConnection>
+#include <QProcess>
 #include <QStandardPaths>
 #include <QtDebug>
 #include "language-plugin.h"
@@ -329,7 +333,46 @@ managerLoaded(GObject    *object,
     plugin->managerLoaded();
 }
 
-void LanguagePlugin::reboot()
-{
-    m_sessionService.reboot();
+void 
+LanguagePlugin::setSessionVariable(const QString &variable,
+                                   const QString &value)
+{   
+    // We need to update both upstart's and DBus's environment
+    QProcess::startDetached(QStringLiteral("initctl set-env --global %1=%2").arg(variable, value));
+
+    QMap<QString,QString> valueMap;
+    valueMap.insert(variable, value);
+
+    QDBusMessage msg = QDBusMessage::createMethodCall(QStringLiteral("org.freedesktop.DBus"),
+                                                      QStringLiteral("/org/freedesktop/DBus"),
+                                                      QStringLiteral("org.freedesktop.DBus"),
+                                                      QStringLiteral("UpdateActivationEnvironment"));
+
+    msg << QVariant::fromValue(valueMap);
+    QDBusConnection::sessionBus().asyncCall(msg);
 }
+
+void
+LanguagePlugin::updateSessionLocale(const QString &locale)
+{   
+    const QString language = locale.split(QStringLiteral("."))[0];
+
+    setSessionVariable(QStringLiteral("LANGUAGE"), language);
+    setSessionVariable(QStringLiteral("LANG"), locale);
+    setSessionVariable(QStringLiteral("LC_ALL"), locale);
+
+    // QLocale caches the default locale on startup, and Qt uses that cached
+    // copy when formatting dates.  So manually update it here.
+    QLocale::setDefault(QLocale(locale));
+
+    // Restart bits of the session to pick up new language.
+    QProcess::startDetached(QStringLiteral("sh -c \"initctl emit indicator-services-end; \
+                                     initctl stop scope-registry; \
+                                     initctl stop smart-scopes-proxy; \
+                                     initctl emit --no-wait indicator-services-start; \
+                                     initctl restart --no-wait ubuntu-location-service-trust-stored; \
+                                     initctl restart --no-wait maliit-server; \
+                                     initctl restart --no-wait indicator-messages; \
+                                     initctl restart --no-wait unity8-dash\""));
+}
+

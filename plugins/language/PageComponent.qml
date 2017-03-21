@@ -74,9 +74,7 @@ ItemPage {
 
         DisplayLanguage {
             onLanguageChanged: {
-                PopupUtils.open(rebootNecessaryNotification, root, {
-                    revertTo: oldLanguage
-                })
+                plugin.updateSessionLocale(i18n.language);
             }
         }
     }
@@ -85,21 +83,6 @@ ItemPage {
         id: spellChecking
 
         SpellChecking {}
-    }
-
-    Component {
-        id: rebootNecessaryNotification
-
-        RebootNecessary {
-
-            onReboot: {
-                plugin.reboot();
-            }
-            onRevert: {
-                plugin.currentLanguage = to;
-                i18n.language = plugin.languageCodes[to]
-            }
-        }
     }
 
     GSettings {

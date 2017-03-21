@@ -8,7 +8,6 @@ set(QML_SOURCES
     KeyboardLayouts.qml
     PageComponent.qml
     PageHardwareKeyboard.qml
-    RebootNecessary.qml
     SpellChecking.qml
     SubsetView.qml
 )

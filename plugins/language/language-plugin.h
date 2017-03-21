@@ -60,7 +60,7 @@ public:
                READ spellCheckingModel
                CONSTANT)
 
-    Q_INVOKABLE void reboot();
+    Q_INVOKABLE void updateSessionLocale(const QString &locale);
 
     explicit LanguagePlugin(QObject *parent = nullptr);
 
@@ -81,6 +81,9 @@ private:
     void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
     void updateSpellCheckingModel();
+    void setSessionVariable(const QString &variable,
+                            const QString &value);
+
 
     int indexForLocale(const QString &name) const;
 
