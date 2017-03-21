@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.4+17.04.20170321-0ubuntu1) zesty; urgency=medium
+
+  * adds printing panel
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Tue, 21 Mar 2017 21:58:58 +0000
+
 ubuntu-system-settings (0.4+17.04.20170301-0ubuntu1) zesty; urgency=medium
 
   [ Michael Sheldon ]
