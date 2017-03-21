@@ -87,7 +87,7 @@ ItemPage {
 
                     }
                     property var target
-                    Component.onCompleted: target = Printers.remotePrinters
+                    Component.onCompleted: target = Printers.devices
                     running: target.searching
                 }
             }
@@ -99,7 +99,7 @@ ItemPage {
             Repeater {
                 id: remotePrintersList
                 anchors { left: parent.left; right: parent.right }
-                model: Printers.remotePrinters
+                model: Printers.devices
                 delegate: ListItem {
                     height: modelLayout.height + (divider.visible ? divider.height : 0)
                     anchors { left: parent.left; right: parent.right }

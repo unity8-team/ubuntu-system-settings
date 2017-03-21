@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
+import Ubuntu.Components.Extras.Printers 0.1
 import Ubuntu.Settings.Components 0.1 as USC
 
 Column {
@@ -37,6 +38,20 @@ Column {
                 serverProperty: "serverChecked"
 
                 onSyncTriggered: printer.printerEnabled = enabledSwitch.checked
+            }
+        }
+    }
+
+    SettingsListItems.Standard {
+        text: i18n.tr("Default")
+        layout.subtitle.text: printer.default ? i18n.tr("This is the default printer.") : ""
+
+        Button {
+            text: i18n.tr("Set as Default")
+            visible: !printer.default
+            onClicked: {
+                Printers.defaultPrinterName = printer.name;
+                pageStack.removePages(printerPage);
             }
         }
     }

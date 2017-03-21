@@ -39,6 +39,11 @@ ItemPage {
                     onTriggered: pageStack.addPageToNextColumn(root, Qt.resolvedUrl("AddPrinter.qml"), {
                         plugin: plugin
                     })
+                },
+                Action {
+                    iconName: "document-print"
+                    text: i18n.tr("Manager Printer Jobs")
+                    onTriggered: Qt.openUrlExternally("printing:///queue")
                 }
             ]
         }
@@ -79,58 +84,95 @@ ItemPage {
     Flickable {
         id: printerList
         anchors.fill: parent
+        clip: true
 
-        ListView {
-            id: allPrintersList
+        Column {
             anchors.fill: parent
-            model: Printers.allPrinters
-            delegate: ListItem {
-                height: modelLayout.height + (divider.visible ? divider.height : 0)
-                leadingActions: ListItemActions {
-                    actions: [
-                        Action {
-                            iconName: "delete"
-                            onTriggered: {
-                                if (!Printers.removePrinter(model.name)) {
-                                    console.error('failed to remove printer', Printers.lastMessage);
-                                }
-                            }
-                        }
-                    ]
-                }
-                trailingActions: ListItemActions {
-                    actions: Action {
-                        iconName: model.default ? "starred" : "non-starred"
-                        enabled: !model.default
-                        onTriggered: Printers.defaultPrinterName = model.name
-                    }
-                }
-                ListItemLayout {
-                    id: modelLayout
-                    title.text: displayName
-                    anchors { left: parent.left; right: parent.right }
 
-                    Icon {
-                        id: icon
-                        width: height
-                        height: units.gu(2.5)
-                        name: "printer-symbolic"
-                        SlotsLayout.position: SlotsLayout.First
-                    }
+            ListView {
+                id: allPrintersList
+                anchors { left: parent.left; right: parent.right }
+                contentHeight: contentItem.childrenRect.height
+                boundsBehavior: Flickable.StopAtBounds
+                height: contentHeight
+                model: Printers.localPrinters
 
-                    ProgressionSlot {}
+                section.property: "default"
+                section.delegate: SettingsItemTitle {
+                    text: section === "true" ? i18n.tr("Default printer")
+                                             : i18n.tr("Configured printers")
                 }
-                onClicked: {
-                    Printers.loadPrinter(model.name);
-                    pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Printer.qml"), {
-                        printer: model, pluginOptions: pluginOptions,
-                        plugin: plugin
-                    });
-                }
+
+                delegate: printerDelegate
+            }
+
+            SettingsItemTitle {
+                anchors { left: parent.left; right: parent.right }
+                text: i18n.tr("Discovered printers")
+                visible: discoveredPrintersRepeater.count
+            }
+
+            Repeater {
+                id: discoveredPrintersRepeater
+                anchors { left: parent.left; right: parent.right }
+                model: Printers.remotePrinters
+                delegate: printerDelegate
             }
         }
     }
 
+    Component {
+        id: printerDelegate
+
+        ListItem {
+            height: modelLayout.height + (divider.visible ? divider.height : 0)
+            leadingActions: ListItemActions {
+                actions: [
+                    Action {
+                        text: i18n.tr("Delete")
+                        iconName: "delete"
+                        onTriggered: {
+                            if (!Printers.removePrinter(model.name)) {
+                                console.error('failed to remove printer', Printers.lastMessage);
+                            }
+                        }
+                    }
+                ]
+            }
+
+            trailingActions: ListItemActions {
+               actions: Action {
+                   text: i18n.tr("Set as Default")
+                   iconName: model.default ? "starred" : "non-starred"
+                   enabled: !model.default && !isRemote
+                   onTriggered: Printers.defaultPrinterName = model.name
+               }
+            }
+
+            ListItemLayout {
+                id: modelLayout
+                title.text: displayName
+                anchors { left: parent.left; right: parent.right }
+
+                Icon {
+                    id: icon
+                    width: height
+                    height: units.gu(2.5)
+                    name: printerEnabled ? "printer-symbolic" : "media-playback-pause"
+                    SlotsLayout.position: SlotsLayout.First
+                }
+
+                ProgressionSlot {}
+            }
+            onClicked: {
+                Printers.loadPrinter(model.name);
+                pageStack.addPageToNextColumn(root, Qt.resolvedUrl("Printer.qml"), {
+                    printer: model, pluginOptions: pluginOptions,
+                    plugin: plugin
+                });
+            }
+        }
+    }
 
     Item {
         visible: allPrintersList.count == 0

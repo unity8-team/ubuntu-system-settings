@@ -17,8 +17,9 @@
  */
 
 import QtQuick 2.4
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 import SystemSettings 1.0
+import SystemSettings.ListItems 1.0 as SettingsListItems
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
@@ -26,21 +27,18 @@ import Ubuntu.Components.ListItems 1.3 as ListItems
 
 Column {
     height: childrenRect.height
-    ListItems.Standard {
+
+    SettingsListItems.Standard {
         anchors {
             left: parent.left
             right: parent.right
         }
         text: i18n.tr("Description")
-        control: TextField {
-           anchors {
-                margins: units.gu(1)
-                left: parent.left
-                right: parent.right
 
-            }
+        TextField {
             text: printer.description
             onTextChanged: printer.description = text
+            Layout.fillWidth: true
         }
     }
 

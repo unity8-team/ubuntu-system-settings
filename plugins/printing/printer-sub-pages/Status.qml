@@ -56,6 +56,7 @@ Column {
         }
     }
 
+
     SettingsListItems.Standard {
         text: i18n.tr("Name")
         layout.subtitle.text: printer.displayName
