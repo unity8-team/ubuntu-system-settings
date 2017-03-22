@@ -167,6 +167,9 @@ MainView {
             PageHeader {
                 id: standardHeader
                 objectName: "standardHeader"
+                // turn off automatic height
+                // so when in APL the height doesn't change
+                automaticHeight: false
                 visible: mainPage.header === standardHeader
                 title: i18n.tr("System Settings")
                 flickable: mainFlickable
@@ -186,6 +189,9 @@ MainView {
             PageHeader {
                 id: searchHeader
                 objectName: "searchHeader"
+                // turn off automatic height
+                // so when in APL the height doesn't change
+                automaticHeight: false
                 visible: mainPage.header === searchHeader
                 flickable: mainFlickable
                 contents: TextField {
