@@ -84,10 +84,14 @@ ItemPage {
     Flickable {
         id: printerList
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
         clip: true
 
         Column {
-            anchors.fill: parent
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             ListView {
                 id: allPrintersList

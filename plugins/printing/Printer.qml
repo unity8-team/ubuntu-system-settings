@@ -28,6 +28,33 @@ ItemPage {
     header: PageHeader {
         title: printer.name
         flickable: printerFlickable
+        extension: Loader {
+            active: printer.isLoaded
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                leftMargin: units.gu(2)
+                right: parent.right
+                rightMargin: units.gu(2)
+            }
+            sourceComponent: Sections {
+                model: [
+                    i18n.tr("Printer status"),
+                    i18n.tr("General settings"),
+                    i18n.tr("Policies"),
+                    /* i18n.tr("Allowed users"), */
+                    /* i18n.tr("Installable options"), */
+                    i18n.tr("Copies and pages"),
+                ]
+
+                Component.onCompleted: {
+                    // If we're asked for specific category, show it immediately.
+                    if (pluginOptions && pluginOptions["category"]) {
+                        categoryToSelectorIndex(pluginOptions["category"]);
+                    }
+                }
+            }
+        }
     }
 
     function categoryToSelectorIndex(category) {
@@ -84,55 +111,28 @@ ItemPage {
                 right: parent.right
             }
 
-            OptionSelector {
-                id: subPageSelector
-                anchors {
-                    left: parent.left
-                    leftMargin: units.gu(2)
-                }
-                width: units.gu(30)
-                model: [
-                    i18n.tr("Printer status"),
-                    i18n.tr("General settings"),
-                    i18n.tr("Policies"),
-                    /* i18n.tr("Allowed users"), */
-                    /* i18n.tr("Installable options"), */
-                    i18n.tr("Copies and pages"),
-                ]
-                onSelectedIndexChanged: {
-                    var uri = printerSubPageLoader.defaultUri;
-                    switch (selectedIndex) {
-                    case 1:
-                        uri = Qt.resolvedUrl("GeneralSettings.qml");
-                        break;
-                    case 2:
-                        uri = Qt.resolvedUrl("Policies.qml");
-                        break;
-                    case 3:
-                        uri = Qt.resolvedUrl("CopiesAndPages.qml");
-                        break;
-                    }
-                    printerSubPageLoader.setSource(uri);
-                }
-            }
-
             Loader {
                 id: printerSubPageLoader
                 anchors { left: parent.left; right: parent.right }
-                property string defaultUri: Qt.resolvedUrl("Status.qml")
-
-                Component.onCompleted: {
-                    // If we're asked for specific category, show it immediately.
-                    var category = pluginOptions ? pluginOptions['category'] : null;
-                    var index = 0;
-                    if (pluginOptions && category) {
-                        index = categoryToSelectorIndex(category);
-                    }
-
-                    if (index == 0) {
-                        printerSubPageLoader.setSource(defaultUri);
+                source: {
+                    if (printerPage.header.extension.item) {
+                        switch (printerPage.header.extension.item.selectedIndex) {
+                        case 1:
+                            Qt.resolvedUrl("GeneralSettings.qml");
+                            break;
+                        case 2:
+                            Qt.resolvedUrl("Policies.qml");
+                            break;
+                        case 3:
+                            Qt.resolvedUrl("CopiesAndPages.qml");
+                            break;
+                        case 0:
+                        default:
+                            Qt.resolvedUrl("Status.qml");
+                            break;
+                        }
                     } else {
-                        subPageSelector.selectedIndex = index;
+                        null
                     }
                 }
             }
