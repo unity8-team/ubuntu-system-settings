@@ -26,13 +26,14 @@ import Ubuntu.Components.ListItems 1.3 as ListItem
 import Ubuntu.SystemSettings.TimeDate 1.1
 
 ItemPage {
+    id: changeTimeZonePage
     title: i18n.tr("Time zone")
     flickable: locationsListView
     property UbuntuTimeDatePanel timeDatePanel
 
     Timer {
         id: goBackTimer
-        onTriggered: pageStack.pop()
+        onTriggered: removePages(changeTimeZonePage)
     }
 
     Connections {
@@ -62,7 +63,7 @@ ItemPage {
 
     TextField {
         anchors {
-            top: showAllUI ? setTimeZoneSelector.bottom : parent.top
+            top: showAllUI ? setTimeZoneSelector.bottom : header.bottom
             left: parent.left
             right: parent.right
             margins: units.gu(2)
