@@ -12,6 +12,7 @@ set(QML_SOURCES
     Printer.qml
     PrinterConnection.qml
     Setting.qml
+    TextBoxListItem.qml
 )
 
 # We need a dummy target so the QML files show up in Qt Creator

@@ -58,19 +58,19 @@ ItemPage {
                         var ret;
                         if (driverSelector.selectedIndex == 0) {
                             ret = Printers.addPrinter(
-                                nameField.text,
+                                nameField.field.text,
                                 driversView.selectedDriver,
                                 connection.host,
-                                descriptionField.text,
-                                locationField.text
+                                descriptionField.field.text,
+                                locationField.field.text
                             );
                         } else {
                             ret = Printers.addPrinterWithPpdFile(
-                                nameField.text,
-                                pddFileField.text,
+                                nameField.field.text,
+                                pddFileField.field.text,
                                 connection.host,
-                                descriptionField.text,
-                                locationField.text
+                                descriptionField.field.text,
+                                locationField.field.text
                             );
                         }
                         if (ret) {
@@ -89,17 +89,17 @@ ItemPage {
         var suggestedName;
 
         if (device) {
-            driverFilter.text = device.displayName;
+            driverFilter.field.text = device.displayName;
 
             suggestedName = (" " + device.displayName).slice(1);
             suggestedName = suggestedName.replace(/\ /g, "\-");
-            nameField.text = suggestedName;
+            nameField.field.text = suggestedName;
 
             connectionsSelector.selectedIndex = connectionsSelector.values.indexOf(connection.typeToString(device.type));
             connection.host = device.uri;
 
-            descriptionField.text = device.info;
-            locationField.text = device.location;
+            descriptionField.field.text = device.info;
+            locationField.field.text = device.location;
         }
     }
 
@@ -121,12 +121,13 @@ ItemPage {
     Flickable {
         id: addPrinterFlickable
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
 
         Column {
             id: fieldsColumn
             anchors { left: parent.left; right: parent.right }
             visible: connectionsSelector.selectedIndex > 0
-            height: visible ? childrenRect.height : 0
+
             clip: true
             property bool enabled: true
 
@@ -159,17 +160,10 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            TextBoxListItem {
+                id: nameField
                 text: i18n.tr("Printer name")
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                TextField {
-                    id: nameField
-                    enabled: fieldsColumn.enabled
-                }
+                enabled: fieldsColumn.enabled
             }
 
             Item {
@@ -203,26 +197,18 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            TextBoxListItem {
+                id: descriptionField
                 text: i18n.tr("Description")
-                anchors { left: parent.left; right: parent.right }
-
-                TextField {
-                    id: descriptionField
-                    placeholderText: i18n.tr("Optional")
-                    enabled: fieldsColumn.enabled
-                }
+                enabled: fieldsColumn.enabled
+                placeholderText: i18n.tr("Optional")
             }
 
-            SettingsListItems.Standard {
+            TextBoxListItem {
+                id: locationField
                 text: i18n.tr("Location")
-                anchors { left: parent.left; right: parent.right }
-
-                TextField {
-                    id: locationField
-                    placeholderText: i18n.tr("Optional")
-                    enabled: fieldsColumn.enabled && showAllUI
-                }
+                enabled: fieldsColumn.enabled
+                placeholderText: i18n.tr("Optional")
             }
 
             SettingsItemTitle {
@@ -244,17 +230,12 @@ ItemPage {
                 enabled: parent.enabled
             }
 
-            SettingsListItems.Standard {
-                anchors { left: parent.left; right: parent.right }
+            TextBoxListItem {
+                id: driverFilter
                 text: i18n.tr("Filter drivers")
-
-                TextField {
-                    id: driverFilter
-                    onTextChanged: Printers.driverFilter = text
-                    enabled: fieldsColumn.enabled
-                }
+                enabled: fieldsColumn.enabled
                 visible: driverSelector.selectedIndex == 0
-                enabled: parent.enabled
+                onFieldTextChanged: Printers.driverFilter = fieldText
             }
 
             ScrollView {
@@ -318,17 +299,11 @@ ItemPage {
                 }
             }
 
-            SettingsListItems.Standard {
+            TextBoxListItem {
                 id: pddFileField
-                anchors { left: parent.left; right: parent.right }
-                enabled: parent.enabled
                 text: i18n.tr("PPD file")
+                enabled: parent.enabled
                 visible: driverSelector.selectedIndex == 1
-
-                TextField {
-                    id: printerPpd
-                    enabled: parent.enabled
-                }
             }
         }
     }

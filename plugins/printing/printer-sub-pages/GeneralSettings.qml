@@ -24,22 +24,14 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Ubuntu.Components.ListItems 1.3 as ListItems
 
-
 Column {
     height: childrenRect.height
 
-    SettingsListItems.Standard {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
+    TextBoxListItem {
+        id: description
         text: i18n.tr("Description")
-
-        TextField {
-            text: printer.description
-            onTextChanged: printer.description = text
-            Layout.fillWidth: true
-        }
+        field.text: printer.description
+        onFieldTextChanged: printer.description = fieldText
     }
 
     ListItems.ValueSelector {
