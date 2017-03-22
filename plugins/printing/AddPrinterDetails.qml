@@ -121,6 +121,7 @@ ItemPage {
     Flickable {
         id: addPrinterFlickable
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
 
         Column {
             id: fieldsColumn
