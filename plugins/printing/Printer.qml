@@ -50,7 +50,7 @@ ItemPage {
                 Component.onCompleted: {
                     // If we're asked for specific category, show it immediately.
                     if (pluginOptions && pluginOptions["category"]) {
-                        categoryToSelectorIndex(pluginOptions["category"]);
+                        selectedIndex = categoryToSelectorIndex(pluginOptions["category"]);
                     }
                 }
             }
