@@ -65,7 +65,7 @@ ItemPage {
                     title.text: i18n.tr("Enter URI")
                     ProgressionSlot {}
                 }
-                onClicked: pageStack.addPageToNextColumn(
+                onClicked: detailsPageObserver.target = pageStack.addFileToNextColumnSync(
                     addPrinterPage, Qt.resolvedUrl("AddPrinterDetails.qml"), {
                         plugin: plugin
                     }
