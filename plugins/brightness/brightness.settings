@@ -4,7 +4,7 @@
     "name": "Brightness",
     "translations": "ubuntu-system-settings",
     "category": "system",
-    "priority": 1,
+    "priority": 4,
     "keywords": [
         "brightness",
         "display",
