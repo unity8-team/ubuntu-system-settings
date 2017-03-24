@@ -130,13 +130,6 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(plugin, NotEquals(None))
 
-    def test_updates_plugin(self):
-        """ Checks whether the Updates plugin is available """
-        plugin = self.main_view.select_single(
-            objectName='entryComponent-system-update'
-        )
-        self.assertThat(plugin, NotEquals(None))
-
     def test_vpn(self):
         """ Checks whether the Vpn plugin is available """
         plugin = self.main_view.select_single(

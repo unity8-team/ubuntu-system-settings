@@ -24,7 +24,6 @@ import random
 import subprocess
 import ubuntuuitoolkit
 
-from datetime import datetime
 from time import sleep
 
 from autopilot import platform
@@ -33,10 +32,7 @@ from dbusmock.templates.networkmanager import (InfrastructureMode,
                                                NM80211ApSecurityFlags)
 from fixtures import EnvironmentVariable
 from gi.repository import UPowerGlib
-from testtools.matchers import Equals, NotEquals, GreaterThan
-from ubuntu_system_settings.utils.mock_update_click_server import (
-    Manager
-)
+from testtools.matchers import Equals
 from ubuntu_system_settings.tests.connectivity import (
     PRIV_OBJ as CTV_PRIV_OBJ, NETS_OBJ as CTV_NETS_OBJ,
     MAIN_IFACE as CTV_IFACE
@@ -63,7 +59,6 @@ NETREG_IFACE = 'org.ofono.NetworkRegistration'
 NETOP_IFACE = 'org.ofono.NetworkOperator'
 CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
-SYSTEM_IFACE = 'com.canonical.SystemImage'
 SYSTEM_SERVICE_OBJ = '/Service'
 LM_SERVICE = 'org.freedesktop.login1'
 LM_PATH = '/org/freedesktop/login1'
@@ -631,63 +626,6 @@ class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.about_page = self.main_view.go_to_about_page()
 
 
-class AboutSystemImageBaseTestCase(AboutBaseTestCase,
-                                   dbusmock.DBusTestCase):
-    systemimage_parameters = {
-        'last_update_date': datetime.now().replace(microsecond=0).isoformat(),
-        'channel': 'daily',
-        'build_number': 42,
-        'device': ''
-    }
-
-    @classmethod
-    def setUpClass(cls):
-        cls.start_system_bus()
-        cls.dbus_con = cls.get_dbus(True)
-        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
-        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
-            si_tmpl, parameters=cls.systemimage_parameters,
-            stdout=subprocess.PIPE)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.si_mock.terminate()
-        cls.si_mock.wait()
-        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
-
-
-class StorageBaseTestCase(AboutBaseTestCase):
-
-    """Base class for Storage page tests."""
-
-    def setUp(self):
-        """Go to Storage Page."""
-        super(StorageBaseTestCase, self).setUp()
-        self.main_view.click_item('storageItem')
-        self.storage_page = self.main_view.select_single(
-            objectName='storagePage'
-        )
-        self.assertThat(self.storage_page.active, Eventually(Equals(True)))
-
-    def assert_space_item(self, object_name, text):
-        """ Checks whether an space item exists and returns a value """
-        item = self.main_view.storage_page.wait_select_single(
-            objectName=object_name
-        )
-        self.assertThat(item, NotEquals(None))
-        label = item.label  # Label
-        self.assertThat(label, Equals(text))
-        # Get item's label
-        size_label = item.select_single(objectName='sizeLabel')
-        self.assertThat(size_label, NotEquals(None))
-        values = size_label.text.split(' ')  # Format: "00.0 (bytes|MB|GB)"
-        self.assertThat(len(values), GreaterThan(1))
-
-    def get_storage_space_used_by_category(self, objectName):
-        return self.main_view.wait_select_single(
-            'StorageItem', objectName=objectName).value
-
-
 class LicenseBaseTestCase(AboutBaseTestCase):
 
     """Base class for Licenses page tests."""
@@ -696,80 +634,6 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """Go to License Page."""
         super(LicenseBaseTestCase, self).setUp()
         self.licenses_page = self.about_page.go_to_software_licenses()
-
-
-class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase,
-                                dbusmock.DBusTestCase):
-    """Base class for SystemUpdates page tests."""
-
-    connectivity_parameters = {
-        'Status': 'online'
-    }
-
-    click_server_parameters = {
-        'start': False
-    }
-
-    systemimage_parameters = {}
-
-    @classmethod
-    def setUpClass(cls):
-        cls.session_con = cls.get_dbus(False)
-
-        cls.start_system_bus()
-
-        si_tmpl = os.path.join(os.path.dirname(__file__), 'systemimage.py')
-        (cls.si_mock, cls.si_obj) = cls.spawn_server_template(
-            si_tmpl, parameters=cls.systemimage_parameters,
-            stdout=subprocess.PIPE)
-
-        super(SystemUpdatesBaseTestCase, cls).setUpClass()
-
-    def setUp(self):
-        """Go to SystemUpdates Page."""
-        self.clicksrv_manager = None
-        if is_process_running(INDICATOR_NETWORK):
-            _stop_process(INDICATOR_NETWORK)
-            self.addCleanup(_start_process, INDICATOR_NETWORK)
-
-        ctv_tmpl = os.path.join(os.path.dirname(__file__), 'connectivity.py')
-        (self.ctv_mock, self.obj_ctv) = self.spawn_server_template(
-            ctv_tmpl, parameters=self.connectivity_parameters,
-            stdout=subprocess.PIPE)
-
-        self.ctv_nets = dbus.Interface(
-            self.session_con.get_object(CTV_IFACE, CTV_NETS_OBJ),
-            'org.freedesktop.DBus.Properties')
-
-        if self.click_server_parameters['start']:
-            self.clicksrv_manager = Manager(
-                responses=self.click_server_parameters.get('responses', None)
-            )
-            self.clicksrv_manager.start()
-
-        super(SystemUpdatesBaseTestCase, self).setUp()
-        self.main_view.click_item('entryComponent-system-update')
-
-    def tearDown(self):
-        self.ctv_mock.terminate()
-        self.ctv_mock.wait()
-        if self.clicksrv_manager and self.clicksrv_manager.is_running():
-            self.clicksrv_manager.stop()
-        super(SystemUpdatesBaseTestCase, self).tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.si_mock.terminate()
-        cls.si_mock.wait()
-        if dbusmock.DBusTestCase.system_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.system_bus_pid)
-            del os.environ['DBUS_SYSTEM_BUS_ADDRESS']
-            dbusmock.DBusTestCase.system_bus_pid = None
-        if dbusmock.DBusTestCase.session_bus_pid is not None:
-            cls.stop_dbus(dbusmock.DBusTestCase.session_bus_pid)
-            del os.environ['DBUS_SESSION_BUS_ADDRESS']
-            dbusmock.DBusTestCase.session_bus_pid = None
-        super(SystemUpdatesBaseTestCase, cls).tearDownClass()
 
 
 class BackgroundBaseTestCase(
@@ -1014,38 +878,6 @@ class SoundBaseTestCase(
 
     def stop_sound_indicator(self):
         subprocess.call(['initctl', 'stop', 'indicator-sound'])
-
-
-class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
-                        dbusmock.DBusTestCase):
-    """ Base class for reset settings tests"""
-
-    def mock_for_factory_reset(self):
-        self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
-                                             SYSTEM_IFACE, system_bus=True,
-                                             stdout=subprocess.PIPE)
-        # spawn_server does not wait properly
-        # Reported as bug here: http://pad.lv/1350833
-        sleep(2)
-        self.sys_mock = dbus.Interface(self.dbus_con.get_object(
-            SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
-
-        self.sys_mock.AddMethod(SYSTEM_IFACE, 'FactoryReset', '', '', '')
-
-    @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-
-    def setUp(self):
-        self.mock_for_factory_reset()
-        super(ResetBaseTestCase, self).setUp()
-        self.reset_page = self.main_view.go_to_reset_phone()
-
-    def tearDown(self):
-        self.mock_server.terminate()
-        self.mock_server.wait()
-        super(ResetBaseTestCase, self).tearDown()
 
 
 class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
