@@ -116,7 +116,6 @@ void PluginsTest::testKeywords()
 
 void PluginsTest::testSorting()
 {
-    /*
     PluginManager manager;
     manager.classBegin();
     manager.componentComplete();
@@ -126,14 +125,13 @@ void PluginsTest::testSorting()
     QVERIFY(model != 0);
     QCOMPARE(model->rowCount(), 5);
 
-    Plugin *wireless = (Plugin *) model->data(model->index(0, 0),
+    Plugin *wireless = (Plugin *) model->data(model->index(2, 0),
                                          ItemModel::ItemRole).value<QObject *>();
-    Plugin *cellular = (Plugin *) model->data(model->index(1, 0),
+    Plugin *cellular = (Plugin *) model->data(model->index(3, 0),
                                              ItemModel::ItemRole).value<QObject *>();
 
     QCOMPARE(wireless->displayName(), QString("Wireless"));
     QCOMPARE(cellular->displayName(), QString("Bluetooth"));
-    */
 }
 
 void PluginsTest::testReset()

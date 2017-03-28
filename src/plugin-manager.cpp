@@ -56,7 +56,8 @@ private:
 } // namespace
 
 PluginManagerPrivate::PluginManagerPrivate(PluginManager *q):
-    q_ptr(q)
+    q_ptr(q),
+    m_model(0)
 {
 }
 
