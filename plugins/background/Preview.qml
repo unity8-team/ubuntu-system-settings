@@ -85,7 +85,7 @@ ItemPage {
     ListItem.ThinDivider {
         id: divider
         anchors.bottom: previewButtons.top
-        anchors.bottomMargin: units.gu(1)
+        anchors.bottomMargin: units.gu(2)
     }
 
     ListItem.Base {
