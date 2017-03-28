@@ -33,6 +33,10 @@ ListItem.Empty {
     signal dragStarted()
     signal dragFinished()
 
+    onClicked: {
+        checkBox.checked = !checkBox.checked
+    }
+
     Rectangle {
         id: icon
         anchors {
