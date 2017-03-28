@@ -70,7 +70,12 @@ ItemPage {
 
     Image {
         id: previewImage
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: divider.top
+        }
         source: uri
         sourceSize.height: height
         sourceSize.width: 0
@@ -78,6 +83,7 @@ ItemPage {
     }
 
     ListItem.ThinDivider {
+        id: divider
         anchors.bottom: previewButtons.top
         anchors.bottomMargin: units.gu(1)
     }
