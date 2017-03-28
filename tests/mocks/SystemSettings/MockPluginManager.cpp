@@ -21,7 +21,9 @@
 #include <QDebug>
 #include <QQmlEngine>
 
-MockPluginManager::MockPluginManager(QObject *parent) : QObject(parent)
+MockPluginManager::MockPluginManager(QObject *parent) :
+    QObject(parent),
+    m_model(0)
 {
 }
 
