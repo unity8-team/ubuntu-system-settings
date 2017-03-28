@@ -69,6 +69,8 @@ protected:
                           const QModelIndex &right) const;
     virtual bool filterAcceptsRow(int source_row,
                                   const QModelIndex &source_parent) const;
+private:
+    QList<QString> m_categoriesOrder;
 };
 
 } // namespace

@@ -171,8 +171,8 @@ Item {
             uncategorizedEntry = testUncategorizedEntry;
             page = testPageComponent;
 
-            manager.addPlugin("Test", personalEntry, page, "personal");
-            manager.addPlugin("Phone", uncategorizedEntry, page, "uncategorized-bottom");
+            manager.addPlugin("Test", personalEntry, page);
+            manager.addPlugin("Phone", uncategorizedEntry, page);
         }
 
         function cleanup() {

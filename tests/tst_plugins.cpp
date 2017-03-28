@@ -53,23 +53,16 @@ void PluginsTest::testCategory()
     manager.classBegin();
     manager.componentComplete();
 
+    QMap<QString, Plugin *> plugins = manager.plugins();
+    QCOMPARE(plugins.count(), 5);
+
+    QStringList categories;
+    Q_FOREACH(Plugin *plugin, plugins) {
+        categories << plugin->category();
+    }
     QSet<QString> expectedCategories;
     expectedCategories << "phone" << "network" << "misc" << "system";
-    QCOMPARE(manager.categories().toSet(), expectedCategories);
-
-    QMap<QString, Plugin *> plugins = manager.plugins("phone");
-    QCOMPARE(plugins.count(), 1);
-    QCOMPARE(plugins.value("cellular")->displayName(), QString("Cellular"));
-
-    plugins = manager.plugins("network");
-    QCOMPARE(plugins.count(), 2);
-    QStringList names;
-    Q_FOREACH(Plugin *plugin, plugins) {
-        names << plugin->displayName();
-    }
-    QSet<QString> expectedNames;
-    expectedNames << "Bluetooth" << "Wireless";
-    QCOMPARE(names.toSet(), expectedNames);
+    QCOMPARE(categories.toSet(), expectedCategories);
 }
 
 void PluginsTest::testName()
@@ -79,7 +72,7 @@ void PluginsTest::testName()
     manager.componentComplete();
 
     Plugin *brightness = 0;
-    Q_FOREACH(Plugin *plugin, manager.plugins("system")) {
+    Q_FOREACH(Plugin *plugin, manager.plugins()) {
         if (plugin->displayName() == "Brightness & Display") {
             brightness = plugin;
         }
@@ -98,7 +91,7 @@ void PluginsTest::testKeywords()
 
     Plugin *wireless = 0;
     Plugin *bluetooth = 0;
-    Q_FOREACH(Plugin *plugin, manager.plugins("network")) {
+    Q_FOREACH(Plugin *plugin, manager.plugins()) {
         if (plugin->displayName() == "Bluetooth") {
             bluetooth = plugin;
         } else if (plugin->displayName() == "Wireless") {
@@ -127,10 +120,10 @@ void PluginsTest::testSorting()
     manager.classBegin();
     manager.componentComplete();
 
-    QAbstractItemModel *model(manager.itemModel("network"));
+    QAbstractItemModel *model(manager.itemModel());
 
     QVERIFY(model != 0);
-    QCOMPARE(model->rowCount(), 2);
+    QCOMPARE(model->rowCount(), 5);
 
     Plugin *wireless = (Plugin *) model->data(model->index(0, 0),
                                          ItemModel::ItemRole).value<QObject *>();
@@ -148,10 +141,7 @@ void PluginsTest::testReset()
     manager.classBegin();
     manager.componentComplete();
 
-    QAbstractItemModel *model(manager.itemModel("network"));
-    Plugin *wireless = (Plugin *) model->data(model->index(0, 0),
-                                         ItemModel::ItemRole).value<QObject *>();
-
+    Plugin *wireless = (Plugin *) manager.getByName("wireless");
     QQmlEngine engine;
     QQmlContext *context = new QQmlContext(engine.rootContext());
     QQmlEngine::setContextForObject(wireless, context);
@@ -167,10 +157,7 @@ void PluginsTest::testResetInPlugin()
     manager.classBegin();
     manager.componentComplete();
 
-    QAbstractItemModel *model(manager.itemModel("misc"));
-    Plugin *phone = (Plugin *) model->data(model->index(0, 0),
-                                         ItemModel::ItemRole).value<QObject *>();
-
+    Plugin *phone = (Plugin *) manager.getByName("phone");
     QQmlEngine engine;
     QQmlContext *context = new QQmlContext(engine.rootContext());
     QQmlEngine::setContextForObject(phone, context);

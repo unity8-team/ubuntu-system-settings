@@ -169,7 +169,7 @@ MainView {
                 objectName: "standardHeader"
                 visible: mainPage.header === standardHeader
                 title: i18n.tr("System Settings")
-                flickable: mainFlickable
+                flickable: categoriesListView
                 trailingActionBar.actions: [
                     Action {
                         objectName: "searchAction"
@@ -187,7 +187,7 @@ MainView {
                 id: searchHeader
                 objectName: "searchHeader"
                 visible: mainPage.header === searchHeader
-                flickable: mainFlickable
+                flickable: categoriesListView
                 contents: TextField {
                     id: searchField
                     objectName: "searchField"
@@ -217,40 +217,62 @@ MainView {
                 z: 1
             }
 
-            Flickable {
-                id: mainFlickable
+            ListView {
+                id: categoriesListView
                 anchors.fill: parent
-                contentHeight: contentItem.childrenRect.height
-                boundsBehavior: (contentHeight > mainPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-                /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
-                   otherwise the UI might end up in a situation where scrolling doesn't work */
-                flickableDirection: Flickable.VerticalFlick
-
-                Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                    UncategorizedItemsView {
-                        model: pluginManager.itemModel("uncategorized-top")
+                model: pluginManager.itemModel()
+                focus: true
+                section.property: "item.category"
+                section.delegate: Loader {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
-
-                    CategorySection {
-                        category: "network"
-                        categoryName: i18n.tr("Network")
+                    active: section !== "uncategorized-top" && section !== "uncategorized-bottom"
+                    sourceComponent: SettingsItemTitle {
+                        text: { 
+                            if (section === "network") {
+                                return i18n.tr("Network")
+                            } else if (section === "personal") {
+                                return i18n.tr("Personal")
+                            } else if (section === "system") {
+                                return i18n.tr("System")
+                            }
+                            return section
+                        }
                     }
+                }
 
-                    CategorySection {
-                        category: "personal"
-                        categoryName: i18n.tr("Personal")
+                delegate: Loader {
+                    id: loader
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
-
-                    CategorySection {
-                        category: "system"
-                        categoryName: i18n.tr("System")
+                    sourceComponent: model.item.entryComponent
+                    active: model.item.visible
+                    Connections {
+                        ignoreUnknownSignals: true
+                        target: loader.item
+                        onClicked: {
+                            var pageComponent = model.item.pageComponent
+                            if (pageComponent) {
+                                Haptics.play();
+                                loadPluginByName(model.item.baseName);
+                            }
+                        }
                     }
-
-                    UncategorizedItemsView {
-                        model: pluginManager.itemModel("uncategorized-bottom")
+                    Binding {
+                        target: loader.item
+                        property: "color"
+                        value: theme.palette.highlighted.background
+                        when: currentPlugin == model.item.baseName && apl.columns > 1
+                    }
+                    Binding {
+                        target: loader.item
+                        property: "color"
+                        value: "transparent"
+                        when: currentPlugin != model.item.baseName || apl.columns == 1
                     }
                 }
             }

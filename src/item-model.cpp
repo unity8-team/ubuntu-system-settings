@@ -160,6 +160,11 @@ void ItemModel::onItemVisibilityChanged()
 ItemModelSortProxy::ItemModelSortProxy(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
+    m_categoriesOrder << "uncategorized-top";
+    m_categoriesOrder << "network";
+    m_categoriesOrder << "personal";
+    m_categoriesOrder << "system";
+    m_categoriesOrder << "uncategorized-bottom";
 }
 
 bool ItemModelSortProxy::lessThan(const QModelIndex &left,
@@ -172,15 +177,22 @@ bool ItemModelSortProxy::lessThan(const QModelIndex &left,
     Plugin *rightPlugin = rightData.value<Plugin *>();
 
     if (leftPlugin && rightPlugin) {
-        int leftPriority = leftPlugin->priority();
-        int rightPriority = rightPlugin->priority();
+        int leftCategoryOrder = m_categoriesOrder.indexOf(leftPlugin->category());
+        int rightCategoryOrder = m_categoriesOrder.indexOf(rightPlugin->category());
 
-        /* In case two plugins happen to have the same priority, sort them
-           alphabetically */
-        if (leftPriority == rightPriority)
-            return leftPlugin->displayName() < rightPlugin->displayName();
+        if (leftCategoryOrder == rightCategoryOrder) {
+            int leftPriority = leftPlugin->priority();
+            int rightPriority = rightPlugin->priority();
 
-        return leftPriority < rightPriority;
+            /* In case two plugins happen to have the same priority, sort them
+               alphabetically */
+            if (leftPriority == rightPriority)
+                return leftPlugin->displayName() < rightPlugin->displayName();
+
+            return leftPriority < rightPriority;
+        }
+
+        return leftCategoryOrder < rightCategoryOrder;
     }
 
     return false;

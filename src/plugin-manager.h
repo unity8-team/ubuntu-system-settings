@@ -45,11 +45,10 @@ public:
     explicit PluginManager(QObject *parent = 0);
     ~PluginManager();
 
-    QStringList categories() const;
-    QMap<QString, Plugin *> plugins(const QString &category) const;
+    QMap<QString, Plugin *> plugins() const;
 
     Q_INVOKABLE QObject *getByName(const QString &name) const;
-    Q_INVOKABLE QAbstractItemModel *itemModel(const QString &category);
+    Q_INVOKABLE QAbstractItemModel *itemModel();
     Q_INVOKABLE void resetPlugins();
     QString getFilter();
     void setFilter(const QString &filter);
