@@ -250,16 +250,11 @@ ItemPage {
             // Discoverability
             SettingsListItems.SingleValue {
                 text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
-                value: backend.discoverable ? backend.adapterName() : ""
+                value: backend.discoverable ? backend.adapterName : ""
                 enabled: bluetoothActionGroup.enabled
                 showDivider: false
 
                 Label {
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        rightMargin: units.gu(2)
-                    }
                     color: "darkgrey"
                     visible: backend.powered && !backend.discoverable
                     text: i18n.tr("Searching…")
