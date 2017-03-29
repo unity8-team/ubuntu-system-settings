@@ -1,6 +1,6 @@
 add_subdirectory(plugin)
 
-set(QML_SOURCES PageComponent.qml)
+set(QML_SOURCES PageComponent.qml ResetLauncherHome.qml)
 set(PANEL_SOURCES
     launcher.h
     launcher_impl.cpp

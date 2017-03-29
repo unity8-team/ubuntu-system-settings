@@ -24,6 +24,7 @@ import Ubuntu.Components 1.3
 import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.Launcher 1.0
+import Ubuntu.Components.Popups 1.3
 
 ItemPage {
     id: root
@@ -103,12 +104,46 @@ ItemPage {
                     onSyncTriggered: unity8Settings.launcherWidth = value
                 }
             }
+
+            Label {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                text: i18n.tr("Reset Launcher")
+                color: UbuntuColors.orange
+                height: units.gu(6)
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            SettingsListItems.Standard {
+                Button {
+                    id: resetLauncherHomeButton
+                    objectName: "resetLauncher"
+                    text: i18n.tr("Reset Launcher")
+                    onClicked: {
+                        buttonActions.source = "ResetLauncherHome.qml";
+                        root.popup = PopupUtils.open(buttonActions.item);
+                    }
+                }
+            }
         }
+    }
+
+    Loader {
+        id: buttonActions
+        asynchronous: false
     }
 
     GSettings {
         id: unity8Settings
         objectName: "unity8Settings"
         schema.id: "com.canonical.Unity8"
+    }
+
+    GSettings {
+        id: launcherSettings
+        schema.id: "com.canonical.Unity.Launcher"
     }
 }

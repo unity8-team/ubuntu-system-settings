@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2017 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -24,6 +24,7 @@ import Ubuntu.Components.Popups 1.3
 
 Component {
     id: resetLauncherHome
+
     Dialog {
         id: dialog
         states: State {
@@ -45,8 +46,8 @@ Component {
             objectName: "resetLauncherAction"
             onClicked: {
                 dialog.state = "clicked";
-                unitySettings.schema.reset("favorites");
-                unitySettings.schema.reset("items");
+                launcherSettings.schema.reset("favorites");
+                launcherSettings.schema.reset("items");
                 root.done();
             }
         }
