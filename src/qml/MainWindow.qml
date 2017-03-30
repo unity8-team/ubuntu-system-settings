@@ -33,6 +33,7 @@ MainView {
     anchorToKeyboard: true
     property var pluginManager: PluginManager {}
     property string currentPlugin: ""
+    property Page currentPluginPage: null
 
     /* Workaround for lp:1648801, i.e. APL does not support a placeholder,
     so we implement it here. */
@@ -56,9 +57,28 @@ MainView {
                     apl.primaryPage, pageComponent, opts
                 );
                 currentPlugin = pluginName;
+                currentPluginPage = page;
                 page.Component.destruction.connect(function () {
-                    if (currentPlugin == this.baseName) {
-                        currentPlugin = "";
+                    if (mainPage) { 
+                        mainPage.forceActiveFocus()
+                    }
+                }.bind(plugin))
+
+                page.Keys.pressed.connect(function (event) {
+                    if (event.key == Qt.Key_Left) {
+                        if (apl.columns > 1) {
+                            mainPage.activeFocusOnTab = true
+                            mainPage.forceActiveFocus()
+                            event.accepted = true
+                        }
+                    } else if (event.key == Qt.Key_Escape) {
+                        if (apl.columns > 1) {
+                            mainPage.activeFocusOnTab = true
+                            mainPage.forceActiveFocus()
+                        } else {
+                            apl.removePages(apl.primaryPage);
+                        }
+                        event.accepted = true
                     }
                 }.bind(plugin))
             }
@@ -85,6 +105,8 @@ MainView {
         // when running in windowed mode, constrain width
         view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
         view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
+
+        mainPage.forceActiveFocus()
     }
 
     Connections {
@@ -92,10 +114,18 @@ MainView {
         ignoreUnknownSignals: true
         onColumnsChanged: {
             var columns = target.columns;
-            if (columns > 1 && !currentPlugin) {
-                loadPluginByName(placeholderPlugin);
-            } else if (columns == 1 && currentPlugin == placeholderPlugin) {
-                apl.removePages(apl.primaryPage);
+            if (columns > 1) {
+                if (!currentPlugin) {
+                    loadPluginByName(placeholderPlugin);
+                } else {
+                    loadPluginByName(currentPlugin);
+                }
+            } else if (columns == 1) {
+                if (currentPlugin == placeholderPlugin) {
+                	apl.removePages(apl.primaryPage);
+                } else {
+                    main.currentPluginPage.forceActiveFocus()
+                }
             }
         }
     }
@@ -266,13 +296,79 @@ MainView {
                         target: loader.item
                         property: "color"
                         value: theme.palette.highlighted.background
-                        when: currentPlugin == model.item.baseName && apl.columns > 1
+                        when: currentPlugin == model.item.baseName
                     }
                     Binding {
                         target: loader.item
                         property: "color"
                         value: "transparent"
-                        when: currentPlugin != model.item.baseName || apl.columns == 1
+                        when: currentPlugin != model.item.baseName
+                    }
+                    Binding {
+                        target: loader.item
+                        property: "activeFocusOnTab"
+                        value: false
+                    }
+                }
+
+                function selectPreviousPlugin() {
+                    var idx = categoriesListView.model.getIndexByName(main.currentPlugin)
+                    if (idx >= 0) {
+                        var previous = categoriesListView.model.getPreviousVisibleIndex(idx)
+                        while (previous == 0 || previous == 1) {
+                            previous = categoriesListView.model.getPreviousVisibleIndex(previous)
+                        }
+                        if (apl.columns > 1) {
+                            loadPluginByName(categoriesListView.model.getNameByIndex(previous))
+                        } else {
+                            main.currentPlugin = categoriesListView.model.getNameByIndex(previous)
+                        }
+                    }
+                }
+
+                function selectNextPlugin() {
+                    var idx = categoriesListView.model.getIndexByName(main.currentPlugin)
+                    if (idx >= 0) {
+                        var next = categoriesListView.model.getNextVisibleIndex(idx)
+                        while (next == 0 || next == 1) {
+                            next = categoriesListView.model.getNextVisibleIndex(next)
+                        }
+                        if (apl.columns > 1) {
+                            loadPluginByName(categoriesListView.model.getNameByIndex(next))
+                        } else {
+                            main.currentPlugin = categoriesListView.model.getNameByIndex(next)
+                        }
+                    }
+                }
+
+                Keys.onPressed: {
+                    if (event.key == Qt.Key_Up) {
+                        selectPreviousPlugin()
+                        event.accepted = true
+                    } else if (event.key == Qt.Key_Down) {
+                        selectNextPlugin()
+                        event.accepted = true
+                    } else if (event.key == Qt.Key_Right) {
+                        if (apl.columns > 1 && main.currentPluginPage) {
+                            mainPage.activeFocusOnTab = false
+                            main.currentPluginPage.forceActiveFocus()
+                            event.accepted = true
+                        }
+                    } else if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
+                        if (apl.columns == 1 && main.currentPlugin) {
+                            loadPluginByName(main.currentPlugin)
+                            mainPage.activeFocusOnTab = false
+                            main.currentPluginPage.forceActiveFocus()
+                            event.accepted = true
+                        }
+                    }
+                }
+
+                Connections {
+                    target: main
+                    onCurrentPluginChanged: {
+                        var idx = categoriesListView.model.getIndexByName(main.currentPlugin)
+                        categoriesListView.positionViewAtIndex(idx, ListView.End)
                     }
                 }
             }
