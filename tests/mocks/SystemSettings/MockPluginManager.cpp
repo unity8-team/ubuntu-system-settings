@@ -154,4 +154,15 @@ QHash<int, QByteArray> MockItemModel::roleNames() const
     return names;
 }
 
+int MockItemModel::getIndexByName(const QString& name) const
+{
+    for (int i = 0; i < m_plugins.count(); ++i) {
+        if (m_plugins.at(i)->baseName() == name) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 // Q_DECLARE_METATYPE(MockItem*)

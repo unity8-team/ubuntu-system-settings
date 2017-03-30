@@ -94,6 +94,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+    Q_INVOKABLE int getIndexByName(const QString &name) const;
+
 private:
     QList<MockItem*> m_plugins;
 };

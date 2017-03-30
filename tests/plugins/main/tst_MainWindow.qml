@@ -249,7 +249,7 @@ Item {
 
             // Pop a page
             apl.removePages(apl.primaryPage);
-            tryCompare(instance, "currentPlugin", "");
+            tryCompare(instance, "currentPlugin", "Test");
         }
 
         // Seems this is how Unity8 is resizing a window to its previous size.
