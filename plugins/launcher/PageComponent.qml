@@ -25,6 +25,7 @@ import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.Launcher 1.0
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 ItemPage {
     id: root
@@ -105,19 +106,11 @@ ItemPage {
                 }
             }
 
-            Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.gu(2)
-                }
-                text: i18n.tr("Reset Launcher")
-                color: UbuntuColors.orange
-                height: units.gu(6)
-                verticalAlignment: Text.AlignVCenter
-            }
-
+            ListItems.ThinDivider {}
             SettingsListItems.Standard {
+                text: i18n.tr("Reset Launcher")
+                layout.subtitle.text: i18n.tr("Reset the Launcher to its original contents.")
+
                 Button {
                     id: resetLauncherHomeButton
                     objectName: "resetLauncher"
