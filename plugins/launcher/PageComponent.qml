@@ -48,6 +48,12 @@ ItemPage {
         return true; // No large screens were the current one.
     }
 
+    // destroy popup after reset
+    property var popup
+    function done () {
+        popup.destroy();
+    }
+
     Flickable {
         id: flick
         anchors.fill: parent
