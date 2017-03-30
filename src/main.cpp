@@ -42,6 +42,9 @@ int main(int argc, char **argv)
     QByteArray mountPoint = qEnvironmentVariableIsSet("SNAP") ? qgetenv("SNAP") : "";
     bool isSnap = !mountPoint.isEmpty();
 
+    // Ensure printing environment is correct.
+    qputenv("QT_PRINTER_MODULE", "cupsprintersupport");
+
     /* read environment variables */
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     if (environment.contains(QLatin1String("SS_LOGGING_LEVEL"))) {

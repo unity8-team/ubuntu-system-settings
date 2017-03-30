@@ -3,6 +3,7 @@
     "name": "Mouse & Touchpad",
     "translations": "ubuntu-system-settings",
     "category": "system",
+    "priority": 3,
     "form-factors": [
         "phone",
         "tablet"

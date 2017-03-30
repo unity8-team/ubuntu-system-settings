@@ -1,0 +1,25 @@
+{
+    "icon": "printer-symbolic",
+    "name": "Printing",
+    "translations": "ubuntu-system-settings",
+    "category": "system",
+    "priority": 1,
+    "keywords": [
+        "printer",
+        "printers",
+        "printing",
+        "pdf",
+        "ppd",
+        "collate",
+        "copies",
+        "colormodel",
+        "greyscale",
+        "color",
+        "laser",
+        "ink"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "visible-if-file-exists": "/usr/lib/cups/backend-available/socket",
+    "page-component": "PageComponent.qml"
+}
