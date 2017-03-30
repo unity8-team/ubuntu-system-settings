@@ -81,10 +81,6 @@ MainView {
             loadPluginByName(placeholderPlugin);
             aplConnections.target = apl;
         }
-
-        // when running in windowed mode, constrain width
-        view.minimumWidth  = Qt.binding( function() { return units.gu(40) } )
-        view.maximumWidth = Qt.binding( function() { return units.gu(140) } )
     }
 
     Connections {
@@ -167,6 +163,9 @@ MainView {
             PageHeader {
                 id: standardHeader
                 objectName: "standardHeader"
+                // turn off automatic height
+                // so when in APL the height doesn't change
+                automaticHeight: false
                 visible: mainPage.header === standardHeader
                 title: i18n.tr("System Settings")
                 flickable: categoriesListView
@@ -186,6 +185,9 @@ MainView {
             PageHeader {
                 id: searchHeader
                 objectName: "searchHeader"
+                // turn off automatic height
+                // so when in APL the height doesn't change
+                automaticHeight: false
                 visible: mainPage.header === searchHeader
                 flickable: categoriesListView
                 contents: TextField {

@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.4+17.04.20170324-0ubuntu1) zesty; urgency=medium
+
+  [ Andrew Hayzen, Jonas G. Drange ]
+  * Jonas Drange: adds printing panel
+
+  [ Ken VanDine ]
+  * Don't change view size after loading MainView. (LP: #1673550)
+  * [time-date] Fixed some issues from the APL migration (LP: #1668640)
+
+ -- Andrew Hayzen <ahayzen@gmail.com>  Fri, 24 Mar 2017 10:36:14 +0000
+
 ubuntu-system-settings (0.4+17.04.20170317.2-0ubuntu1) zesty; urgency=medium
 
   * Drop the fake build depends on upstart
