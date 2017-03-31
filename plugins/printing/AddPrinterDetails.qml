@@ -29,8 +29,21 @@ import Ubuntu.Components.ListItems 1.3 as ListItems
 ItemPage {
     id: describePrinterPage
     objectName: "printingPage"
+    property var connections: null
     property var device: null
     signal printerAdded()
+
+    function updateSettingsFromDevice(device) {
+        var suggestedName;
+        driverFilter.field.text = device.info;
+
+        suggestedName = (" " + device.info).slice(1);
+        suggestedName = suggestedName.replace(/\ /g, "\-");
+        nameField.field.text = suggestedName;
+        hostField.field.text = device.uri;
+        descriptionField.field.text = device.info;
+        locationField.field.text = device.location;
+    }
 
     header: PageHeader {
         id: printerHeader
@@ -52,7 +65,6 @@ ItemPage {
                     id: addAction
                     iconName: "ok"
                     text: i18n.tr("Add printer")
-                    enabled: connectionsSelector.selectedIndex > 0
                     onTriggered: {
                         describePrinterPage.state = "adding";
                         var ret;
@@ -60,7 +72,7 @@ ItemPage {
                             ret = Printers.addPrinter(
                                 nameField.field.text,
                                 driversView.selectedDriver,
-                                connection.host,
+                                hostField.field.text,
                                 descriptionField.field.text,
                                 locationField.field.text
                             );
@@ -68,7 +80,7 @@ ItemPage {
                             ret = Printers.addPrinterWithPpdFile(
                                 nameField.field.text,
                                 pddFileField.field.text,
-                                connection.host,
+                                hostField.field.text,
                                 descriptionField.field.text,
                                 locationField.field.text
                             );
@@ -86,20 +98,8 @@ ItemPage {
     }
 
     Component.onCompleted: {
-        var suggestedName;
-
         if (device) {
-            driverFilter.field.text = device.displayName;
-
-            suggestedName = (" " + device.displayName).slice(1);
-            suggestedName = suggestedName.replace(/\ /g, "\-");
-            nameField.field.text = suggestedName;
-
-            connectionsSelector.selectedIndex = connectionsSelector.values.indexOf(connection.typeToString(device.type));
-            connection.host = device.uri;
-
-            descriptionField.field.text = device.info;
-            locationField.field.text = device.location;
+            updateSettingsFromDevice(device);
         }
     }
 
@@ -109,7 +109,7 @@ ItemPage {
             PropertyChanges { target: closeAction; enabled: false }
             PropertyChanges { target: addAction; enabled: false }
             PropertyChanges { target: successTimer; running: true }
-            PropertyChanges { target: connection; enabled: false }
+            PropertyChanges { target: hostField; enabled: false }
             PropertyChanges { target: fieldsColumn; enabled: false }
         },
         State {
@@ -126,36 +126,44 @@ ItemPage {
         Column {
             id: fieldsColumn
             anchors { left: parent.left; right: parent.right }
-            visible: connectionsSelector.selectedIndex > 0
 
             clip: true
             property bool enabled: true
 
-            ListItems.ValueSelector {
-                id: connectionsSelector
-                anchors { left: parent.left; right: parent.right }
+
+            SettingsItemTitle {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 text: i18n.tr("Connection")
-                values: [
-                    i18n.tr("Choose a connection"),
-                    "ipp",
-                    "lpd",
-                    "ipps",
-                    "ipp14",
-                    "http",
-                    "beh",
-                    "socket",
-                    "https",
-                    "ipp",
-                    "hp",
-                    "usb",
-                    "hpfax",
-                    "dnssd",
-                ]
-                onSelectedIndexChanged: {
-                    if (selectedIndex === 0) {
-                        connection.type = PrinterEnum.IppType;
-                    } else {
-                        connection.type = connection.stringToType(values[selectedIndex]);
+                visible: connections && connections.devices.count > 0
+            }
+
+            OptionSelector {
+                id: connectionsSelector
+                property var listView: null
+                anchors {
+                    margins: units.gu(2)
+                    left: parent.left
+                    right: parent.right
+                }
+                model: connections ? connections.devices : null
+                visible: connections && connections.devices.count > 0
+                delegate: OptionSelectorDelegate {
+                    property var device: model
+                    anchors { left: parent.left; right: parent.right }
+                    text: displayName
+                    subText: info || uri
+                    Component.onCompleted: {
+                        if (!connectionsSelector.listView) {
+                            connectionsSelector.listView = listView;
+                        }
+                    }
+                }
+                onDelegateClicked: {
+                    if (listView && listView.currentItem && listView.currentItem.device) {
+                        updateSettingsFromDevice(listView.currentItem.device)
                     }
                 }
             }
@@ -185,16 +193,10 @@ ItemPage {
                 }
             }
 
-            PrinterConnection {
-                id: connection
-                anchors { left: parent.left; right: parent.right }
-                onTypeChanged: {
-                    var selIndex = connectionsSelector.values.indexOf(typeToString(type));
-                    if (selIndex < 0) {
-                        selIndex = 0;
-                    }
-                    connectionsSelector.selectedIndex = selIndex;
-                }
+            TextBoxListItem {
+                id: hostField
+                text: i18n.tr("Host")
+                enabled: fieldsColumn.enabled
             }
 
             TextBoxListItem {

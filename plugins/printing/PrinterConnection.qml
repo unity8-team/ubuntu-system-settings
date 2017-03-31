@@ -26,7 +26,6 @@ import SystemSettings.ListItems 1.0 as SettingsListItems
 
 Column {
     id: root
-    property alias host: hostField.textFieldText
     property bool enabled: true
 
     function stringToType(str) {
@@ -62,10 +61,5 @@ Column {
 
     property var type: PrinterEnum.IppType
 
-    TextBoxListItem {
-        id: hostField
-        text: i18n.tr("Host")
-        enabled: root.enabled
-        placeholderText: "%1://printer.mydomain/%1".arg(typeToString(type))
-    }
+
 }
