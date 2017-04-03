@@ -153,7 +153,46 @@ ItemPage {
                     property var device: model
                     anchors { left: parent.left; right: parent.right }
                     text: displayName
-                    subText: info || uri
+                    subText: {
+                        var protocol = i18n.tr("Unknown");
+                        switch (Number(model.type)) {
+                        case PrinterEnum.LPDType:
+                            protocol = "LPD";
+                            break;
+                        case PrinterEnum.IppType:
+                        case PrinterEnum.IppSType:
+                        case PrinterEnum.Ipp14Type:
+                            protocol = "IPP";
+                            break;
+                        case PrinterEnum.BehType:
+                            protocol = "BEH";
+                            break;
+                        case PrinterEnum.SocketType:
+                            protocol = i18n.tr("AppSocket/HP JetDirect");
+                            break;
+                        case PrinterEnum.HttpType:
+                        case PrinterEnum.HttpsType:
+                            protocol = "HTTP";
+                            break;
+                        case PrinterEnum.HPType:
+                            protocol = i18n.tr("HP Linux Imaging and Printing (HPLIP)");
+                            break;
+                        case PrinterEnum.USBType:
+                            protocol = "USB";
+                            break;
+                        case PrinterEnum.HPFaxType:
+                            protocol = i18n.tr("Fax — HP Linux Imaging and Printing (HPLIP)");
+                            break;
+                        case PrinterEnum.DNSSDType:
+                            protocol = "DNS-SD";
+                            break;
+                        }
+
+                        /* TRANSLATORS: %1 is the way we identify the printer,
+                        and %2 is the protocol via which we can connect to it.
+                        So e.g. “Mark's HP LaserJet 5000 via USB”. */
+                        return i18n.tr("%1 via %2").arg(info || makeModel).arg(protocol);
+                    }
                 }
                 onDelegateClicked: updateSettingsFromDevice(
                     connections.devices.get(index)
