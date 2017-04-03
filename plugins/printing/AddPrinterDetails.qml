@@ -142,7 +142,6 @@ ItemPage {
 
             OptionSelector {
                 id: connectionsSelector
-                property var listView: null
                 anchors {
                     margins: units.gu(2)
                     left: parent.left
@@ -155,17 +154,10 @@ ItemPage {
                     anchors { left: parent.left; right: parent.right }
                     text: displayName
                     subText: info || uri
-                    Component.onCompleted: {
-                        if (!connectionsSelector.listView) {
-                            connectionsSelector.listView = listView;
-                        }
-                    }
                 }
-                onDelegateClicked: {
-                    if (listView && listView.currentItem && listView.currentItem.device) {
-                        updateSettingsFromDevice(listView.currentItem.device)
-                    }
-                }
+                onDelegateClicked: updateSettingsFromDevice(
+                    connections.devices.get(index)
+                )
             }
 
             TextBoxListItem {

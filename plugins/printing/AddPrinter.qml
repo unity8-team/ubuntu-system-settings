@@ -123,6 +123,7 @@ ItemPage {
                         };
                         if (connectionsCount > 1) {
                             props["connections"] = model;
+                            props["device"] = model.devices.get(0);
                         } else if (connectionsCount == 1) {
                             props["device"] = model.devices.get(0);
                         }
