@@ -35,7 +35,7 @@ ItemPage {
 
     function updateSettingsFromDevice(device) {
         var suggestedName;
-        driverFilter.field.text = device.info;
+        driverFilter.field.text = device.makeModel;
 
         suggestedName = (" " + device.info).slice(1);
         suggestedName = suggestedName.replace(/\ /g, "\-");
