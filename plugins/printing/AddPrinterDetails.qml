@@ -103,6 +103,8 @@ ItemPage {
         }
     }
 
+    Component.onDestruction: Printers.driverFilter = ""
+
     states: [
         State {
             name: "adding"
