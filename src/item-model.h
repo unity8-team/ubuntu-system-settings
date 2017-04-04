@@ -49,6 +49,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+    int getIndexByName(const QString &name) const;
+
 private Q_SLOTS:
     void onItemVisibilityChanged();
 
@@ -63,6 +65,11 @@ class ItemModelSortProxy: public QSortFilterProxyModel
 
 public:
     explicit ItemModelSortProxy(QObject *parent = 0);
+
+    Q_INVOKABLE int getIndexByName(const QString &name) const;
+    Q_INVOKABLE QString getNameByIndex(int row) const;
+    Q_INVOKABLE int getPreviousVisibleIndex(int from) const;
+    Q_INVOKABLE int getNextVisibleIndex(int from) const;
 
 protected:
     virtual bool lessThan(const QModelIndex &left,
