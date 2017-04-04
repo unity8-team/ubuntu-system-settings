@@ -21,7 +21,9 @@
 #include <QDebug>
 #include <QQmlEngine>
 
-MockPluginManager::MockPluginManager(QObject *parent) : QObject(parent)
+MockPluginManager::MockPluginManager(QObject *parent) :
+    QObject(parent),
+    m_model(0)
 {
 }
 
@@ -32,9 +34,9 @@ QObject* MockPluginManager::getByName(const QString &name) const
     return p;
 }
 
-QAbstractItemModel* MockPluginManager::itemModel(const QString &category)
+QAbstractItemModel* MockPluginManager::itemModel()
 {
-    QAbstractItemModel* m = m_models.value(category);
+    QAbstractItemModel* m = m_model;
     QQmlEngine::setObjectOwnership(m, QQmlEngine::CppOwnership);
     return m;
 }
@@ -55,21 +57,17 @@ void MockPluginManager::setFilter(const QString &filter)
 }
 
 void MockPluginManager::addPlugin(const QString &name, QQmlComponent *entry,
-                                  QQmlComponent *page, const QString &category)
+                                  QQmlComponent *page)
 {
-    MockItemModel *model = nullptr;
-    if (m_models.contains(category)) {
-        model = (MockItemModel*) m_models.value(category);
-    } else {
-        model = new MockItemModel(this);
-        m_models.insert(category, model);
+    if (!m_model) {
+        m_model = new MockItemModel(this);
     }
 
     MockItem* item = new MockItem(this);
     item->setBaseName(name);
     item->setEntryComponent(entry);
     item->setPageComponent(page);
-    model->addPlugin(item);
+    m_model->addPlugin(item);
     m_plugins.insert(name, item);
 }
 

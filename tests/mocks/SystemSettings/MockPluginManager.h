@@ -38,21 +38,20 @@ public:
 
 public Q_SLOTS:
     QObject* getByName(const QString &name) const;
-    QAbstractItemModel* itemModel(const QString &category);
+    QAbstractItemModel* itemModel();
     void resetPlugins();
     QString getFilter();
     void setFilter(const QString &filter);
     void addPlugin(const QString &name,
                    QQmlComponent *entry,
-                   QQmlComponent *page,
-                   const QString &category = "uncategorized-bottom");
+                   QQmlComponent *page);
 
 Q_SIGNALS:
     void filterChanged();
 
 private:
     QString m_filter = QString::null;
-    QMap<QString, MockItemModel*> m_models;
+    MockItemModel* m_model;
     QMap<QString, MockItem*> m_plugins;
 };
 

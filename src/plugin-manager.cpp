@@ -49,14 +49,15 @@ class PluginManagerPrivate
 
 private:
     mutable PluginManager *q_ptr;
-    QMap<QString,QMap<QString, Plugin*> > m_plugins;
-    QHash<QString,ItemModelSortProxy*> m_models;
+    QMap<QString, Plugin*> m_plugins;
+    ItemModelSortProxy* m_model;
 };
 
 } // namespace
 
 PluginManagerPrivate::PluginManagerPrivate(PluginManager *q):
-    q_ptr(q)
+    q_ptr(q),
+    m_model(0)
 {
 }
 
@@ -67,12 +68,8 @@ PluginManagerPrivate::~PluginManagerPrivate()
 
 void PluginManagerPrivate::clear()
 {
-    QMapIterator<QString, QMap<QString, Plugin*> > it(m_plugins);
-    while (it.hasNext()) {
-        it.next();
-        Q_FOREACH(Plugin *plugin, it.value().values()) {
-            delete plugin;
-        }
+    Q_FOREACH(Plugin *plugin, m_plugins.values()) {
+        delete plugin;
     }
     m_plugins.clear();
 }
@@ -109,9 +106,8 @@ void PluginManagerPrivate::reload()
     Q_FOREACH(const QFileInfo &fileInfo, searchPaths) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin, ctx);
-        QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
         if (showAll || !plugin->hideByDefault())
-            pluginList.insert(fileInfo.baseName(), plugin);
+            m_plugins.insert(fileInfo.baseName(), plugin);
     }
 }
 
@@ -126,59 +122,45 @@ PluginManager::~PluginManager()
     delete d_ptr;
 }
 
-QStringList PluginManager::categories() const
+QMap<QString, Plugin *> PluginManager::plugins() const
 {
     Q_D(const PluginManager);
-    return d->m_plugins.keys();
-}
-
-QMap<QString, Plugin *> PluginManager::plugins(const QString &category) const
-{
-    Q_D(const PluginManager);
-    return d->m_plugins.value(category);
+    return d->m_plugins;
 }
 
 void PluginManager::resetPlugins()
 {
     Q_D(const PluginManager);
-
-    typedef QMap<QString, Plugin *> Plugins;
-    Q_FOREACH (const Plugins &plugins, d->m_plugins.values()) {
-        Q_FOREACH (Plugin *plugin, plugins.values()) {
+    Q_FOREACH (Plugin *plugin, d->m_plugins) {
             plugin->reset();
-        }
     }
 }
 
-QAbstractItemModel *PluginManager::itemModel(const QString &category)
+QAbstractItemModel *PluginManager::itemModel()
 {
     Q_D(PluginManager);
-    ItemModelSortProxy *&model = d->m_models[category];
-    if (model == 0) {
+    if (d->m_model == 0) {
         ItemModel *backing_model = new ItemModel(this);
-        backing_model->setPlugins(plugins(category));
+        backing_model->setPlugins(plugins());
         /* Return a sorted proxy backed by the real model containing the items */
-        model = new ItemModelSortProxy(this);
-        model->setSourceModel(backing_model);
-        model->setDynamicSortFilter(true);
-        model->setFilterCaseSensitivity(Qt::CaseInsensitive);
-        model->setFilterRole(ItemModel::KeywordRole);
+        d->m_model = new ItemModelSortProxy(this);
+        d->m_model->setSourceModel(backing_model);
+        d->m_model->setDynamicSortFilter(true);
+        d->m_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        d->m_model->setFilterRole(ItemModel::KeywordRole);
         /* we only have one column as this is a QAbstractListModel */
-        model->sort(0);
+        d->m_model->sort(0);
     }
 
-    return model;
+    return d->m_model;
 }
 
 QObject *PluginManager::getByName(const QString &name) const
 {
     Q_D(const PluginManager);
-    QMapIterator<QString, QMap<QString, Plugin *> > plugins(d->m_plugins);
-    while (plugins.hasNext()) {
-        plugins.next();
-        if (plugins.value().contains(name))
-            return plugins.value()[name];
-    }
+    if (d->m_plugins.contains(name))
+        return d->m_plugins[name];
+
     return nullptr;
 }
 
@@ -190,14 +172,10 @@ QString PluginManager::getFilter()
 void PluginManager::setFilter(const QString &filter)
 {
     Q_D(PluginManager);
-    QHashIterator<QString,ItemModelSortProxy*> it(d->m_models);
-    while (it.hasNext()) {
-        it.next();
-        if (filter.isEmpty())
-            it.value()->setFilterRegExp("");
-        else
-            it.value()->setFilterRegExp(filter);
-    }
+    if (filter.isEmpty())
+        d->m_model->setFilterRegExp("");
+    else
+        d->m_model->setFilterRegExp(filter);
     m_filter = filter;
     Q_EMIT (filterChanged());
 }

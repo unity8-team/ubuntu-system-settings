@@ -22,10 +22,8 @@ set(USS_SOURCES
 )
 
 set(QML_SOURCES
-    qml/CategorySection.qml
     qml/EntryComponent.qml
     qml/MainWindow.qml
-    qml/UncategorizedItemsView.qml
     SystemSettings/ItemPage.qml
     SystemSettings/SettingsItemTitle.qml
 )
