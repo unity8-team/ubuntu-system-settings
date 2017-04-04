@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.4+17.04.20170404-0ubuntu1) zesty; urgency=medium
+
+  [ Arthur Mello ]
+  * Change Categories list view to use ListView qml Component
+  * Add new keyboard navigation
+
+ -- bill.filler@canonical.com <bill.filler@canonical.com>  Tue, 04 Apr 2017 21:55:42 +0000
+
 ubuntu-system-settings (0.4+17.04.20170329-0ubuntu1) zesty; urgency=medium
 
   [ Ken VanDine ]
