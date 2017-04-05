@@ -24,10 +24,10 @@ find_program(qmlscene_exe qmlscene)
 find_program(gcc_exe gcc)
 
 if (NOT ${gcc_exe} STREQUAL "")
-    set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/i386-linux-gnu/mesa/libGL.so.1")
+    # set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/i386-linux-gnu/mesa/libGL.so.1")
 endif()
 set(XVFB_CMD
-    env ${qmltest_ENVIRONMENT} ${LD_PRELOAD_PATH}
+    env ${qmltest_ENVIRONMENT}
     xvfb-run -a -s "-screen 0 640x480x24"
 )
 
