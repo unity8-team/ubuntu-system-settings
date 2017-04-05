@@ -23,12 +23,8 @@ find_program(qmltestrunner_exe qmltestrunner)
 find_program(qmlscene_exe qmlscene)
 find_program(gcc_exe gcc)
 
-if (NOT ${gcc_exe} STREQUAL "")
-    exec_program(gcc ARGS "-dumpmachine" OUTPUT_VARIABLE ARCH_TRIPLET)
-    set(LD_PRELOAD_PATH "LD_PRELOAD=/usr/lib/${ARCH_TRIPLET}/mesa/libGL.so.1")
-endif()
 set(XVFB_CMD
-    env ${qmltest_ENVIRONMENT} ${LD_PRELOAD_PATH}
+    env ${qmltest_ENVIRONMENT}
     xvfb-run -a -s "-screen 0 640x480x24"
 )
 
