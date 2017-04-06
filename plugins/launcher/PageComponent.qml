@@ -24,6 +24,8 @@ import Ubuntu.Components 1.3
 import Ubuntu.Settings.Components 0.1 as USC
 import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.Launcher 1.0
+import Ubuntu.Components.Popups 1.3
+import Ubuntu.Components.ListItems 1.3 as ListItems
 
 ItemPage {
     id: root
@@ -44,6 +46,12 @@ ItemPage {
             }
         }
         return true; // No large screens were the current one.
+    }
+
+    // destroy popup after reset
+    property var popup
+    function done () {
+        popup.destroy();
     }
 
     Flickable {
@@ -103,12 +111,38 @@ ItemPage {
                     onSyncTriggered: unity8Settings.launcherWidth = value
                 }
             }
+
+            ListItems.ThinDivider {}
+            SettingsListItems.Standard {
+                text: i18n.tr("Reset Launcher")
+                layout.subtitle.text: i18n.tr("Reset the Launcher to its original contents.")
+
+                Button {
+                    id: resetLauncherHomeButton
+                    objectName: "resetLauncher"
+                    text: i18n.tr("Reset Launcher")
+                    onClicked: {
+                        buttonActions.source = "ResetLauncherHome.qml";
+                        root.popup = PopupUtils.open(buttonActions.item);
+                    }
+                }
+            }
         }
+    }
+
+    Loader {
+        id: buttonActions
+        asynchronous: false
     }
 
     GSettings {
         id: unity8Settings
         objectName: "unity8Settings"
         schema.id: "com.canonical.Unity8"
+    }
+
+    GSettings {
+        id: launcherSettings
+        schema.id: "com.canonical.Unity.Launcher"
     }
 }

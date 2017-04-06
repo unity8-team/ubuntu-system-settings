@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2017 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -23,7 +23,8 @@ import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 
 Component {
-    id: eraseEverything
+    id: resetLauncherHome
+
     Dialog {
         id: dialog
         states: State {
@@ -37,22 +38,23 @@ Component {
                 enabled: false
             }
         }
-        objectName: "factoryResetDialog"
-        text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this device.")
+        text: i18n.tr("The Launcher will be returned to its original contents.")
+        objectName: "resetLauncherDialog"
         Button {
             id: action
-            text: i18n.tr("Erase & Reset Everything")
-            objectName: "factoryResetAction"
+            text: i18n.tr("Reset Launcher")
+            objectName: "resetLauncherAction"
             onClicked: {
                 dialog.state = "clicked";
-                resetBackend.factoryReset();
+                launcherSettings.schema.reset("favorites");
+                launcherSettings.schema.reset("items");
                 root.done();
             }
         }
         Button {
             id: cancel
             text: i18n.tr("Cancel")
-            onClicked: PopupUtils.close(dialog);
+            onClicked: PopupUtils.close(dialog)
         }
     }
 }
