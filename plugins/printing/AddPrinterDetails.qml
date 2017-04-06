@@ -139,7 +139,6 @@ ItemPage {
                     right: parent.right
                 }
                 text: i18n.tr("Connection")
-                visible: connections && connections.devices.count > 0
             }
 
             OptionSelector {
@@ -199,6 +198,41 @@ ItemPage {
                 onDelegateClicked: updateSettingsFromDevice(
                     connections.devices.get(index)
                 )
+            }
+
+            OptionSelector {
+                id: protocolSelector
+                anchors {
+                    margins: units.gu(2)
+                    left: parent.left
+                    right: parent.right
+                }
+                model: [
+                   i18n.tr("Choose a connection"),
+                   "ipp",
+                   "lpd",
+                   "ipps",
+                   "http",
+                   "beh",
+                   "socket",
+                   "https",
+                   "ipp",
+                   "hp",
+                   "usb",
+                   "hpfax",
+                   "dnssd",
+                ]
+                visible: !connections
+                onDelegateClicked: {
+                    var host = hostField.field.text;
+                    var newText = "";
+
+                    if (index > 0) {
+                        newText = model[index];
+                    }
+
+                    hostField.field.text = newText;
+                }
             }
 
             TextBoxListItem {
