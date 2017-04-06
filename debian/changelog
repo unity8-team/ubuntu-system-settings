@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.4+17.04.20170406-0ubuntu1) zesty; urgency=medium
+
+  [ Jonas G. Drange ]
+  * fixes qml test mesa error caused by some form of change
+
+  [ Ken VanDine ]
+  * Add reset launcher to the launcher panel (LP: #1677232)
+
+ -- Ken VanDine <ken.vandine@canonical.com>  Thu, 06 Apr 2017 13:38:34 +0000
+
 ubuntu-system-settings (0.4+17.04.20170329-0ubuntu1) zesty; urgency=medium
 
   [ Ken VanDine ]
