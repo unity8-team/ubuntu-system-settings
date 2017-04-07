@@ -118,6 +118,8 @@ ItemPage {
             PropertyChanges { target: successTimer; running: true }
             PropertyChanges { target: hostField; enabled: false }
             PropertyChanges { target: fieldsColumn; enabled: false }
+            PropertyChanges { target: connectionsSelector; enabled: false }
+            PropertyChanges { target: protocolSelector; enabled: false }
         },
         State {
             name: "failure"
