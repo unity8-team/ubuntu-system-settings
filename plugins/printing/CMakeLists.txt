@@ -10,7 +10,6 @@ set(QML_SOURCES
     AddPrinterDetails.qml
     PageComponent.qml
     Printer.qml
-    PrinterConnection.qml
     Setting.qml
     TextBoxListItem.qml
 )

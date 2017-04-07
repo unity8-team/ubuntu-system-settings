@@ -87,7 +87,7 @@ ItemPage {
 
                     }
                     property var target
-                    Component.onCompleted: target = Printers.devices
+                    Component.onCompleted: target = Printers.consolidatedDevices
                     running: target.searching
                 }
             }
@@ -99,14 +99,13 @@ ItemPage {
             Repeater {
                 id: remotePrintersList
                 anchors { left: parent.left; right: parent.right }
-                model: Printers.devices
+                model: Printers.consolidatedDevices
                 delegate: ListItem {
                     height: modelLayout.height + (divider.visible ? divider.height : 0)
                     anchors { left: parent.left; right: parent.right }
                     ListItemLayout {
                         id: modelLayout
-                        title.text: displayName ? displayName : info
-                        subtitle.text: info
+                        title.text: displayName
 
                         Icon {
                             id: icon
@@ -119,11 +118,20 @@ ItemPage {
                         ProgressionSlot {}
                     }
                     onClicked: {
+                        var props = {
+                            plugin: plugin
+                        };
+                        if (connectionsCount > 0) {
+                            props["connections"] = model;
+                            props["device"] = model.devices.get(0);
+                        } else if (connectionsCount >= 1) {
+                            props["device"] = model.devices.get(0);
+                        }
                         detailsPageObserver.target = pageStack.addFileToNextColumnSync(
-                            addPrinterPage, Qt.resolvedUrl("AddPrinterDetails.qml"), {
-                                device: model, plugin: plugin
-                            }
-                        )
+                            addPrinterPage,
+                            Qt.resolvedUrl("AddPrinterDetails.qml"),
+                            props
+                        );
                     }
                 }
             }
