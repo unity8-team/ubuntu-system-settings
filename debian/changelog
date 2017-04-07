@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.4+17.04.20170407-0ubuntu1) zesty; urgency=medium
+
+  * uses Printers.consolidatedDevices to get a list of consolidated
+    devices (multiple connections to printers of the same make/model)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Fri, 07 Apr 2017 12:53:31 +0000
+
 ubuntu-system-settings (0.4+17.04.20170329-0ubuntu1) zesty; urgency=medium
 
   [ Ken VanDine ]
