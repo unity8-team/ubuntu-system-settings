@@ -69,9 +69,14 @@ ItemPage {
                         describePrinterPage.state = "adding";
                         var ret;
                         if (driverSelector.selectedIndex == 0) {
+                            var driver = driversView.selectedDriver;
+
+                            if (!driver && Printers.drivers.count == 1) {
+                                driver = Printers.drivers.get(0).name;
+                            }
                             ret = Printers.addPrinter(
                                 nameField.field.text,
-                                driversView.selectedDriver,
+                                driver,
                                 hostField.field.text,
                                 descriptionField.field.text,
                                 locationField.field.text
@@ -344,7 +349,8 @@ ItemPage {
                                 width: units.gu(2)
                                 height: width
                                 SlotsLayout.position: SlotsLayout.Trailing
-                                visible: model.name == driversView.selectedDriver
+                                visible: (model.name == driversView.selectedDriver) ||
+                                         (Printers.drivers.count == 1)
                             }
                         }
                         onClicked: {
