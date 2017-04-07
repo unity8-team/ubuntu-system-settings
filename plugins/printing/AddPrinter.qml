@@ -121,10 +121,10 @@ ItemPage {
                         var props = {
                             plugin: plugin
                         };
-                        if (connectionsCount > 1) {
+                        if (connectionsCount > 0) {
                             props["connections"] = model;
                             props["device"] = model.devices.get(0);
-                        } else if (connectionsCount == 1) {
+                        } else if (connectionsCount >= 1) {
                             props["device"] = model.devices.get(0);
                         }
                         detailsPageObserver.target = pageStack.addFileToNextColumnSync(
